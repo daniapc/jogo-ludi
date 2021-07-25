@@ -1,7 +1,7 @@
 #include "Jogo.h"
 
 Jogo::Jogo():
-	Janela(sf::VideoMode(1920,1080), "Jogo", sf::Style::Titlebar | sf::Style::Close)
+	Janela(sf::VideoMode(800,600), "Jogo", sf::Style::Titlebar | sf::Style::Close)
 {
 	Executar();
 }
