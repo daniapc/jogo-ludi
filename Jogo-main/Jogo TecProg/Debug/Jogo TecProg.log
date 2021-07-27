@@ -1,6 +1,13 @@
 ﻿  Entidade.cpp
   GerenciadorGrafico.cpp
+  Jogo.cpp
   main.cpp
   Jogador.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Jogador.cpp(16,22): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Jogador.cpp(18,23): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Jogador.cpp(20,23): warning C4305: 'argumento': truncamento de 'double' para 'float'
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Jogador.cpp(22,22): warning C4305: 'argumento': truncamento de 'double' para 'float'
+  Personagem.cpp
   Gerando Código...
+  LINK : C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Jogo TecProg.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
   Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Jogo TecProg.exe

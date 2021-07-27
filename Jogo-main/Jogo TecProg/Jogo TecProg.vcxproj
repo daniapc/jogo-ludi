@@ -147,18 +147,17 @@
   <ItemGroup>
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
-    <ClCompile Include="Jogo.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
+    <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jogador.cpp" />
+    <ClCompile Include="Personagem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="GerenciadorGrafico.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Jogador.h" />
+    <ClInclude Include="Personagem.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

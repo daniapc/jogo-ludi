@@ -7,20 +7,26 @@ protected:
 	sf::Vector2f DimensoesCorpo;
 	sf::RectangleShape Corpo;
 	sf::Vector2f Posicao;
+	sf::Texture Textura;
+	sf::Color Cor;
 
-	sf::RenderTarget* Janela;
+	sf::RenderWindow* Janela;
 	
 public:
 	Entidade();
 	virtual ~Entidade();
-
-	virtual void Inicializa(sf::Vector2f dimensoes, sf::Vector2f posicao) = 0;
 	
+	void setCor(sf::Color cor);
+	sf::Color getCor();
+	void setDimensoes(sf::Vector2f dimensoes);
 	sf::Vector2f getDimensoes();
-	sf::RectangleShape& getCorpo();
+	void setPosicao(sf::Vector2f posicao);
 	sf::Vector2f getPosicao();
 
-	void setJanela(sf::RenderTarget* janela);
-	
+	sf::RectangleShape getCorpo();
+	void setTextura(string textura);
+	void setJanela(sf::RenderWindow* janela);
+
+	void desenhar();
 };
 
