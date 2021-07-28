@@ -24,7 +24,7 @@ public:
 	sf::Vector2f getPosicao();
 
 	sf::RectangleShape getCorpo();
-	void setTextura(string textura);
+	void setTextura(const string textura);
 	void setJanela(sf::RenderWindow* janela);
 
 	void desenhar();

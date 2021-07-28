@@ -1,45 +1,46 @@
 #include "Jogo.h"
 
-Jogo::Jogo():
-	Janela(sf::VideoMode(1920,1080), "Jogo", sf::Style::Fullscreen),
-    View(sf::Vector2f(400.f, 225.f), sf::Vector2f(800.0f, 450.0f))
+const float Jogo::Altura = 720;
+const float Jogo::Comprimento = 1280;
+
+Jogo::Jogo() :
+    Janela(sf::VideoMode(static_cast <unsigned int> (Comprimento),static_cast <unsigned int> (Altura)), "Jogo", sf::Style::Fullscreen),
+    View(sf::Vector2f(640.f, 360.f), sf::Vector2f(Comprimento, Altura))
 {
 	Executar();
 }
 
-
 Jogo::~Jogo()
 {
+}
+
+const float Jogo::getAltura()
+{
+    return Altura;
+}
+
+const float Jogo::getComprimento()
+{
+    return Comprimento;
+}
+
+void Jogo::Atualiza()
+{
+    Fase_Quintal.atualiza();
 }
 
 void Jogo::Inicializa()
 {
     Janela.setView(View);
 
-    InicializaJogadores();
+    InicializaFases();
 }
 
-void Jogo::InicializaJogadores()
+void Jogo::InicializaFases()
 {
-   
-    Background.setJanela(&Janela);
-    Background.setDimensoes(sf::Vector2f(1920.f, 450.f));
-    Background.setPosicao(sf::Vector2f(0.f, 0.f));
-    Background.setCor(sf::Color::White);
-    Background.setTextura("Background.png");
-
-    //Perguntar se isso deveria estar em um gerenciador gráfico
-    Bruxo.setJanela(&Janela);
-    Bruxo.setDimensoes(sf::Vector2f(75.f, 75.f));
-    Bruxo.setPosicao(sf::Vector2f(0.f, 0.f));
-    Bruxo.setTextura("HeavyBandit_Attack_2.png");
-    Bruxo.setTeclas(sf::Keyboard::D, sf::Keyboard::A, sf::Keyboard::S, sf::Keyboard::W);
-
-    Fazendeira.setJanela(&Janela);
-    Fazendeira.setDimensoes(sf::Vector2f(50.f, 50.f));
-    Fazendeira.setPosicao(sf::Vector2f(100.f, 100.f));
-    Fazendeira.setCor(sf::Color::Red);
-    Fazendeira.setTeclas(sf::Keyboard::Right, sf::Keyboard::Left, sf::Keyboard::Down, sf::Keyboard::Up);
+    Fase_Quintal.setJanela(&Janela);
+    Fase_Quintal.setView(&View);
+    Fase_Quintal.Inicializa();
 }
 
 void Jogo::Executar()
@@ -59,20 +60,13 @@ void Jogo::LoopJogo()
             if (evento.type == sf::Event::Closed)
                 Janela.close();
         }
-
-        Bruxo.movimenta();
-        View.setCenter(Bruxo.getPosicao());
-        Fazendeira.movimenta();
+    
         Janela.clear();
 
-        Background.desenhar();
-        Fazendeira.desenhar();
-        Bruxo.desenhar();
-        
+        Atualiza();
         
         Janela.setView(View);
         Janela.display();
-    
 
     }
 }

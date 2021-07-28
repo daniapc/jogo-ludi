@@ -13,13 +13,15 @@ Jogador::~Jogador()
 void Jogador::movimenta()
 {
 	if (sf::Keyboard::isKeyPressed(Direita))
-		Corpo.move(0.1, 0.f);
+		if (!colidindoParedeDireita())
+			Corpo.move(sf::Vector2f(Velocidade.x, 0.f));
 	if (sf::Keyboard::isKeyPressed(Esquerda))
-		Corpo.move(-0.1, 0.f);
+		if (!colidindoParedeEsquerda())
+			Corpo.move(sf::Vector2f(-Velocidade.x, 0.f));
 	if (sf::Keyboard::isKeyPressed(Cima))
-		Corpo.move(0.f, -0.1);
+		Corpo.move(sf::Vector2f(0.f, -Velocidade.y));
 	if (sf::Keyboard::isKeyPressed(Baixo))
-		Corpo.move(0.f, 0.1);
+		Corpo.move(sf::Vector2f(0.f, Velocidade.y));
 }
 
 void Jogador::setTeclas(sf::Keyboard::Key direita, sf::Keyboard::Key esquerda, sf::Keyboard::Key baixo, sf::Keyboard::Key cima)

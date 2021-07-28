@@ -48,10 +48,10 @@ sf::Vector2f Entidade::getPosicao()
 	return Posicao;
 }
 
-void Entidade::setTextura(string textura)
+void Entidade::setTextura(const string textura)
 {
-	if (!Textura.loadFromFile(textura)) // testar como string
-        cerr << "Erro." << endl;
+	if (!Textura.loadFromFile(textura))
+        cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
 
 	Corpo.setTexture(&Textura);
 }
