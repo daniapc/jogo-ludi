@@ -5,14 +5,13 @@
 class Quintal : public Fase
 {
 private:
-
 	vector <Passaro*> ListaPassaros;
 
 public:
 	Quintal();
 	~Quintal();
 
-	void Inicializa();
+	void inicializa();
 	void desenhar();
 	void criaPassaro();
 	

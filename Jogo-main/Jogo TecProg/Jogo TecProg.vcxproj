@@ -149,6 +149,7 @@
     <ClCompile Include="Estatico.cpp" />
     <ClCompile Include="Fantasma.cpp" />
     <ClCompile Include="Fase.cpp" />
+    <ClCompile Include="GerenciadorFisica.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogo.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Estatico.h" />
     <ClInclude Include="Fantasma.h" />
     <ClInclude Include="Fase.h" />
+    <ClInclude Include="GerenciadorFisica.h" />
     <ClInclude Include="GerenciadorGrafico.h" />
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="Jogo.h" />

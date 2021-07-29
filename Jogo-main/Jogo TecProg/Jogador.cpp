@@ -1,27 +1,47 @@
 #include "Jogador.h"
 
-Jogador::Jogador():
-	Personagem()
+Jogador::Jogador():Personagem()
 {
-
 }
 
 Jogador::~Jogador()
 {
 }
 
-void Jogador::movimenta()
+void Jogador::atualiza()
 {
 	if (sf::Keyboard::isKeyPressed(Direita))
+	{
+		Velocidade.x = 0.1f;
+		Velocidade.y = 0.f;
 		if (!colidindoParedeDireita())
-			Corpo.move(sf::Vector2f(Velocidade.x, 0.f));
+			this->movimenta();
+	}
 	if (sf::Keyboard::isKeyPressed(Esquerda))
+	{
+		Velocidade.x = -0.1f;
+		Velocidade.y = 0.f;
 		if (!colidindoParedeEsquerda())
-			Corpo.move(sf::Vector2f(-Velocidade.x, 0.f));
+			this->movimenta();
+	}
 	if (sf::Keyboard::isKeyPressed(Cima))
-		Corpo.move(sf::Vector2f(0.f, -Velocidade.y));
+	{
+		Velocidade.x = 0.f;
+		Velocidade.y = -0.1f;
+		this->movimenta();
+	}
+		
 	if (sf::Keyboard::isKeyPressed(Baixo))
-		Corpo.move(sf::Vector2f(0.f, Velocidade.y));
+	{
+		Velocidade.x = 0.f;
+		Velocidade.y = 0.1f;
+		this->movimenta();
+	}
+}
+
+void Jogador::movimenta()
+{
+	Corpo.move(sf::Vector2f(Velocidade.x, Velocidade.y));
 }
 
 void Jogador::setTeclas(sf::Keyboard::Key direita, sf::Keyboard::Key esquerda, sf::Keyboard::Key baixo, sf::Keyboard::Key cima)

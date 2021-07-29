@@ -18,7 +18,7 @@ public:
 	Fase();
 	virtual ~Fase();
 
-	virtual void Inicializa() = 0;
+	virtual void inicializa() = 0;
 	virtual void criaEntidades();
 	virtual void desenhar() = 0;
 

@@ -12,16 +12,17 @@ Quintal::~Quintal()
 	ListaPassaros.clear();
 }
 
-void Quintal::Inicializa()
+void Quintal::inicializa()
 {
 	ListaEntidades.push_back(static_cast <Entidade*> (&Cenario));
-
+	
 	Fazendeira.setJanela(Janela);
 	Fazendeira.setDimensoes(sf::Vector2f(45.f, 75.f));
+	Fazendeira.setOrigem();
 	Fazendeira.setPosicao(sf::Vector2f(0.f, 0.f));
 	Fazendeira.setTextura("HeavyBandit_Attack_2.png");
 	Fazendeira.setTeclas(sf::Keyboard::D, sf::Keyboard::A, sf::Keyboard::S, sf::Keyboard::W);
-	Fazendeira.setVelocidade(sf::Vector2f(0.1f, 0.1f));
+	//Fazendeira.setVelocidade(sf::Vector2f(0.1f, 0.1f));
 
 	Cenario.setJanela(Janela);
 	Cenario.setTextura("Background.png");

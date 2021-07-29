@@ -1,2 +1,15 @@
-﻿  Quintal.cpp
+﻿  Entidade.cpp
+  Estatico.cpp
+  Fantasma.cpp
+  Fase.cpp
+  GerenciadorFisica.cpp
+  Inimigo.cpp
+  Jogador.cpp
+  Jogo.cpp
+  Passaro.cpp
+  Personagem.cpp
+  Plataforma.cpp
+  Quintal.cpp
+  main.cpp
+  Gerando Código...
   Jogo TecProg.vcxproj -> D:\User\Desktop\Jogo TecProg\Jogo\Jogo-main\Debug\Jogo TecProg.exe

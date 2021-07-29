@@ -2,8 +2,6 @@
 #include "stdafx.h"
 #include "Entidade.h"
 
-class Jogo;
-
 class Personagem : public Entidade   
 {
 protected:

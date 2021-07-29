@@ -19,13 +19,14 @@ void Fase::criaEntidades()
 
 void Fase::atualiza()
 {
-        Fazendeira.movimenta();
-        //Condições para a view
-        if (Fazendeira.getPosicao().x > 640.f && Fazendeira.getPosicao().x < 3360.f)//
-            View->setCenter(sf::Vector2f(Fazendeira.getPosicao().x, 360.f));//
-        //Bruxo.movimenta();
+    Fazendeira.atualiza();
 
-        desenhar();
+    //Condições para a view
+    if (Fazendeira.getPosicao().x > 640.f && Fazendeira.getPosicao().x < 3360.f)//
+        View->setCenter(sf::Vector2f(Fazendeira.getPosicao().x, 360.f));//
+    //Bruxo.atualiza();
+
+    desenhar();
 }
 
 void Fase::setJanela(sf::RenderWindow* janela)

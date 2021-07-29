@@ -1,5 +1,4 @@
 #include "Personagem.h"
-#include "Jogo.h"
 
 Personagem::Personagem() : Entidade()
 {
@@ -21,14 +20,14 @@ sf::Vector2f Personagem::getVelocidade()
 
 bool Personagem::colidindoParedeEsquerda()
 {
-	if (this->getPosicao().x <= 0.f)
+	if (this->getPosicao().x <= 0.f + this->getDimensoes().x/2)
 		return true;
 	return false;
 }
 
 bool Personagem::colidindoParedeDireita()
 {
-	if (this->getPosicao().x >= 4000 - this->getDimensoes().x)
+	if (this->getPosicao().x >= 4000 - this->getDimensoes().x/2)
 		return true;
 	return false;
 }

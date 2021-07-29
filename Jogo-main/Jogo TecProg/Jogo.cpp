@@ -40,7 +40,7 @@ void Jogo::InicializaFases()
 {
     Fase_Quintal.setJanela(&Janela);
     Fase_Quintal.setView(&View);
-    Fase_Quintal.Inicializa();
+    Fase_Quintal.inicializa();
 }
 
 void Jogo::Executar()

@@ -9,15 +9,9 @@ Entidade::~Entidade()
 {
 }
 
-void Entidade::setCor(sf::Color cor)
+sf::RectangleShape& Entidade::getCorpo()
 {
-	Cor = cor;
-	Corpo.setFillColor(Cor);
-}
-
-sf::Color Entidade::getCor()
-{
-	return Cor;
+	return Corpo;
 }
 
 void Entidade::setDimensoes(sf::Vector2f dimensoes)
@@ -31,11 +25,6 @@ sf::Vector2f Entidade::getDimensoes()
 	return DimensoesCorpo;
 }
 
-sf::RectangleShape Entidade::getCorpo()
-{
-	return Corpo;
-}
-
 void Entidade::setPosicao(sf::Vector2f posicao)
 {
 	Posicao = posicao;
@@ -46,6 +35,11 @@ sf::Vector2f Entidade::getPosicao()
 {
 	Posicao = Corpo.getPosition();
 	return Posicao;
+}
+
+void Entidade::setOrigem()
+{
+	Corpo.setOrigin(DimensoesCorpo.x / 2, DimensoesCorpo.y / 2);
 }
 
 void Entidade::setTextura(const string textura)

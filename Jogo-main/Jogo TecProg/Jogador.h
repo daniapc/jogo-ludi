@@ -11,6 +11,7 @@ public:
 	Jogador();
 	~Jogador();
 	
+	void atualiza();
 	void movimenta();
 	void setTeclas(sf::Keyboard::Key direita, sf::Keyboard::Key esquerda, sf::Keyboard::Key baixo, sf::Keyboard::Key cima);
 };
