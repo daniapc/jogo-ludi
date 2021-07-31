@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entidade.cpp" />
+    <ClCompile Include="Espinho.cpp" />
     <ClCompile Include="Estatico.cpp" />
     <ClCompile Include="Fantasma.cpp" />
     <ClCompile Include="Fase.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jogador.cpp" />
+    <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Passaro.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entidade.h" />
+    <ClInclude Include="Espinho.h" />
     <ClInclude Include="Estatico.h" />
     <ClInclude Include="Fantasma.h" />
     <ClInclude Include="Fase.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Jogador.h" />
+    <ClInclude Include="Obstaculo.h" />
     <ClInclude Include="Passaro.h" />
     <ClInclude Include="Personagem.h" />
     <ClInclude Include="Plataforma.h" />

@@ -18,6 +18,11 @@ sf::Vector2f Personagem::getVelocidade()
 	return Velocidade;
 }
 
+sf::FloatRect Personagem::getHitbox()
+{
+	return Corpo.getGlobalBounds();
+}
+
 bool Personagem::colidindoParedeEsquerda()
 {
 	if (this->getPosicao().x <= 0.f + this->getDimensoes().x/2)

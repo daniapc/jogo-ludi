@@ -6,6 +6,7 @@ class Jogador : public Personagem
 {
 private:
 	sf::Keyboard::Key Direita, Esquerda, Baixo, Cima;
+	bool direita, esquerda, cima, baixo;
 
 public:
 	Jogador();

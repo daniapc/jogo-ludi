@@ -5,7 +5,6 @@ class Estatico : public Inimigo
 public: 
     bool Neutralizavel;
 
-
 protected:
     Estatico();
     ~Estatico();

@@ -13,4 +13,6 @@ Fantasma::~Fantasma()
 void Fantasma::movimenta()
 {
 
+
+
 }

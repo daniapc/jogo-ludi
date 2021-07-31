@@ -1,15 +1,10 @@
-﻿  Entidade.cpp
-  Estatico.cpp
-  Fantasma.cpp
-  Fase.cpp
-  GerenciadorFisica.cpp
-  Inimigo.cpp
-  Jogador.cpp
-  Jogo.cpp
-  Passaro.cpp
-  Personagem.cpp
-  Plataforma.cpp
+﻿  Estatico.cpp
   Quintal.cpp
-  main.cpp
+D:\User\Desktop\Jogo TecProg\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(34,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+D:\User\Desktop\Jogo TecProg\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(63,42): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
   Gerando Código...
   Jogo TecProg.vcxproj -> D:\User\Desktop\Jogo TecProg\Jogo\Jogo-main\Debug\Jogo TecProg.exe

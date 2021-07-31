@@ -36,7 +36,7 @@ void Jogador::atualiza()
 		Velocidade.x = 0.f;
 		Velocidade.y = 0.1f;
 		this->movimenta();
-	}
+	}																					
 }
 
 void Jogador::movimenta()
