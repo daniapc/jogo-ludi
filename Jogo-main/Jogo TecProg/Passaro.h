@@ -9,7 +9,7 @@ public:
 	Passaro();
 	~Passaro();
 
-	void movimenta();
+	void inicializa();
 	void atiraProjetil();
 };
 

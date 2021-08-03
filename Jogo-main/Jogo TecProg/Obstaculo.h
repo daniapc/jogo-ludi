@@ -4,7 +4,6 @@
 class Obstaculo : public Entidade
 {
 private:
-	sf::FloatRect Hitbox;
 
 public:
 	Obstaculo();

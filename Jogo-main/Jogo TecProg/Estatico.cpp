@@ -8,6 +8,10 @@ Estatico::~Estatico()
 {
 }
 
-void Estatico::movimenta()
+void Estatico::inicializa()
+{
+}
+
+void Estatico::movimenta(sf::Vector2f movimento)
 {
 }

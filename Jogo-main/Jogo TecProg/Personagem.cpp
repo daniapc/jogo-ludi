@@ -8,12 +8,32 @@ Personagem::~Personagem()
 {
 }
 
-void Personagem::setVelocidade(sf::Vector2f velocidade)
+void Personagem::setMovimentoX(float movimentox)
+{
+	Movimento.x = movimentox;
+}
+
+void Personagem::setMovimentoY(float movimentoy)
+{
+	Movimento.y = movimentoy;
+}
+
+void Personagem::setVelocidade(float velocidade)
 {
 	Velocidade = velocidade;
 }
 
-sf::Vector2f Personagem::getVelocidade()
+void Personagem::setPodePular(bool podepular)
+{
+	podePular = podepular;
+}
+
+void Personagem::setAlturaPulo(float alturapulo)
+{
+	alturaPulo = alturapulo;
+}
+
+float Personagem::getVelocidade()
 {
 	return Velocidade;
 }
@@ -23,16 +43,7 @@ sf::FloatRect Personagem::getHitbox()
 	return Corpo.getGlobalBounds();
 }
 
-bool Personagem::colidindoParedeEsquerda()
+void Personagem::movimenta(sf::Vector2f movimento)
 {
-	if (this->getPosicao().x <= 0.f + this->getDimensoes().x/2)
-		return true;
-	return false;
-}
-
-bool Personagem::colidindoParedeDireita()
-{
-	if (this->getPosicao().x >= 4000 - this->getDimensoes().x/2)
-		return true;
-	return false;
+	Corpo.move(movimento);
 }

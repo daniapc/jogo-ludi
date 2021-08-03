@@ -8,12 +8,10 @@ Passaro::~Passaro()
 {
 }
 
-void Passaro::movimenta()
+void Passaro::inicializa()
 {
-
 }
 
 void Passaro::atiraProjetil()
 {
-
 }

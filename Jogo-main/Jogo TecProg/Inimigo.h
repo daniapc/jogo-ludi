@@ -10,6 +10,7 @@ public:
 	Inimigo();
 	virtual ~Inimigo();
 
-	virtual void movimenta() = 0;
+	virtual void inicializa() = 0;
+
 };
 

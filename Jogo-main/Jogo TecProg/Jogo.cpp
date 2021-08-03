@@ -1,11 +1,11 @@
 #include "Jogo.h"
 
-const float Jogo::Altura = 720;
-const float Jogo::Comprimento = 1280;
-
 Jogo::Jogo() :
+    /*
     Janela(sf::VideoMode(1280, 720), "Jogo", sf::Style::Fullscreen),
     View(sf::Vector2f(640.f, 360.f), sf::Vector2f(1280, 720))
+    */
+    gerenciadorGrafico()
 {
 	Executar();
 }
@@ -14,32 +14,24 @@ Jogo::~Jogo()
 {
 }
 
-const float Jogo::getAltura()
+void Jogo::Atualiza(float deltaTempo)
 {
-    return Altura;
-}
-
-const float Jogo::getComprimento()
-{
-    return Comprimento;
-}
-
-void Jogo::Atualiza()
-{
-    Fase_Quintal.atualiza();
+    Fase_Quintal.atualiza(deltaTempo);
 }
 
 void Jogo::Inicializa()
 {
-    Janela.setView(View);
+    
+    gerenciadorGrafico.getJanela().setView(gerenciadorGrafico.getView());
+    //Janela.setView(View);
 
     InicializaFases();
 }
 
 void Jogo::InicializaFases()
 {
-    Fase_Quintal.setJanela(&Janela);
-    Fase_Quintal.setView(&View);
+    Fase_Quintal.setJanela(&gerenciadorGrafico.getJanela());
+    Fase_Quintal.setView(&gerenciadorGrafico.getView());
     Fase_Quintal.inicializa();
 }
 
@@ -51,22 +43,24 @@ void Jogo::Executar()
 
 void Jogo::LoopJogo()
 {
-    while (Janela.isOpen())
+    sf::Clock Tempo;
+
+    while (gerenciadorGrafico.getJanela().isOpen())
     {
         sf::Event evento;
-        while (Janela.pollEvent(evento))
+        while (gerenciadorGrafico.getJanela().pollEvent(evento))
         {
             if (evento.type == sf::Event::Closed)
-                Janela.close();
+                gerenciadorGrafico.getJanela().close();
         }
     
-        Janela.clear();
+        gerenciadorGrafico.getJanela().clear();
 
-        Atualiza();
-       
-        Janela.setView(View);
-        Janela.display();
+        float DeltaTempo = Tempo.restart().asSeconds();
 
+        Atualiza(DeltaTempo);
+        
+        gerenciadorGrafico.getJanela().setView(gerenciadorGrafico.getView());
+        gerenciadorGrafico.getJanela().display();
     }
-    
 }

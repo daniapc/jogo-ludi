@@ -27,7 +27,21 @@ void Fase::criaPlataforma(sf::Vector2f posicao, sf::Vector2f tamanho, const stri
 	nova->setTextura(textura);
 	nova->setJanela(Janela);
 	ListaPlataformas.push_back(nova);
-	ListaEntidades.push_back(static_cast <Entidade*> (nova));
+	listaEntidades.inclua(static_cast <Entidade*> (nova));
+	gerenciadorFisica.incluaPlataforma(nova);
+}
+
+void Fase::criaChao(){
+	Plataforma* nova = NULL;
+	nova = new Plataforma();
+	nova->getCorpo().setFillColor(sf::Color::Transparent);
+	nova->setDimensoes(sf::Vector2f(COMPRIMENTO_CENARIO, ALTURA_PLATAFORMA));
+	nova->setPosicao(sf::Vector2f(COMPRIMENTO_CENARIO / 2, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA / 2));
+	nova->setOrigem();
+	nova->setJanela(Janela);
+	ListaPlataformas.push_back(nova);
+	listaEntidades.inclua(static_cast <Entidade*> (nova));
+	gerenciadorFisica.incluaPlataforma(nova);
 }
 
 Jogador& Fase::getFazendeira()
@@ -35,65 +49,26 @@ Jogador& Fase::getFazendeira()
 	return Fazendeira;
 }
 
-void Fase::atualiza()
+GerenciadorFisica Fase::getGerenciadorFisica()
 {
-	checaColisoes();
+	return gerenciadorFisica;
+}
 
-    Fazendeira.atualiza();
+void Fase::atualiza(float deltaTempo)
+{
+	gerenciadorFisica.checaColisoes();
 
 	atualizaView();
+
+    Fazendeira.atualiza(deltaTempo);
 
     desenhar();
 }
 
 void Fase::atualizaView()
 {
-	if (Fazendeira.getPosicao().x > 640.f && Fazendeira.getPosicao().x < 3360.f)
+	if (Fazendeira.getPosicao().x > COMPRIMENTO_RESOLUCAO / 2 && Fazendeira.getPosicao().x < COMPRIMENTO_CENARIO - COMPRIMENTO_RESOLUCAO / 2)
 		View->setCenter(sf::Vector2f(Fazendeira.getPosicao().x, 360.f));
-}
-
-void Fase::checaColisao(Personagem* personagem, Entidade* entidade)
-{
-	float deltaX = entidade->getPosicao().x - personagem->getPosicao().x;
-	float deltaY = entidade->getPosicao().y - personagem->getPosicao().y;
-	float intersecaoX = abs(deltaX) - (personagem->getDimensoes().x / 2 + entidade->getDimensoes().x / 2);
-	float intersecaoY = abs(deltaY) - (personagem->getDimensoes().y / 2 + entidade->getDimensoes().y / 2);
-
-	if (intersecaoX < 0.f && intersecaoY < 0.f)
-	{
-		if (intersecaoX > intersecaoY) //Lógica invertida pois são valores negativos
-		{
-			if (deltaX > 0.f)
-			{
-				personagem->setVelocidade(sf::Vector2f(intersecaoX, 0.f));
-				personagem->movimenta();
-			}
-				
-			else
-			{
-				personagem->setVelocidade(sf::Vector2f(-intersecaoX, 0.f));
-				personagem->movimenta();
-			}
-		}
-		else
-		{
-			if (deltaY > 0.f)
-			{
-				personagem->setVelocidade(sf::Vector2f(0.f, intersecaoY));
-				personagem->movimenta();
-			}
-			else
-			{
-				personagem->setVelocidade(sf::Vector2f(0.f, -intersecaoY));
-				personagem->movimenta();
-			}
-		}
-	}
-}
-
-void Fase::setJanela(sf::RenderWindow* janela)
-{
-	Janela = janela;
 }
 
 void Fase::setView(sf::View* view)

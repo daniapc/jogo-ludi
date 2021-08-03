@@ -9,6 +9,8 @@ protected:
     Estatico();
     ~Estatico();
 
-    void movimenta();
+    void inicializa();
+
+    void movimenta(sf::Vector2f movimento);
 };
 

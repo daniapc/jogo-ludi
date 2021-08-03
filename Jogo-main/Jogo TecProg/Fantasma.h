@@ -4,12 +4,15 @@
 class Fantasma : public Inimigo
 {
 private:
-
+	float limiteXEsq, limiteXDir, limiteYCima, limiteYBaixo;
+	bool direita, cima;
 
 public:
 	Fantasma();
 	~Fantasma();
 
-	void movimenta();
+	void inicializa();
+
+	void atualiza(float deltaTempo);
 };
 

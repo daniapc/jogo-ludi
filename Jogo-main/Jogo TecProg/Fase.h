@@ -1,17 +1,20 @@
 #pragma once
 #include "stdafx.h"
+#include "Ente.h"
 #include "Plataforma.h"
 #include "Jogador.h"
+#include "GerenciadorFisica.h"
+#include "ListaEntidades.h"
 
-class Fase
+class Fase : public Ente
 {
 protected:
 	Entidade Cenario;
 	Jogador Fazendeira;
-	vector <Entidade*> ListaEntidades;
+	GerenciadorFisica gerenciadorFisica;
+	ListaEntidades listaEntidades;
 	vector <Plataforma*> ListaPlataformas;
 
-	sf::RenderWindow* Janela;
 	sf::View* View;
 
 public:
@@ -22,15 +25,16 @@ public:
 	virtual void desenhar() = 0;
 
 	virtual void criaEntidades();
-	void criaPlataforma(sf::Vector2f posicao,sf::Vector2f tamanho = sf::Vector2f(32.f,32.f), const string textura = "ground_top.png");
+	virtual void criaPlataformas() = 0;
+	void criaPlataforma(sf::Vector2f posicao,sf::Vector2f tamanho = sf::Vector2f(COMPRIMENTO_PLATAFORMA,ALTURA_PLATAFORMA), const string textura = "ground_top.png");
+	void criaChao();
 
 	Jogador& getFazendeira();
-	void atualiza();
-	void atualizaView();
-	virtual void checaColisoes() = 0;
-	void checaColisao(Personagem* personagem, Entidade* entidade);
+	GerenciadorFisica getGerenciadorFisica();
 
-	void setJanela(sf::RenderWindow* janela);
+	virtual void atualiza(float deltaTempo);
+	void atualizaView();
+
 	void setView(sf::View* view);
 };
 

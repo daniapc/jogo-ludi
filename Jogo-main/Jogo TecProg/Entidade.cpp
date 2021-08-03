@@ -12,6 +12,7 @@ Entidade::~Entidade()
 sf::RectangleShape& Entidade::getCorpo()
 {
 	return Corpo;
+	//return gerenciadorGrafico.
 }
 
 void Entidade::setDimensoes(sf::Vector2f dimensoes)
@@ -48,11 +49,6 @@ void Entidade::setTextura(const string textura)
         cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
 
 	Corpo.setTexture(&Textura);
-}
-
-void Entidade::setJanela(sf::RenderWindow* janela)
-{
-	Janela = janela;
 }
 
 void Entidade::desenhar()

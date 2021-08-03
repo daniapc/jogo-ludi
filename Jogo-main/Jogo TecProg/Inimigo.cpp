@@ -8,6 +8,7 @@ Inimigo::~Inimigo()
 {
 }
 
-void Inimigo::movimenta()
+void Inimigo::inicializa()
 {
 }
+

@@ -1,7 +1,7 @@
 #pragma once
-#include "Entidade.h"
+#include "Obstaculo.h"
 
-class Plataforma : public Entidade
+class Plataforma : public Obstaculo
 {
 private:
 
