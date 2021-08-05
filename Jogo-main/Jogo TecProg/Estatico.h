@@ -1,16 +1,17 @@
 #pragma once
 #include "Inimigo.h"
+
 class Estatico : public Inimigo
 {
-public: 
-    bool Neutralizavel;
+private: 
 
-protected:
+public:
     Estatico();
     ~Estatico();
 
+    void atualiza(float deltaTempo);
+    void colidir(Personagem* personagem);
     void inicializa();
-
     void movimenta(sf::Vector2f movimento);
 };
 

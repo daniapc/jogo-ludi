@@ -8,57 +8,49 @@ GerenciadorFisica::~GerenciadorFisica()
 {
 }
 
+/*
+void GerenciadorFisica::setListaEntidades(ListaEntidades* listaentidades)
+{
+	listaEntidades = listaentidades;
+}
+*/
+
 void GerenciadorFisica::setFazendeira(Jogador* fazendeira)
 {
 	pFazendeira = fazendeira;
 }
 
+/*
 void GerenciadorFisica::incluaPlataforma(Plataforma* plataforma)
 {
 	ListaPlataformas.push_back(plataforma);
 }
-
-void GerenciadorFisica::incluaEspinho(Espinho* espinho)
-{
-	ListaEspinhos.push_back(espinho);
-}
-
-void GerenciadorFisica::incluaFantasma(Fantasma* fantasma)
-{
-	ListaFantasmas.push_back(fantasma);
-}
+*/
 
 void GerenciadorFisica::incluaPersonagem(Personagem* personagem)
 {
 	ListaPersonagens.push_back(personagem);
 }
 
+/*
+void GerenciadorFisica::incluaProjetil(Projetil* projetil)
+{
+	ListaProjeteis.push_back(projetil);
+}
+*/
+
+void GerenciadorFisica::incluaEntidade(Entidade* entidade)
+{
+	ListaEntidades.push_back(entidade);
+}
+
 void GerenciadorFisica::checaColisoes()
 {
-	
-	for (unsigned int i = 0; i < ListaPlataformas.size(); i++)
-		checaColisao(pFazendeira, ListaPlataformas[i]);
-
-	for (unsigned int i = 0; i < ListaEspinhos.size(); i++)
+	for (unsigned int i = 0; i < ListaPersonagens.size(); i++)
 	{
-		sf::FloatRect hitbox_espinho = ListaEspinhos[i]->getHitbox();
-		sf::FloatRect hitbox_jogador = pFazendeira->getHitbox();
-
-		if (hitbox_jogador.intersects(hitbox_espinho))
-		{
-			cout << "Colidiu Espinho!" << endl;
-		}
-	}
-
-	for (unsigned int i = 0; i < ListaFantasmas.size(); i++)
-	{
-		sf::FloatRect hitbox_fantasma = ListaFantasmas[i]->getHitbox();
-		sf::FloatRect hitbox_jogador = pFazendeira->getHitbox();
-
-		if (hitbox_jogador.intersects(hitbox_fantasma))
-		{
-			cout << "Colidiu Fantasma!" << endl;
-		}
+		for (unsigned int j = 0; j < ListaEntidades.size(); j++)
+			if (ListaPersonagens[i] != NULL && ListaEntidades[j] != NULL)
+				checaColisao(ListaPersonagens[i], ListaEntidades[j]);
 	}
 
 	checaColisaoParede(pFazendeira);
@@ -73,34 +65,7 @@ void GerenciadorFisica::checaColisao(Personagem* personagem, Entidade* entidade)
 
 	if (intersecaoX < 0.f && intersecaoY < 0.f)
 	{
-		if (intersecaoX > intersecaoY) //Lógica invertida pois são valores negativos
-		{
-			if (deltaX > 0.f)
-			{
-				personagem->movimenta(sf::Vector2f(intersecaoX, 0.f));
-				personagem->setMovimentoX(0.f);
-			}
-
-			else
-			{
-				personagem->movimenta(sf::Vector2f(-intersecaoX, 0.f));
-				personagem->setMovimentoX(0.f);
-			}
-		}
-		else
-		{
-			if (deltaY > 0.f)
-			{
-				personagem->setPodePular(true);
-				personagem->movimenta(sf::Vector2f(0.f, intersecaoY));
-				personagem->setMovimentoY(0.f);
-			}
-			else
-			{
-				personagem->movimenta(sf::Vector2f(0.f, -intersecaoY));
-				personagem->setMovimentoY(0.f);
-			}
-		}
+		entidade->colidir(personagem);
 	}
 }
 

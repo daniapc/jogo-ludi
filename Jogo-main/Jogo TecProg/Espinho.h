@@ -7,5 +7,7 @@ private:
 public:
 	Espinho();
 	~Espinho();
+
+	void colidir(Personagem* personagem);
 };
 

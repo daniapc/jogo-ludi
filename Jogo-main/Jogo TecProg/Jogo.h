@@ -9,6 +9,7 @@ private:
 
 	GerenciadorGrafico gerenciadorGrafico;
 	Quintal Fase_Quintal;
+	static int Pontuacao;
 
 public:
 	Jogo();

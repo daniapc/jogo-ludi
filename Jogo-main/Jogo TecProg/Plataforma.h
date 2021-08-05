@@ -8,5 +8,7 @@ private:
 public:
 	Plataforma();
 	~Plataforma();
+
+	void colidir(Personagem* personagem);
 };
 

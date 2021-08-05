@@ -5,26 +5,37 @@
 class Personagem : public Entidade   
 {
 protected:
-	float Velocidade;
-	sf::FloatRect Hitbox;
+	int Vida;
 	sf::Vector2f Movimento;
-	bool podePular;
-	float alturaPulo;
+	float Velocidade, alturaPulo;
+	bool podePular,olharDireita;
+	bool Amigavel, colidePlataforma;
+	int CooldownAtaque, CooldownAtaqueMax;
+	int CooldownInvencibilidade, CooldownInvencibilidadeMax;
+	int Neutralizavel;
 
 public:
 	Personagem();
 	~Personagem();
 
 	virtual void inicializa() = 0;
+	virtual void atualiza(float deltaTempo);
+	virtual void colidir();
 
+	bool podeMorrer();
+	void setOlhaDireita(bool olhardireita);
+	void setColidePlataforma(bool colideplataforma);
+	bool getColidePlataforma();
+	void setVida(int vida);
+	int getVida();
+	void setAmigavel(bool amigavel);
+	bool getAmigavel();
+	bool podeAtacar();
 	void setMovimentoX(float movimentox);
 	void setMovimentoY(float movimentoy);
 	void setVelocidade(float velocidade);
 	void setPodePular(bool podepular);
 	void setAlturaPulo(float alturapulo);
 	float getVelocidade();
-	sf::FloatRect getHitbox();
-
-	void movimenta(sf::Vector2f movimento);
 };
 

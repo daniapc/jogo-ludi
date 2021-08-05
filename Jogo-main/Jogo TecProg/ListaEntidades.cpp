@@ -39,7 +39,45 @@ void ListaEntidades::inclua(Entidade* pentidade)
         else
         {
             pUltimo->setProx(pAux);
+            pAux->setAnte(pUltimo);
             pUltimo = pAux;
+    }
+}
+
+void ListaEntidades::atualiza(float deltaTempo)
+{
+    Elemento* pAux = NULL;
+
+    pAux = pPrimeiro;
+
+    while (pAux != NULL)
+    {
+        Entidade* pE = NULL;
+
+        
+        pE = pAux->getEntidade();
+        pE->atualiza(deltaTempo);
+        pAux = pAux->getProx();
+        
+        /*
+        pE = pAux->getEntidade();
+        if (pE->getDesalocavel())
+        {
+            Elemento* pAux2 = pAux;
+            pAux = pAux->getProx();
+            if (pAux2->getAnte() != NULL)
+                pAux2->getAnte()->setProx(pAux2->getProx());
+            if (pAux2->getProx() != NULL)
+                pAux2->getProx()->setAnte(pAux2->getAnte());
+            delete pE;
+            delete pAux2;
+        }
+        else
+        {
+            pE->atualiza(deltaTempo);
+            pAux = pAux->getProx();
+        }
+        */
     }
 }
 
@@ -54,7 +92,9 @@ void ListaEntidades::desenhar() const
         Entidade* pE = NULL;
 
         pE = pAux->getEntidade();
+    
         pE->desenhar();
+
         pAux = pAux->getProx();
     }
 }

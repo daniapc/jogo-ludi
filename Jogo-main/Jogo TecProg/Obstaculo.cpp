@@ -8,7 +8,10 @@ Obstaculo::~Obstaculo()
 {
 }
 
-sf::FloatRect Obstaculo::getHitbox()
+void Obstaculo::colidir(Personagem* personagem)
 {
-	return Corpo.getGlobalBounds();
+}
+
+void Obstaculo::atualiza(float deltaTempo)
+{
 }

@@ -1,6 +1,8 @@
 #include "Entidade.h"
+#include "Personagem.h"
 
-Entidade::Entidade()
+Entidade::Entidade():
+	Desalocavel(false)
 {
 	Janela = NULL;
 }
@@ -38,6 +40,16 @@ sf::Vector2f Entidade::getPosicao()
 	return Posicao;
 }
 
+void Entidade::setDesalocavel(bool desalocavel)
+{
+	Desalocavel = desalocavel;
+}
+
+bool Entidade::getDesalocavel()
+{
+	return Desalocavel;
+}
+
 void Entidade::setOrigem()
 {
 	Corpo.setOrigin(DimensoesCorpo.x / 2, DimensoesCorpo.y / 2);
@@ -49,6 +61,19 @@ void Entidade::setTextura(const string textura)
         cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
 
 	Corpo.setTexture(&Textura);
+}
+
+void Entidade::colidir(Personagem* personagem)
+{
+}
+
+void Entidade::movimenta(sf::Vector2f movimento)
+{
+	Corpo.move(movimento);
+}
+
+void Entidade::atualiza(float deltaTempo)
+{
 }
 
 void Entidade::desenhar()

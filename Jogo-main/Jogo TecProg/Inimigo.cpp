@@ -12,3 +12,11 @@ void Inimigo::inicializa()
 {
 }
 
+void Inimigo::atualiza()
+{
+}
+
+void Inimigo::colidir()
+{
+}
+

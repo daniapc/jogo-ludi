@@ -1,4 +1,5 @@
 #pragma once
+#include "Personagem.h"
 #include "Entidade.h"
 
 class Obstaculo : public Entidade
@@ -9,6 +10,7 @@ public:
 	Obstaculo();
 	~Obstaculo();
 
-	sf::FloatRect getHitbox();
+	virtual void colidir(Personagem* personagem);
+	virtual void atualiza(float deltaTempo);
 };
 

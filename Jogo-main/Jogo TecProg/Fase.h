@@ -4,6 +4,9 @@
 #include "Plataforma.h"
 #include "Jogador.h"
 #include "GerenciadorFisica.h"
+#include "Obstaculo.h"
+#include "Espinho.h"
+#include "Estatico.h"
 #include "ListaEntidades.h"
 
 class Fase : public Ente
@@ -13,7 +16,6 @@ protected:
 	Jogador Fazendeira;
 	GerenciadorFisica gerenciadorFisica;
 	ListaEntidades listaEntidades;
-	vector <Plataforma*> ListaPlataformas;
 
 	sf::View* View;
 
@@ -26,8 +28,12 @@ public:
 
 	virtual void criaEntidades();
 	virtual void criaPlataformas() = 0;
-	void criaPlataforma(sf::Vector2f posicao,sf::Vector2f tamanho = sf::Vector2f(COMPRIMENTO_PLATAFORMA,ALTURA_PLATAFORMA), const string textura = "ground_top.png");
+
+	//Cria objetos que estão em ambas as fases
+	void criaPlataforma(sf::Vector2f posicao,sf::Vector2f tamanho = sf::Vector2f(COMPRIMENTO_PLATAFORMA,ALTURA_PLATAFORMA), const string textura = "textures/Plataforma_meio.png");
 	void criaChao();
+	void criaEstatico(sf::Vector2f posicao);
+	void criaEspinho(sf::Vector2f posicao);
 
 	Jogador& getFazendeira();
 	GerenciadorFisica getGerenciadorFisica();
@@ -35,6 +41,7 @@ public:
 	virtual void atualiza(float deltaTempo);
 	void atualizaView();
 
+	void incluaProjetil(Projetil* projetil);
 	void setView(sf::View* view);
 };
 

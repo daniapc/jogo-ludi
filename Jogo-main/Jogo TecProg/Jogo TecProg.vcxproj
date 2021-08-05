@@ -164,6 +164,7 @@
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Projetil.cpp" />
     <ClCompile Include="Quintal.cpp" />
+    <ClCompile Include="Teia.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ente.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Projetil.h" />
     <ClInclude Include="Quintal.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Teia.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

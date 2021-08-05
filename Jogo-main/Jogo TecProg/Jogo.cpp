@@ -21,7 +21,6 @@ void Jogo::Atualiza(float deltaTempo)
 
 void Jogo::Inicializa()
 {
-    
     gerenciadorGrafico.getJanela().setView(gerenciadorGrafico.getView());
     //Janela.setView(View);
 

@@ -8,13 +8,16 @@ public:
     {
     private:
         Entidade* pEntidade;
-        Elemento* pProx;
+        Elemento* pProx, *pAnte;
     public:
-        Elemento() { pProx = NULL; pEntidade = NULL; }
+        Elemento() { pProx = NULL; pEntidade = NULL; pAnte = NULL; }
         ~Elemento()  { pEntidade = NULL; pProx = NULL; }
 
         void setEntidade(Entidade* pentidade) { pEntidade = pentidade; }
         Entidade* getEntidade() { return pEntidade; }
+
+        void setAnte(Elemento* p) { pAnte = p; }
+        Elemento* getAnte() { return pAnte; }
 
         void setProx(Elemento* p) { pProx = p; }
         Elemento* getProx() { return pProx; }
@@ -30,6 +33,7 @@ public:
     ~ListaEntidades();
    
     void inclua(Entidade* pentidade); 
+    void atualiza(float deltaTempo);
     void desenhar() const;
 };
 

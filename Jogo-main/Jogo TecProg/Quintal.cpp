@@ -6,18 +6,18 @@ Quintal::Quintal()
 
 Quintal::~Quintal()
 {
-	for (unsigned int i = 0; i < ListaPassaros.size(); i++)
-		delete ListaPassaros[i];
-	ListaPassaros.clear();
-	for (unsigned int i = 0; i < ListaEspinhos.size(); i++)
-		delete ListaEspinhos[i];
-	ListaEspinhos.clear();
-	for (unsigned int i = 0; i < ListaPlataformas.size(); i++)
-		delete ListaPlataformas[i];
-	ListaPlataformas.clear();
-	for (unsigned int i = 0; i < ListaFantasmas.size(); i++)
-		delete ListaFantasmas[i];
-	ListaFantasmas.clear();
+	//for (unsigned int i = 0; i < ListaPassaros.size(); i++)
+	//	delete ListaPassaros[i];
+	//ListaPassaros.clear();
+	//for (unsigned int i = 0; i < ListaEspinhos.size(); i++)
+	//	delete ListaEspinhos[i];
+	//ListaEspinhos.clear();
+	//for (unsigned int i = 0; i < ListaPlataformas.size(); i++)
+	//	delete ListaPlataformas[i];
+	//ListaPlataformas.clear();
+	//for (unsigned int i = 0; i < ListaFantasmas.size(); i++)
+	//	delete ListaFantasmas[i];
+	//ListaFantasmas.clear();
 }
 
 void Quintal::inicializa()
@@ -25,33 +25,57 @@ void Quintal::inicializa()
 	srand(time(NULL));
 
 	listaEntidades.inclua(static_cast <Entidade*> (&Cenario));
+	//gerenciadorFisica.setListaEntidades(&listaEntidades);
 	
+	Fazendeira.inicializa();
 	Fazendeira.setJanela(Janela);
+	Fazendeira.setFaseAtual(this);
 	Fazendeira.setDimensoes(sf::Vector2f(COMPRIMENTO_JOGADOR, ALTURA_JOGADOR));
 	Fazendeira.setOrigem();
 	Fazendeira.setPosicao(sf::Vector2f(640.f, 320.f));
-	Fazendeira.setTextura("Fazendeira.png");
+	Fazendeira.setTextura("textures/Fazendeira.png");
 	Fazendeira.setTeclas(sf::Keyboard::D, sf::Keyboard::A, sf::Keyboard::W, sf::Keyboard::Space);
 	Fazendeira.setVelocidade(400.f);
 	Fazendeira.setAlturaPulo(400.f);
 	gerenciadorFisica.setFazendeira(&Fazendeira);
+	gerenciadorFisica.incluaPersonagem(&Fazendeira);
 
 	Cenario.setJanela(Janela);
-	Cenario.setTextura("Background.png");
+	Cenario.setTextura("textures/Background.png");
 	Cenario.setDimensoes(sf::Vector2f(COMPRIMENTO_CENARIO, ALTURA_RESOLUCAO));
 	Cenario.setPosicao(sf::Vector2f(0.f, 0.f));
 
 	criaPlataformas();
 
-	//Incluindo Espinhos
-	for (int i = 0; i < rand()%6+3; i++)
+	for (int i = 0; i < rand() % 6 + 3; i++)
 	{
-		//Perguntar se todos os espinhos devem ser necessariamente aleatórios
 		criaEspinho(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO-400)) + 200,
 			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_ESPINHO/2)));
 	}
 
-	criaFantasma(sf::Vector2f(500.f, 500.f));
+	for (int i = 0; i < rand() % 6 + 3; i++)
+	{
+		criaTeia(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
+			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_TEIA / 2)));
+	}
+
+	for (int i = 0; i < rand() % 4 + 3; i++)
+	{
+		criaFantasma(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200, 
+						rand() % static_cast<int>(ALTURA_RESOLUCAO / 2) + ALTURA_FANTASMA / 2));
+	}
+
+	for (int i = 0; i < rand() % 4 + 3; i++)
+	{
+		criaPassaro(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
+			rand() % static_cast<int>(ALTURA_RESOLUCAO / 2) + ALTURA_FANTASMA / 2));
+	}
+
+	for (int i = 0; i < rand() % 4 + 3; i++)
+	{
+		criaEstatico(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
+			rand() % static_cast<int>(ALTURA_RESOLUCAO) - (ALTURA_PLATAFORMA + ALTURA_ESTATICO/2)));
+	}
 
 	listaEntidades.inclua(static_cast <Entidade*> (&Fazendeira));
 }
@@ -64,50 +88,34 @@ void Quintal::desenhar()
 void Quintal::atualiza(float deltaTempo)
 {
 	atualizaView();
-	
+
 	gerenciadorFisica.checaColisoes();
 
-	Fazendeira.atualiza(deltaTempo);
-
-	atualizaFantasmas(deltaTempo);
+	listaEntidades.atualiza(deltaTempo);
 
 	desenhar();
 }
 
-void Quintal::atualizaFantasmas(float deltaTempo)
-{
-	for (unsigned int i = 0; i < ListaFantasmas.size(); i++)
-	{
-		ListaFantasmas[i]->atualiza(deltaTempo);
-	}
-}
-
-void Quintal::criaPassaro()
+void Quintal::criaPassaro(sf::Vector2f posicao)
 {
 	Passaro* novo = NULL;
 	novo = new Passaro();
 
-	//Setar posição aleatoriamente
-
-	ListaPassaros.push_back(novo);
-	listaEntidades.inclua(static_cast <Entidade*> (novo));
-}
-
-void Quintal::criaEspinho(sf::Vector2f posicao)
-{
-	Espinho* novo = NULL; 
-	novo = new Espinho();
-
-	//Setar posição aleatoriamente
+	novo->setFaseAtual(this);
 	novo->setPosicao(posicao);
 	novo->setDimensoes(sf::Vector2f(COMPRIMENTO_ESPINHO, ALTURA_ESPINHO));
 	novo->setOrigem();
+	novo->inicializa();
+	novo->setVida(3);
+	novo->setVelocidade(100.f);
 	novo->setJanela(Janela);
-	novo->setTextura("");
+	novo->setTextura("textures/Passaro_direita.png");
+	novo->setColidePlataforma(true);
 
-	ListaEspinhos.push_back(novo);
-	listaEntidades.inclua(static_cast <Entidade*>(novo));
-	gerenciadorFisica.incluaEspinho(novo);
+	//ListaPassaros.push_back(novo);
+	listaEntidades.inclua(static_cast <Entidade*> (novo));
+	gerenciadorFisica.incluaPersonagem(novo);
+	gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
 }
 
 void Quintal::criaFantasma(sf::Vector2f posicao)
@@ -119,14 +127,36 @@ void Quintal::criaFantasma(sf::Vector2f posicao)
 	novo->setDimensoes(sf::Vector2f(COMPRIMENTO_FANTASMA,ALTURA_FANTASMA));
 	novo->setOrigem();
 	novo->setJanela(Janela);
-	novo->setTextura("");
+	novo->setTextura("textures/Fantasma_direita.png");
 
-	ListaFantasmas.push_back(novo);
+	//ListaFantasmas.push_back(novo);
 	listaEntidades.inclua(static_cast <Entidade*>(novo));
-	gerenciadorFisica.incluaFantasma(novo);
+	//gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
+	gerenciadorFisica.incluaPersonagem(novo);
 
+	novo->setColidePlataforma(false);
 	novo->inicializa();
 	novo->setVelocidade(200.f);
+	novo->setVida(4);
+}
+
+void Quintal::criaTeia(sf::Vector2f posicao)
+{
+	Teia* novo = NULL;
+	novo = new Teia();
+
+	//Setar posição aleatoriamente
+	novo->setPosicao(posicao);
+	novo->setDimensoes(sf::Vector2f(COMPRIMENTO_TEIA, ALTURA_TEIA));
+	novo->setOrigem();
+	novo->setJanela(Janela);
+	novo->setTextura("");
+	//novo->setLentidao(0.9f);
+
+	//ListaTeias.push_back(novo);
+	listaEntidades.inclua(static_cast <Entidade*>(novo));
+	//listaObstaculos.push_back(static_cast<Obstaculo*>(novo));
+	gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
 }
 
 void Quintal::criaPlataformas(){
@@ -135,18 +165,18 @@ void Quintal::criaPlataformas(){
 	criaChao();
 
 	//Plataformas específicas
-	for (int i = 0; i < 9; i++){
-		criaPlataforma(sf::Vector2f(500.f + COMPRIMENTO_PLATAFORMA*i, 300.f));
-	}
-	for (int i = 0; i < 9; i++){
-		criaPlataforma(sf::Vector2f(1500.f + COMPRIMENTO_PLATAFORMA*i, 300.f));
-	}
-	for (int i = 0; i < 9; i++){
-		criaPlataforma(sf::Vector2f(800.f + COMPRIMENTO_PLATAFORMA*i, 450.f));
-	}
-	for (int i = 0; i < 9; i++){
-		criaPlataforma(sf::Vector2f(1800.f + COMPRIMENTO_PLATAFORMA*i, 150.f));
-	}
+	for (int i = 0; i < 10; i++){
 
+		criaPlataforma(sf::Vector2f(900.f + COMPRIMENTO_PLATAFORMA * i, 337.5f));
+		criaPlataforma(sf::Vector2f(1500.f + COMPRIMENTO_PLATAFORMA*i, 337.5f));
+		criaPlataforma(sf::Vector2f(500.f + COMPRIMENTO_PLATAFORMA*i, 517.5f));
+		criaPlataforma(sf::Vector2f(1800.f + COMPRIMENTO_PLATAFORMA*i, 157.5f));
+		//criaPlataforma(sf::Vector2f(1800.f + COMPRIMENTO_PLATAFORMA*i, 1.f*(ALTURA_RESOLUCAO/4.f - ALTURA_PLATAFORMA)/4.f + 0.f*ALTURA_PLATAFORMA + ALTURA_PLATAFORMA/2.f));
+
+	}
+	for (int i = 0; i < 5; i++){
+		criaPlataforma(sf::Vector2f(2000.f + COMPRIMENTO_PLATAFORMA*i, 517.5f));
+		//criaPlataforma(sf::Vector2f(2000.f + COMPRIMENTO_PLATAFORMA * i, 2.f*(ALTURA_RESOLUCAO/4.f - ALTURA_PLATAFORMA)/4.f + 1.f*ALTURA_PLATAFORMA + ALTURA_PLATAFORMA/2.f));
+	}
 }
 
