@@ -21,3 +21,8 @@ sf::View& GerenciadorGrafico::getView()
 {
 	return View;
 }
+
+void GerenciadorGrafico::resetaView()
+{
+	View.setCenter(sf::Vector2f(COMPRIMENTO_RESOLUCAO/2, ALTURA_RESOLUCAO/2));
+}

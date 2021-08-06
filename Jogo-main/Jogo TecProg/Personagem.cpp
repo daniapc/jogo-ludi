@@ -44,7 +44,7 @@ bool Personagem::podeMorrer()
 
 	if (CooldownInvencibilidade >= CooldownInvencibilidadeMax)
 		CooldownInvencibilidade = 1;
-	if (CooldownInvencibilidade % CooldownInvencibilidadeMax + 1 <= CooldownInvencibilidadeMax/2)
+         	if (CooldownInvencibilidade % CooldownInvencibilidadeMax + 1 <= CooldownInvencibilidadeMax/2)
 		return false;
 	else
 		return true;

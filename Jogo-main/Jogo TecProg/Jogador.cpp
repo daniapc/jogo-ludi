@@ -43,12 +43,12 @@ void Jogador::atualiza(float deltaTempo)
 	if (sf::Keyboard::isKeyPressed(Direita))
 	{
 		Movimento.x += Velocidade;
-		direita = true;
+		olharDireita = true;
 	}
 	if (sf::Keyboard::isKeyPressed(Esquerda))
 	{
 		Movimento.x -= Velocidade;
-		direita = false;
+		olharDireita = false;
 	}
 	if (podePular && sf::Keyboard::isKeyPressed(Pulo))
 	{
@@ -85,15 +85,15 @@ void Jogador::atiraProjetil()
 	novo = new Projetil();
 	novo->setDesalocavel(false);
 
-	if (direita)
+	if (olharDireita)
 	{
 		novo->setPosicao(sf::Vector2f(this->getPosicao().x + this->getDimensoes().x / 2, this->getPosicao().y));
-		novo->setVelocidade(sf::Vector2f(600.f, 0.f));
+		novo->setVelocidade(sf::Vector2f(800.f, 0.f));
 	}
 	else
 	{
 		novo->setPosicao(sf::Vector2f(this->getPosicao().x - this->getDimensoes().x / 2, this->getPosicao().y));
-		novo->setVelocidade(sf::Vector2f(-600.f, 0.f));
+		novo->setVelocidade(sf::Vector2f(-800.f, 0.f));
 	}
 	novo->setDimensoes(sf::Vector2f(10.f, 10.f));
 	novo->setOrigem();

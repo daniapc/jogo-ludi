@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chefao.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="Espinho.cpp" />
@@ -158,15 +159,23 @@
     <ClCompile Include="ListaEntidades.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jogador.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuFases.cpp" />
+    <ClCompile Include="MenuJogadores.cpp" />
+    <ClCompile Include="MenuPause.cpp" />
+    <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Passaro.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
+    <ClCompile Include="Porta.cpp" />
     <ClCompile Include="Projetil.cpp" />
+    <ClCompile Include="Quarto.cpp" />
     <ClCompile Include="Quintal.cpp" />
     <ClCompile Include="Teia.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chefao.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="Espinho.h" />
@@ -179,11 +188,18 @@
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="ListaEntidades.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuFases.h" />
+    <ClInclude Include="MenuJogadores.h" />
+    <ClInclude Include="MenuPause.h" />
+    <ClInclude Include="MenuPrincipal.h" />
     <ClInclude Include="Obstaculo.h" />
     <ClInclude Include="Passaro.h" />
     <ClInclude Include="Personagem.h" />
     <ClInclude Include="Plataforma.h" />
+    <ClInclude Include="Porta.h" />
     <ClInclude Include="Projetil.h" />
+    <ClInclude Include="Quarto.h" />
     <ClInclude Include="Quintal.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Teia.h" />

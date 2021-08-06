@@ -5,16 +5,13 @@
 #include "Fantasma.h"
 #include "Estatico.h"
 #include "GerenciadorFisica.h"
+#include "Chefao.h"
+#include "Porta.h"
 
 class Quintal : public Fase
 {
 private:
-	/*
-	vector <Passaro*> ListaPassaros;
-	vector <Espinho*> ListaEspinhos;
-	vector <Fantasma*> ListaFantasmas;
-	vector <Teia*> ListaTeias;
-	*/
+	Porta porta;
 
 public:
 	Quintal();
@@ -25,7 +22,7 @@ public:
 	void atualiza(float deltaTempo);
 
 	void criaPassaro(sf::Vector2f posicao);
-	void criaFantasma(sf::Vector2f posicao);
+	//void criaFantasma(sf::Vector2f posicao);
 	void criaTeia(sf::Vector2f posicao);
 	void criaPlataformas();
 };

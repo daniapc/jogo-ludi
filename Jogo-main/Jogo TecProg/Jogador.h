@@ -10,7 +10,6 @@ class Jogador : public Personagem
 private:
 	sf::Keyboard::Key Direita, Esquerda, Pulo, Atira;
 	Fase* faseAtual;
-	bool direita;
 	//static int Pontuacao;
 
 public:

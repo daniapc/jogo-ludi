@@ -9,7 +9,6 @@ class Passaro : public Inimigo
 private:
 	Fase* faseAtual;
 	float limiteXEsq, limiteXDir;
-	int Vida;
 
 public:
 	Passaro();

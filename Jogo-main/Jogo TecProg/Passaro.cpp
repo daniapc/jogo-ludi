@@ -38,6 +38,7 @@ void Passaro::atualiza(float deltaTempo)
 	{
 		this->setDimensoes(sf::Vector2f(0.f, 0.f));
 		this->setVelocidade(0.f);
+		this->setPosicao(sf::Vector2f(0.f, 0.f));
 		/*
 		Jogador::setPontuacao(Jogador::getPontuacao() + 1);
 		cout << "Score: " << Jogador::getPontuacao() << endl;

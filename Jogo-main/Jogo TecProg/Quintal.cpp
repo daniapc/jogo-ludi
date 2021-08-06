@@ -1,23 +1,12 @@
 #include "Quintal.h"
 
-Quintal::Quintal()
+Quintal::Quintal() :
+	porta()
 {
 }
 
 Quintal::~Quintal()
 {
-	//for (unsigned int i = 0; i < ListaPassaros.size(); i++)
-	//	delete ListaPassaros[i];
-	//ListaPassaros.clear();
-	//for (unsigned int i = 0; i < ListaEspinhos.size(); i++)
-	//	delete ListaEspinhos[i];
-	//ListaEspinhos.clear();
-	//for (unsigned int i = 0; i < ListaPlataformas.size(); i++)
-	//	delete ListaPlataformas[i];
-	//ListaPlataformas.clear();
-	//for (unsigned int i = 0; i < ListaFantasmas.size(); i++)
-	//	delete ListaFantasmas[i];
-	//ListaFantasmas.clear();
 }
 
 void Quintal::inicializa()
@@ -36,7 +25,7 @@ void Quintal::inicializa()
 	Fazendeira.setTextura("textures/Fazendeira.png");
 	Fazendeira.setTeclas(sf::Keyboard::D, sf::Keyboard::A, sf::Keyboard::W, sf::Keyboard::Space);
 	Fazendeira.setVelocidade(400.f);
-	Fazendeira.setAlturaPulo(400.f);
+	Fazendeira.setAlturaPulo(250.f);
 	gerenciadorFisica.setFazendeira(&Fazendeira);
 	gerenciadorFisica.incluaPersonagem(&Fazendeira);
 
@@ -59,11 +48,13 @@ void Quintal::inicializa()
 			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_TEIA / 2)));
 	}
 
-	for (int i = 0; i < rand() % 4 + 3; i++)
+	/*
+	/for (int i = 0; i < rand() % 4 + 3; i++)
 	{
 		criaFantasma(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200, 
 						rand() % static_cast<int>(ALTURA_RESOLUCAO / 2) + ALTURA_FANTASMA / 2));
 	}
+	*/
 
 	for (int i = 0; i < rand() % 4 + 3; i++)
 	{
@@ -76,6 +67,11 @@ void Quintal::inicializa()
 		criaEstatico(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
 			rand() % static_cast<int>(ALTURA_RESOLUCAO) - (ALTURA_PLATAFORMA + ALTURA_ESTATICO/2)));
 	}
+
+	porta.setJanela(Janela);
+	porta.setJogo(jogo);
+	listaEntidades.inclua(static_cast<Entidade*> (&porta));
+	gerenciadorFisica.incluaEntidade(static_cast<Entidade*> (&porta));
 
 	listaEntidades.inclua(static_cast <Entidade*> (&Fazendeira));
 }
@@ -107,7 +103,7 @@ void Quintal::criaPassaro(sf::Vector2f posicao)
 	novo->setOrigem();
 	novo->inicializa();
 	novo->setVida(3);
-	novo->setVelocidade(100.f);
+	novo->setVelocidade(200.f);
 	novo->setJanela(Janela);
 	novo->setTextura("textures/Passaro_direita.png");
 	novo->setColidePlataforma(true);
@@ -118,6 +114,7 @@ void Quintal::criaPassaro(sf::Vector2f posicao)
 	gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
 }
 
+/*
 void Quintal::criaFantasma(sf::Vector2f posicao)
 {
 	Fantasma* novo = NULL;
@@ -131,7 +128,7 @@ void Quintal::criaFantasma(sf::Vector2f posicao)
 
 	//ListaFantasmas.push_back(novo);
 	listaEntidades.inclua(static_cast <Entidade*>(novo));
-	//gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
+	gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
 	gerenciadorFisica.incluaPersonagem(novo);
 
 	novo->setColidePlataforma(false);
@@ -139,6 +136,7 @@ void Quintal::criaFantasma(sf::Vector2f posicao)
 	novo->setVelocidade(200.f);
 	novo->setVida(4);
 }
+*/
 
 void Quintal::criaTeia(sf::Vector2f posicao)
 {

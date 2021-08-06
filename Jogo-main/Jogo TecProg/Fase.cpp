@@ -1,4 +1,5 @@
 #include "Fase.h"
+#include "Jogo.h"
 
 Fase::Fase()
 {
@@ -17,7 +18,7 @@ void Fase::criaEntidades()
 {
 }
 
-void Fase::criaPlataforma(sf::Vector2f posicao, sf::Vector2f tamanho, const string textura)
+void Fase::criaPlataforma(sf::Vector2f posicao, const string textura, sf::Vector2f tamanho)
 {
 	Plataforma* nova = NULL;
 	nova = new Plataforma();
@@ -125,4 +126,9 @@ void Fase::incluaProjetil(Projetil* projetil)
 void Fase::setView(sf::View* view)
 {
     View = view;
+}
+
+void Fase::setJogo(Jogo* jg)
+{
+	jogo = jg;
 }

@@ -16,6 +16,7 @@ public:
 	sf::View& getView();
 
 	//void setView();
+	void resetaView();
 
 };
 
