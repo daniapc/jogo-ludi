@@ -10,5 +10,6 @@ public:
 	~Plataforma();
 
 	void colidir(Personagem* personagem);
+	void salvar();
 };
 

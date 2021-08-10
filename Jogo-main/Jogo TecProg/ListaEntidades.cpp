@@ -41,7 +41,7 @@ void ListaEntidades::inclua(Entidade* pentidade)
             pUltimo->setProx(pAux);
             pAux->setAnte(pUltimo);
             pUltimo = pAux;
-    }
+        }
 }
 
 void ListaEntidades::atualiza(float deltaTempo)
@@ -94,6 +94,24 @@ void ListaEntidades::desenhar() const
         pE = pAux->getEntidade();
     
         pE->desenhar();
+
+        pAux = pAux->getProx();
+    }
+}
+
+void ListaEntidades::salvar()
+{
+    Elemento* pAux = NULL;
+
+    pAux = pPrimeiro;
+
+    while (pAux != NULL)
+    {
+        Entidade* pE = NULL;
+
+        pE = pAux->getEntidade();
+
+        pE->salvar();
 
         pAux = pAux->getProx();
     }

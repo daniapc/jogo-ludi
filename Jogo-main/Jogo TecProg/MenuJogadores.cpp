@@ -44,6 +44,7 @@ void MenuJogadores::LoopMenu(sf::Event* evento)
 				jogo->setEstado(2);
 				break;
 			case 1:
+				jogo->setMultiplayer(true);
 				jogo->setEstado(2);
 				break;
 			case 2:

@@ -17,9 +17,9 @@ public:
 	void inicializa();
 	void desenhar();
 	void atualiza(float deltaTempo);
+	void recuperar();
 
 	void criaFantasma(sf::Vector2f posicao);
-	void criaTeia(sf::Vector2f posicao);
 	void criaChefao(sf::Vector2f posicao);
 	void criaPlataformas();
 };

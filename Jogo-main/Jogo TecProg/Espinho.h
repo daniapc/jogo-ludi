@@ -9,5 +9,6 @@ public:
 	~Espinho();
 
 	void colidir(Personagem* personagem);
+	void salvar();
 };
 

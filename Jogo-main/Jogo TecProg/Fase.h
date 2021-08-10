@@ -8,6 +8,7 @@
 #include "Espinho.h"
 #include "Estatico.h"
 #include "ListaEntidades.h"
+#include "Projetil.h"
 
 class Jogo;
 
@@ -15,9 +16,11 @@ class Fase : public Ente
 {
 protected:
 	Entidade Cenario;
-	Jogador Fazendeira;
+	Jogador* Fazendeira;
+	Jogador* Bruxo;
 	GerenciadorFisica gerenciadorFisica;
 	ListaEntidades listaEntidades;
+	vector<Projetil*> PiscinaProjeteis;
 	Jogo* jogo;
 
 	sf::View* View;
@@ -35,11 +38,16 @@ public:
 	//Cria objetos que estão em ambas as fases
 	void criaPlataforma(sf::Vector2f posicao, const string textura = "textures/Plataforma_meio.png" ,sf::Vector2f tamanho = sf::Vector2f(COMPRIMENTO_PLATAFORMA, ALTURA_PLATAFORMA));
 	void criaChao();
-	void criaEstatico(sf::Vector2f posicao);
-	void criaEspinho(sf::Vector2f posicao);
+	void criaEstatico(sf::Vector2f posicao, const string textura = "");
+	void criaEspinho(sf::Vector2f posicao, const string textura = "");
+	void criaTeia(sf::Vector2f posicao, const string textura = "");
 
-	Jogador& getFazendeira();
+
+	vector<Projetil*>& getPiscinaProjeteis();
+	Jogador* getFazendeira();
 	GerenciadorFisica getGerenciadorFisica();
+	void setFazendeira(Jogador* fazendeira);
+	void setBruxo(Jogador* bruxo);
 
 	virtual void atualiza(float deltaTempo);
 	void atualizaView();
@@ -47,5 +55,11 @@ public:
 	void incluaProjetil(Projetil* projetil);
 	void setView(sf::View* view);
 	void setJogo(Jogo* jg);
+	void salvar();
+
+	void recuperarEstaticos();
+	void recuperarEspinhos();
+	void recuperarTeias();
+	void recuperarJogadores();
 };
 

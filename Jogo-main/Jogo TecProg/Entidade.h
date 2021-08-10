@@ -8,7 +8,6 @@ class Personagem;
 class Entidade : public Ente
 {
 protected:
-	
 	sf::Vector2f DimensoesCorpo;
 	sf::Vector2f Movimento;
 	sf::RectangleShape Corpo;
@@ -27,6 +26,7 @@ public:
 	sf::Vector2f getDimensoes();
 	void setPosicao(sf::Vector2f posicao);
 	sf::Vector2f getPosicao();
+	sf::Vector2f getMovimento();
 
 	// Para saber se o elemento 
 	void setDesalocavel(bool desalocavel);
@@ -39,5 +39,6 @@ public:
 	void movimenta(sf::Vector2f movimento);
 	virtual void atualiza(float deltaTempo);
 	void desenhar();
+	virtual void salvar();
 };
 

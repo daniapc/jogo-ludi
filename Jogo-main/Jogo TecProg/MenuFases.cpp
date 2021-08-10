@@ -39,9 +39,11 @@ void MenuFases::LoopMenu(sf::Event* evento)
 			switch (Indice)
 			{
 			case 0:
+				jogo->InicializaFases();
 				jogo->setEstado(4);
 				break;
 			case 1:
+				jogo->InicializaFases();
 				jogo->setEstado(5);
 				break;
 			case 2:

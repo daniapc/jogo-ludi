@@ -1,4 +1,5 @@
 #include "Projetil.h"
+#include "Fase.h"
 
 Projetil::Projetil()
 {
@@ -6,6 +7,11 @@ Projetil::Projetil()
 
 Projetil::~Projetil()
 {
+}
+
+void Projetil::setNaPiscina(bool napiscina)
+{
+	NaPiscina = napiscina;
 }
 
 void Projetil::setAmigavel(bool amigavel)
@@ -26,17 +32,21 @@ void Projetil::colidir(Personagem* personagem)
 		personagem->setVida(personagem->getVida() - 1);
 		this->setDesalocavel(true);
 	}
+
 }
 
 void Projetil::atualiza(float deltaTempo)
 {
 	Movimento = sf::Vector2f(0.f, 0.f);
 
-	if (Desalocavel)
+	if (Desalocavel && !NaPiscina)
 	{
 		this->setDimensoes(sf::Vector2f(0.f, 0.f));
 		this->setVelocidade(sf::Vector2f(0.f, 0.f));
 		this->setPosicao(sf::Vector2f(0.f, 0.f));
+		this->faseAtual->getPiscinaProjeteis().push_back(this);
+		NaPiscina = true;
+		cout << this->faseAtual->getPiscinaProjeteis().size() << endl;
 	}
 
 	Movimento.x += Velocidade.x;
@@ -53,4 +63,9 @@ void Projetil::movimenta(sf::Vector2f movimento)
 void Projetil::setVelocidade(sf::Vector2f velocidade)
 {
 	Velocidade = velocidade;
+}
+
+void Projetil::setFaseAtual(Fase* faseatual)
+{
+	faseAtual = faseatual;
 }

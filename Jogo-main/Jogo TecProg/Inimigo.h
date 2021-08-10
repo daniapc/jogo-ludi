@@ -13,5 +13,6 @@ public:
 	virtual void inicializa() = 0;
 	virtual void atualiza();
 	virtual void colidir();
+	virtual void salvar() = 0;
 };
 

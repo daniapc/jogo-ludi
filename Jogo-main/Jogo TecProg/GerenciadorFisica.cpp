@@ -67,6 +67,13 @@ void GerenciadorFisica::checaColisao(Personagem* personagem, Entidade* entidade)
 	{
 		entidade->colidir(personagem);
 	}
+	
+	if (entidade->getPosicao().x <= entidade->getDimensoes().x / 2
+		|| entidade->getPosicao().x >= COMPRIMENTO_CENARIO - entidade->getDimensoes().x / 2
+		|| entidade->getPosicao().y <= 0
+		|| entidade->getPosicao().y >= ALTURA_RESOLUCAO)
+		entidade->setDesalocavel(true);
+
 }
 
 void GerenciadorFisica::checaColisaoParede(Personagem* personagem)

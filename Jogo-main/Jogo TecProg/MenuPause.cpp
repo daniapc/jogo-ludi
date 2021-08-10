@@ -26,6 +26,16 @@ MenuPause::~MenuPause()
 {
 }
 
+void MenuPause::setEstadoAtual(int estadoatual)
+{
+	EstadoAtual = estadoatual;
+}
+
+int MenuPause::getEstadoAtual()
+{
+	return EstadoAtual;
+}
+
 void MenuPause::LoopMenu(sf::Event* evento)
 {
 	if (evento->type == sf::Event::KeyPressed)
@@ -39,10 +49,10 @@ void MenuPause::LoopMenu(sf::Event* evento)
 			switch (Indice)
 			{
 			case 0:
-				jogo->setEstado(2);
+				jogo->setEstado(EstadoAtual);
 				break;
 			case 1:
-				jogo->setEstado(7);
+				jogo->Salvar();
 				break;
 			case 2:
 				Janela->close();

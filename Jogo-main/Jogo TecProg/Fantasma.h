@@ -14,5 +14,6 @@ public:
 	void colidir(Personagem* personagem);
 	void inicializa();
 	void atualiza(float deltaTempo);
+	void salvar();
 };
 

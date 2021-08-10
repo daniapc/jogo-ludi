@@ -26,3 +26,16 @@ float Teia::getLentidao()
 {
 	return Lentidao;
 }
+
+void Teia::salvar()
+{
+	ofstream gravadorTeia("saves/Teias.dat", ios::app);
+
+	if (!gravadorTeia)
+		cout << "Erro." << endl;
+
+	gravadorTeia << this->getPosicao().x << ' '
+		<< this->getPosicao().y << ' ' << endl;
+
+	gravadorTeia.close();
+}

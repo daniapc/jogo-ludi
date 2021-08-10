@@ -9,6 +9,16 @@ Passaro::~Passaro()
 {
 }
 
+void Passaro::setLimiteXEsq(float limesq)
+{
+	limiteXEsq = limesq;
+}
+
+void Passaro::setLimiteXDir(float limdir)
+{
+	limiteXDir = limdir;
+}
+
 void Passaro::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel())
@@ -20,7 +30,7 @@ void Passaro::inicializa()
 	Neutralizavel = true;
 	Amigavel = false;
 	CooldownAtaque = 0.f;
-	CooldownAtaqueMax = 3000.f;
+	CooldownAtaqueMax = 2.f;
 	CooldownInvencibilidade = 0;
 	CooldownInvencibilidadeMax = -1;
 	limiteXEsq = getPosicao().x;
@@ -60,7 +70,7 @@ void Passaro::atualiza(float deltaTempo)
 	this->movimenta(Movimento * deltaTempo);
 	srand(time(NULL));
 
-	CooldownAtaque++;
+	CooldownAtaque += deltaTempo;
 
 	if (!Desalocavel && this->podeAtacar())
 		this->atiraProjetil();
@@ -69,11 +79,17 @@ void Passaro::atualiza(float deltaTempo)
 void Passaro::atiraProjetil()
 {
 	Projetil* novo = NULL;
-	novo = new Projetil();
-	novo->setDesalocavel(false);
 
-	float deltax = faseAtual->getFazendeira().getPosicao().x - this->getPosicao().x;
-	float deltay = faseAtual->getFazendeira().getPosicao().y - this->getPosicao().y;
+	if (faseAtual->getPiscinaProjeteis().empty()) {
+		novo = new Projetil();
+	}
+	else {
+		novo = faseAtual->getPiscinaProjeteis().back();
+		faseAtual->getPiscinaProjeteis().pop_back();
+	}
+
+	float deltax = faseAtual->getFazendeira()->getPosicao().x - this->getPosicao().x;
+	float deltay = faseAtual->getFazendeira()->getPosicao().y - this->getPosicao().y;
 	float modulo = sqrt(deltax*deltax + deltay*deltay);
 
 	if (olharDireita)
@@ -90,6 +106,33 @@ void Passaro::atiraProjetil()
 	novo->setOrigem();
 	novo->setJanela(Janela);
 	novo->setAmigavel(false);
+	novo->setDesalocavel(false);
+	novo->setFaseAtual(faseAtual);
+	novo->setNaPiscina(false);
 
-	faseAtual->incluaProjetil(novo); //Incluído na fase
+	if (faseAtual->getPiscinaProjeteis().empty())
+		faseAtual->incluaProjetil(novo); //Incluído na fase
 }
+
+void Passaro::salvar()
+{
+	if (!this->getDesalocavel())
+	{
+		ofstream gravadorPassaro("saves/Passaros.dat", ios::app);
+
+		if (!gravadorPassaro)
+			cout << "Erro." << endl;
+
+		gravadorPassaro << this->getVida() << ' '
+			<< this->getPosicao().x << ' '
+			<< this->getPosicao().y << ' '
+			<< this->getMovimento().x << ' '
+			<< this->getMovimento().y << ' '
+			<< this->limiteXDir << ' '
+			<< this->limiteXEsq << ' '
+			<< this-> CooldownAtaque << endl;
+
+		gravadorPassaro.close();
+	}
+}
+

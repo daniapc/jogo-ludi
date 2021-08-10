@@ -18,5 +18,6 @@ public:
 	void atiraProjetil(float altura);
 	void atiraProjetil2();
 	void atiraProjeteis();
+	void salvar();
 };
 

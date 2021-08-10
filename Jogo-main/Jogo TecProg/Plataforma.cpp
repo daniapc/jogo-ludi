@@ -49,3 +49,7 @@ void Plataforma::colidir(Personagem* personagem)
 		}
 	}
 }
+
+void Plataforma::salvar()
+{
+}

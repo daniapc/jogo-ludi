@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <Windows.h>
+#include <fstream>
 
 #define COMPRIMENTO_RESOLUCAO 1280.f
 #define ALTURA_RESOLUCAO 720.f

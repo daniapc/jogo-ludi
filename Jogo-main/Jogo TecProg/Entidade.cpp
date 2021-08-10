@@ -40,6 +40,11 @@ sf::Vector2f Entidade::getPosicao()
 	return Posicao;
 }
 
+sf::Vector2f Entidade::getMovimento()
+{
+	return Movimento;
+}
+
 void Entidade::setDesalocavel(bool desalocavel)
 {
 	Desalocavel = desalocavel;
@@ -79,4 +84,8 @@ void Entidade::atualiza(float deltaTempo)
 void Entidade::desenhar()
 {
 	Janela->draw(Corpo);
+}
+
+void Entidade::salvar()
+{
 }

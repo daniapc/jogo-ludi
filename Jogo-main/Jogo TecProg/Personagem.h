@@ -6,12 +6,11 @@ class Personagem : public Entidade
 {
 protected:
 	int Vida;
-	sf::Vector2f Movimento;
 	float Velocidade, alturaPulo;
 	bool podePular,olharDireita;
 	bool Amigavel, colidePlataforma;
-	int CooldownAtaque, CooldownAtaqueMax;
-	int CooldownInvencibilidade, CooldownInvencibilidadeMax;
+	float CooldownAtaque, CooldownAtaqueMax;
+	float CooldownInvencibilidade, CooldownInvencibilidadeMax;
 	int Neutralizavel;
 
 public:
@@ -23,6 +22,7 @@ public:
 	virtual void colidir();
 
 	bool podeMorrer();
+	void setCooldownAtaque(float cooldownataque);
 	void setOlhaDireita(bool olhardireita);
 	void setColidePlataforma(bool colideplataforma);
 	bool getColidePlataforma();
@@ -37,5 +37,6 @@ public:
 	void setPodePular(bool podepular);
 	void setAlturaPulo(float alturapulo);
 	float getVelocidade();
+	virtual void salvar() = 0;
 };
 

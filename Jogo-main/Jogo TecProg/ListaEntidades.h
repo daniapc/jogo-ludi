@@ -35,6 +35,7 @@ public:
     void inclua(Entidade* pentidade); 
     void atualiza(float deltaTempo);
     void desenhar() const;
+    void salvar();
 };
 
 

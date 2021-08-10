@@ -12,5 +12,6 @@ public:
 
 	virtual void colidir(Personagem* personagem);
 	virtual void atualiza(float deltaTempo);
+	virtual void salvar();
 };
 
