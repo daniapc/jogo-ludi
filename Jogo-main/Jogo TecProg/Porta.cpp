@@ -9,7 +9,7 @@ Porta::Porta():
 	this->setPosicao(sf::Vector2f(COMPRIMENTO_CENARIO - 150.f , ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 50.f)));
 	this->setDimensoes(sf::Vector2f(50.f, 100.f));
 	//this->setOrigem();
-	this->setTextura("");
+	//this->setTextura("");
 }
 
 Porta::~Porta()

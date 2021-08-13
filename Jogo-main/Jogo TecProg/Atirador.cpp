@@ -15,6 +15,12 @@ void Atirador::setFaseAtual(Fase* faseatual) {
 	faseAtual = faseatual;
 }
 
+void Atirador::setTexturaProjetil(string textura)
+{
+	Textura = textura;
+}
+
+/*
 void Atirador::atiraProjetilHorizontal(Personagem* personagem)
 {
 	Projetil* novo = NULL;
@@ -37,9 +43,11 @@ void Atirador::atiraProjetilHorizontal(Personagem* personagem)
 	novo->setAmigavel(personagem->getAmigavel());
 	novo->setDesalocavel(false);
 	novo->setFaseAtual(faseAtual);
+	novo->setTextura(Textura);
 
 	faseAtual->incluaProjetil(novo); //Incluído na fase
 }
+*/
 
 void Atirador::atiraProjetilHorizontal(Personagem* personagem, float altura)
 {
@@ -63,6 +71,8 @@ void Atirador::atiraProjetilHorizontal(Personagem* personagem, float altura)
 	novo->setAmigavel(personagem->getAmigavel());
 	novo->setDesalocavel(false);
 	novo->setFaseAtual(faseAtual);
+	novo->setTextura(Textura);
+
 
 	faseAtual->incluaProjetil(novo); //Incluído na fase
 }
@@ -92,6 +102,7 @@ void Atirador::atiraProjetilDirecionado(Personagem* personagem, float dimensao)
 			novo->setAmigavel(personagem->getAmigavel());
 			novo->setDesalocavel(false);
 			novo->setFaseAtual(faseAtual);
+			novo->setTextura(Textura);
 
 			faseAtual->incluaProjetil(novo); //Incluído na fase	
 		}

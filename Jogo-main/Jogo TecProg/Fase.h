@@ -44,7 +44,7 @@ public:
 	void criaBordas();
 	void criaEstatico(sf::Vector2f posicao, const string textura = "");
 	void criaEspinho(sf::Vector2f posicao, const string textura = "");
-	void criaTeia(sf::Vector2f posicao, const string textura = "");
+	void criaTeia(sf::Vector2f posicao, const string textura = "textures/Teia.png");
 
 
 	virtual void setChefaoMorreu(bool chefaomorreu);

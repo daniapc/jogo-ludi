@@ -173,6 +173,7 @@ void Jogo::InicializaJogadores()
     //Fazendeira->setOrigem();
     Fazendeira->setPosicao(sf::Vector2f(640.f, 320.f));
     Fazendeira->setTextura("textures/Fazendeira.png");
+    Fazendeira->setTexturaProjetil("textures/Projetil_Fazendeira.png");
     Fazendeira->setTeclas(sf::Keyboard::D, sf::Keyboard::A, sf::Keyboard::W, sf::Keyboard::Space);
     Fazendeira->setVelocidade(400.f);
     Fazendeira->setAlturaPulo(250.f);
@@ -187,6 +188,7 @@ void Jogo::InicializaJogadores()
        // Bruxo->setOrigem();
         Bruxo->setPosicao(sf::Vector2f(640.f, 320.f));
         Bruxo->setTextura("textures/Bruxo.png");
+        Bruxo->setTexturaProjetil("textures/Projetil_Bruxo.png");
         Bruxo->setTeclas(sf::Keyboard::Right, sf::Keyboard::Left, sf::Keyboard::Up, sf::Keyboard::Enter);
         Bruxo->setVelocidade(400.f);
         Bruxo->setAlturaPulo(250.f);
@@ -364,6 +366,7 @@ void Jogo::RecuperarJogadores()
     Fazendeira->setMovimentoX(movx);
     Fazendeira->setMovimentoY(movy);
     Fazendeira->setCooldownAtaque(cooldown);
+    Fazendeira->setTexturaProjetil("textures/Projetil_Fazendeira.png");
     Fazendeira->setVelocidade(400.f);
     Fazendeira->setAlturaPulo(250.f);
     Fazendeira->setJanela(&gerenciadorGrafico.getJanela());
@@ -390,6 +393,7 @@ void Jogo::RecuperarJogadores()
         Bruxo->setMovimentoX(movx);
         Bruxo->setMovimentoY(movy);
         Bruxo->setCooldownAtaque(cooldown);
+        Bruxo->setTexturaProjetil("textures/Projetil_Bruxo.png");
         Bruxo->setVelocidade(400.f);
         Bruxo->setAlturaPulo(250.f);
         Bruxo->setJanela(&gerenciadorGrafico.getJanela());

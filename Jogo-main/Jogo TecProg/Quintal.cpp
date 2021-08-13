@@ -36,7 +36,8 @@ void Quintal::inicializa()
 	for (int i = 0; i < rand() % 6 + 3; i++)
 	{
 		criaEspinho(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO-400)) + 200,
-			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_ESPINHO/2)));
+			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_ESPINHO/2)),
+			"textures/Espinhos.png");
 	}
 
 	for (int i = 0; i < rand() % 6 + 3; i++)
@@ -60,6 +61,7 @@ void Quintal::inicializa()
 
 	porta.setJanela(Janela);
 	porta.setJogo(jogo);
+	porta.setTextura("textures/Porta.png");
 	listaEntidades.inclua(static_cast<Entidade*> (&porta));
 
 	//gerenciadorFisica.incluaEntidade(static_cast<Entidade*> (&porta));
@@ -125,6 +127,7 @@ void Quintal::criaPassaro(sf::Vector2f posicao)
 	novo->setVelocidade(200.f);
 	novo->setJanela(Janela);
 	novo->setTextura("textures/Passaro_direita.png");
+	novo->setTexturaProjetil("textures/Projetil_Passaro.png");
 	novo->setColidePlataforma(true);
 	novo->setLimiteXEsq(posicao.x);
 	novo->setLimiteXDir(posicao.x + 300.0f);
@@ -222,6 +225,7 @@ void Quintal::recuperarPassaros()
 		novo->setVelocidade(200.f);
 		novo->setJanela(Janela);
 		novo->setTextura("textures/Passaro_direita.png");
+		novo->setTexturaProjetil("textures/Projetil_Passaro.png");
 		novo->setColidePlataforma(true);
 		novo->setDimensoes(sf::Vector2f(COMPRIMENTO_ESPINHO, ALTURA_ESPINHO));
 		//novo->setOrigem();

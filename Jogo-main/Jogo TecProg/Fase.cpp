@@ -85,7 +85,7 @@ void Fase::criaTeia(sf::Vector2f posicao, const string textura)
 	novo->setDimensoes(sf::Vector2f(COMPRIMENTO_TEIA, ALTURA_TEIA));
 	//novo->setOrigem();
 	novo->setJanela(Janela);
-	novo->setTextura("");
+	novo->setTextura(textura);
 	//novo->setLentidao(0.9f);
 
 	//ListaTeias.push_back(novo);

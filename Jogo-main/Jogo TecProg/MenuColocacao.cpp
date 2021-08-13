@@ -78,7 +78,7 @@ void MenuColocacao::LoopMenu(sf::Event* evento)
 
 							for (int i = 1; i <= 4; i++) {
 								string saux = menu[i].getString();
-								if (saux.back() == ' ')
+								while (saux.back() == ' ')
 									saux.pop_back();
 
 								gravadorColocacao << saux << '\n';

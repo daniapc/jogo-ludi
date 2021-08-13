@@ -84,7 +84,8 @@ void Quarto::inicializa()
 	for (int i = 0; i < rand() % 6 + 3; i++)
 	{
 		criaEspinho(sf::Vector2f(rand() % (static_cast<int>(COMPRIMENTO_CENARIO-400)) + 200,
-			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_ESPINHO/2)));
+			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_ESPINHO/2)),
+			"textures/Materiais.png");
 	}
 	
 	criaChefao(sf::Vector2f(2000.f,600.f));
@@ -126,9 +127,10 @@ void Quarto::atualiza(float deltaTempo)
 		Porta* cabideiro;
 
 		cabideiro = new Porta();
-
+		cabideiro->setTextura("textures/Cabideiro.png");
 		cabideiro->setJogo(jogo);
 		cabideiro->setJanela(Janela);
+
 		
 		listaEntidades.inclua(static_cast<Entidade*> (cabideiro));
 	}
@@ -253,7 +255,8 @@ void Quarto::recuperarChefao()
 		novo->setCooldownAtaque(cooldown);
 		novo->setVelocidade(50.f);
 		novo->setJanela(Janela);
-		novo->setTextura("");
+		novo->setTextura("textures/Chefao.png");
+		novo->setTexturaProjetil("textures/Projetil_Chefao.png");
 		novo->setColidePlataforma(true);
 		novo->setDimensoes(sf::Vector2f(COMPRIMENTO_CHEFAO, ALTURA_CHEFAO));
 		//novo->setOrigem();
@@ -289,6 +292,7 @@ void Quarto::recuperarPorta()
 
 		novo->setPosicao(sf::Vector2f(posx, posy));
 		novo->setDimensoes(sf::Vector2f(50.0f, 100.0f));
+		novo->setTextura("textures/Cabideiro.png");
 		novo->setJanela(Janela);
 		novo->setJogo(jogo);
 
@@ -335,7 +339,8 @@ void Quarto::criaChefao(sf::Vector2f posicao)
 	novo->setVida(3);
 	novo->setVelocidade(50.f);
 	novo->setJanela(Janela);
-	novo->setTextura("");
+	novo->setTextura("textures/Chefao.png");
+	novo->setTexturaProjetil("textures/Projetil_Chefao.png");
 	novo->setColidePlataforma(true);
 
 	listaEntidades.inclua(static_cast <Entidade*> (novo));
