@@ -1,1 +1,94 @@
-﻿  Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Debug\Jogo TecProg.exe
+﻿  Atirador.cpp
+  Chefao.cpp
+  Creditos.cpp
+  Ente.cpp
+  Entidade.cpp
+  Espinho.cpp
+  Estatico.cpp
+  Fantasma.cpp
+  Fase.cpp
+  GerenciadorFisica.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\GerenciadorFisica.cpp(39,29): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\GerenciadorFisica.cpp(41,30): warning C4018: '<': incompatibilidade de signed/unsigned
+  Inimigo.cpp
+  Jogador.cpp
+  Jogo.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(5,42): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(5,19): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(6,42): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(6,19): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(7,38): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(7,15): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(8,38): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(8,15): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(9,42): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(9,19): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(10,37): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Jogo.cpp(10,14): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+  Lista.cpp
+  ListaEntidades.cpp
+  ListaPersonagens.cpp
+  Menu.cpp
+  MenuColocacao.cpp
+  MenuFases.cpp
+  MenuJogadores.cpp
+  Gerando Código...
+  Compilando...
+  MenuPause.cpp
+  MenuPrincipal.cpp
+  Obstaculo.cpp
+  Passaro.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Passaro.cpp(70,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  Personagem.cpp
+  Plataforma.cpp
+  Porta.cpp
+  Projetil.cpp
+  Quarto.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quarto.cpp(18,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quarto.cpp(68,84): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quarto.cpp(73,84): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quarto.cpp(80,80): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quarto.cpp(86,81): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+  Quintal.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(19,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(38,81): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(44,80): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(50,83): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Jogo TecProg\Quintal.cpp(56,84): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+  Teia.cpp
+  main.cpp
+  Gerando Código...
+  LINK : C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Debug\Jogo TecProg.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
+  Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Chico\Jogo\Jogo-main\Debug\Jogo TecProg.exe

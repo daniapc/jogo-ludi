@@ -2,55 +2,34 @@
 #include "Jogo.h"
 
 Quintal::Quintal() :
+	Fase(),
 	porta()
 {
 }
 
 Quintal::~Quintal()
 {
+	this->limparTudo();
 }
 
 void Quintal::inicializa()
 {
+	View->setCenter(sf::Vector2f(COMPRIMENTO_RESOLUCAO/2, ALTURA_RESOLUCAO/2));
+
 	srand(time(NULL));
 
+	gerenciadorFisica.setListaEntidades(&listaEntidades);
+	gerenciadorFisica.setListaPersonagens(&listaPersonagens);
+	//gerenciadorFisica.setFazendeira(Fazendeira);
+
+
+	//Fazendeira->setFaseAtual(this);
 	listaEntidades.inclua(static_cast <Entidade*> (&Cenario));
 	Cenario.setJanela(Janela);
 	Cenario.setTextura("textures/Background.png");
 	Cenario.setDimensoes(sf::Vector2f(COMPRIMENTO_CENARIO, ALTURA_RESOLUCAO));
-	Cenario.setPosicao(sf::Vector2f(0.f, 0.f));
-	//gerenciadorFisica.setListaEntidades(&listaEntidades);
-	
-	Fazendeira = new Jogador();
-	Fazendeira->inicializa();
-	Fazendeira->setJanela(Janela);
-	Fazendeira->setFaseAtual(this);
-	Fazendeira->setDimensoes(sf::Vector2f(COMPRIMENTO_JOGADOR, ALTURA_JOGADOR));
-	Fazendeira->setOrigem();
-	Fazendeira->setPosicao(sf::Vector2f(640.f, 320.f));
-	Fazendeira->setTextura("textures/Fazendeira.png");
-	Fazendeira->setTeclas(sf::Keyboard::D, sf::Keyboard::A, sf::Keyboard::W, sf::Keyboard::Space);
-	Fazendeira->setVelocidade(400.f);
-	Fazendeira->setAlturaPulo(250.f);
-	gerenciadorFisica.setFazendeira(Fazendeira);
-	gerenciadorFisica.incluaPersonagem(static_cast<Personagem*>(Fazendeira));
 
-	if (jogo->getMultiplayer())
-	{
-		Bruxo = new Jogador();
-		Bruxo->inicializa();
-		Bruxo->setJanela(Janela);
-		Bruxo->setFaseAtual(this);
-		Bruxo->setDimensoes(sf::Vector2f(COMPRIMENTO_JOGADOR, ALTURA_JOGADOR));
-		Bruxo->setOrigem();
-		Bruxo->setPosicao(sf::Vector2f(640.f, 320.f));
-		Bruxo->setTextura("textures/Bruxo.png");
-		Bruxo->setTeclas(sf::Keyboard::Right, sf::Keyboard::Left, sf::Keyboard::Up, sf::Keyboard::Enter);
-		Bruxo->setVelocidade(400.f);
-		Bruxo->setAlturaPulo(250.f);
-
-		gerenciadorFisica.incluaPersonagem(static_cast<Personagem*>(Bruxo));
-	}
+	Cenario.setPosicao(sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO/2));
 
 	criaPlataformas();
 
@@ -82,11 +61,18 @@ void Quintal::inicializa()
 	porta.setJanela(Janela);
 	porta.setJogo(jogo);
 	listaEntidades.inclua(static_cast<Entidade*> (&porta));
-	gerenciadorFisica.incluaEntidade(static_cast<Entidade*> (&porta));
 
-	if (Bruxo != NULL)
-		listaEntidades.inclua(static_cast <Entidade*> (Bruxo));
+	//gerenciadorFisica.incluaEntidade(static_cast<Entidade*> (&porta));
+
 	listaEntidades.inclua(static_cast <Entidade*> (Fazendeira));
+	listaPersonagens.inclua(static_cast <Personagem*> (Fazendeira));
+	if (jogo->getMultiplayer())
+	{
+
+		//Bruxo->setFaseAtual(this);
+		listaEntidades.inclua(static_cast <Entidade*> (Bruxo));
+		listaPersonagens.inclua(static_cast <Personagem*> (Bruxo));
+	}
 }
 
 void Quintal::desenhar()
@@ -96,6 +82,16 @@ void Quintal::desenhar()
 
 void Quintal::atualiza(float deltaTempo)
 {
+
+	if (getFazendeira()->getDesalocavel())
+		cout << "Fazendeira desalocavel true" << endl;
+
+	listaPersonagens.limpar();
+	listaEntidades.limpar();
+
+	if (getFazendeira() == NULL)
+		cout << "Fazendeira nula" << endl;
+
 	atualizaView();
 
 	gerenciadorFisica.checaColisoes();
@@ -103,6 +99,16 @@ void Quintal::atualiza(float deltaTempo)
 	listaEntidades.atualiza(deltaTempo);
 
 	desenhar();
+}
+
+void Quintal::limparTudo()
+{
+	listaPersonagens.limparTudo();
+	listaEntidades.limparTudo();
+	View = NULL;
+	Fazendeira = NULL;
+	Bruxo = NULL;
+	jogo = NULL;
 }
 
 void Quintal::criaPassaro(sf::Vector2f posicao)
@@ -113,25 +119,28 @@ void Quintal::criaPassaro(sf::Vector2f posicao)
 	novo->setFaseAtual(this);
 	novo->setPosicao(posicao);
 	novo->setDimensoes(sf::Vector2f(COMPRIMENTO_ESPINHO, ALTURA_ESPINHO));
-	novo->setOrigem();
+	//novo->setOrigem();
 	novo->inicializa();
 	novo->setVida(3);
 	novo->setVelocidade(200.f);
 	novo->setJanela(Janela);
 	novo->setTextura("textures/Passaro_direita.png");
 	novo->setColidePlataforma(true);
+	novo->setLimiteXEsq(posicao.x);
+	novo->setLimiteXDir(posicao.x + 300.0f);
 
 	//ListaPassaros.push_back(novo);
 	listaEntidades.inclua(static_cast <Entidade*> (novo));
-	gerenciadorFisica.incluaPersonagem(novo);
-	gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
+	listaPersonagens.inclua(static_cast <Personagem*> (novo));
+	//gerenciadorFisica.incluaPersonagem(novo);
+	//gerenciadorFisica.incluaEntidade(static_cast <Entidade*>(novo));
 }
 
 
 void Quintal::criaPlataformas(){
 
 	//Plataforma principal de baixo.
-	criaChao();
+	criaBordas();
 
 	//Plataformas específicas
 	for (int i = 0; i < 10; i++){
@@ -147,6 +156,9 @@ void Quintal::criaPlataformas(){
 		criaPlataforma(sf::Vector2f(2000.f + COMPRIMENTO_PLATAFORMA*i, 517.5f));
 		//criaPlataforma(sf::Vector2f(2000.f + COMPRIMENTO_PLATAFORMA * i, 2.f*(ALTURA_RESOLUCAO/4.f - ALTURA_PLATAFORMA)/4.f + 1.f*ALTURA_PLATAFORMA + ALTURA_PLATAFORMA/2.f));
 	}
+
+	criaPlataforma(sf::Vector2f(-COMPRIMENTO_PLATAFORMA/2, ALTURA_RESOLUCAO/2), "", sf::Vector2f(COMPRIMENTO_PLATAFORMA,ALTURA_RESOLUCAO));
+	criaPlataforma(sf::Vector2f(COMPRIMENTO_CENARIO+COMPRIMENTO_PLATAFORMA / 2, ALTURA_RESOLUCAO / 2), "", sf::Vector2f(COMPRIMENTO_PLATAFORMA, ALTURA_RESOLUCAO));
 }
 
 void Quintal::recuperar()
@@ -156,16 +168,31 @@ void Quintal::recuperar()
 	Cenario.setJanela(Janela);
 	Cenario.setTextura("textures/Background.png");
 	Cenario.setDimensoes(sf::Vector2f(COMPRIMENTO_CENARIO, ALTURA_RESOLUCAO));
-	Cenario.setPosicao(sf::Vector2f(0.f, 0.f));
+	Cenario.setPosicao(sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO / 2));
 	porta.setJanela(Janela);
 	porta.setJogo(jogo);
 	listaEntidades.inclua(static_cast<Entidade*> (&porta));
-	gerenciadorFisica.incluaEntidade(static_cast<Entidade*> (&porta));
+
+	gerenciadorFisica.setListaEntidades(&listaEntidades);
+	gerenciadorFisica.setListaPersonagens(&listaPersonagens);
+
+	
+	jogo->InicializaQuarto();
+
+	recuperarProjeteis();
 	recuperarEspinhos();
 	recuperarEstaticos();
 	recuperarPassaros();
 	recuperarTeias();
-	recuperarJogadores();
+	//recuperarJogadores();
+	Fazendeira->setFaseAtual(this);
+	listaEntidades.inclua(static_cast<Entidade*>(Fazendeira));
+	listaPersonagens.inclua(static_cast <Personagem*> (Fazendeira));
+	if (jogo->getMultiplayer()) {
+		Bruxo->setFaseAtual(this);
+		listaEntidades.inclua(static_cast<Entidade*>(Bruxo));
+		listaPersonagens.inclua(static_cast <Personagem*> (Bruxo));
+	}
 }
 
 void Quintal::recuperarPassaros()
@@ -197,15 +224,18 @@ void Quintal::recuperarPassaros()
 		novo->setTextura("textures/Passaro_direita.png");
 		novo->setColidePlataforma(true);
 		novo->setDimensoes(sf::Vector2f(COMPRIMENTO_ESPINHO, ALTURA_ESPINHO));
-		novo->setOrigem();
+		//novo->setOrigem();
 		novo->setFaseAtual(this);
 
 		listaEntidades.inclua(static_cast<Entidade*>(novo));
-		gerenciadorFisica.incluaPersonagem(static_cast<Personagem*>(novo));
-		gerenciadorFisica.incluaEntidade(static_cast<Entidade*>(novo));
+		listaPersonagens.inclua(static_cast <Personagem*> (novo));
+		//gerenciadorFisica.incluaPersonagem(static_cast<Personagem*>(novo));
+		//gerenciadorFisica.incluaEntidade(static_cast<Entidade*>(novo));
 	}
 
 	recuperadorPassaros.close();
+	//ofstream deletar("saves/Passaros.dat", ios::out);
+	//deletar.close();
 }
 
 

@@ -99,6 +99,24 @@
     <ClCompile Include="Porta.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="MenuColocacao.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Lista.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaPersonagens.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Creditos.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Atirador.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+>>>>>>> menu-salvamento
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo.h">
@@ -185,5 +203,23 @@
     <ClInclude Include="Porta.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="MenuColocacao.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Lista.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaPersonagens.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Creditos.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Atirador.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+>>>>>>> menu-salvamento
   </ItemGroup>
 </Project>

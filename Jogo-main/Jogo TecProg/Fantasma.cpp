@@ -2,47 +2,57 @@
 
 Fantasma::Fantasma():
 	Inimigo(),
-	cima(false)
+	cima(false),
+	limiteXDir(0.0f),
+	limiteXEsq(0.0f),
+	limiteYCima(0.0f),
+	limiteYBaixo(ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_FANTASMA / 2))
 {
-	
+	CooldownAtaqueMax = 0.5f;
 }
 
 Fantasma::~Fantasma()
 {
 }
 
+void Fantasma::setLimiteXEsq(float limesq)
+{
+	limiteXEsq = limesq;
+}
+
+void Fantasma::setLimiteXDir(float limdir)
+{
+	limiteXDir = limdir;
+}
+
+void Fantasma::setLimiteYCima(float limiteycima)
+{
+	limiteYCima = limiteycima;
+}
+
+void Fantasma::setLimiteYBaixo(float limiteybaixo)
+{
+	limiteYBaixo = limiteybaixo;
+}
+
 void Fantasma::colidir(Personagem* personagem)
 {
-	if (personagem->getAmigavel())
+	if (personagem->getAmigavel() && this->podeAtacar())
+	{
 		cout << "Colidiu Fantasma!" << endl;
+		personagem->setVida(personagem->getVida() - 1);
+		CooldownAtaque = 0.0f;
+		if (personagem->getVida() <= 0)
+			personagem->setDesalocavel(true);
+	}
 }
 
 void Fantasma::inicializa()
 {
-	Neutralizavel = true;
-	Amigavel = false;
-	limiteXEsq = getPosicao().x;
-	limiteXDir = getPosicao().x + 200;
-	limiteYBaixo = ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_FANTASMA/2);
-	limiteYCima = DimensoesCorpo.y / 2;
-	CooldownInvencibilidade = 0;
-	CooldownInvencibilidadeMax = -1;
-	CooldownAtaque = 0;
-	CooldownAtaqueMax = 1;
 }
 
 void Fantasma::atualiza(float deltaTempo)
 {
-	if (Desalocavel)
-	{
-		this->setDimensoes(sf::Vector2f(0.f, 0.f));
-		this->setVelocidade(0.f);
-		this->setPosicao(sf::Vector2f(0.f, 0.f));
-		/*
-		Jogador::setPontuacao(Jogador::getPontuacao() + 1);
-		cout << "Score: " << Jogador::getPontuacao() << endl;
-		*/
-	}
 
 	CooldownAtaque += deltaTempo;
 

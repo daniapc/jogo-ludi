@@ -1,6 +1,6 @@
 #include "Teia.h"
 
-Teia::Teia()
+Teia::Teia():Obstaculo()
 {
 }
 

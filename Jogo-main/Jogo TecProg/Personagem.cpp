@@ -1,6 +1,16 @@
 #include "Personagem.h"
 
-Personagem::Personagem() : Entidade()
+
+Personagem::Personagem():
+	Entidade(),
+	Neutralizavel(true),
+	Amigavel(false),
+	colidePlataforma(true),
+	CooldownAtaque(0.f),
+	CooldownAtaqueMax(1.f),
+	olharDireita(true),
+	Vida(3),
+	Velocidade(200.f)
 {
 }
 
@@ -10,9 +20,11 @@ Personagem::~Personagem()
 
 void Personagem::setVida(int vida)
 {
+	/*
 	if (vida == 0)
 		Desalocavel = true;
-
+	*/
+	
 	Vida = vida;
 }
 
@@ -41,13 +53,7 @@ void Personagem::colidir()
 
 bool Personagem::podeMorrer()
 {
-
-	if (CooldownInvencibilidade >= CooldownInvencibilidadeMax)
-		CooldownInvencibilidade = 0;
-    if ((CooldownInvencibilidade)/(CooldownInvencibilidadeMax) <= 0.5)
-		return true;
-	else
-		return false;
+	return true;
 }
 
 void Personagem::setCooldownAtaque(float cooldownataque)
@@ -58,6 +64,11 @@ void Personagem::setCooldownAtaque(float cooldownataque)
 void Personagem::setOlhaDireita(bool olhardireita)
 {
 	olharDireita = olhardireita;
+}
+
+bool Personagem::getOlharDireita()
+{
+	return olharDireita;
 }
 
 void Personagem::setColidePlataforma(bool colideplataforma)
@@ -73,10 +84,7 @@ bool Personagem::getColidePlataforma()
 bool Personagem::podeAtacar()
 {
 	if (CooldownAtaque >= CooldownAtaqueMax)
-	{
-		CooldownAtaque = 0;
 		return true;
-	}
 	return false;
 }
 
@@ -95,18 +103,13 @@ void Personagem::setVelocidade(float velocidade)
 	Velocidade = velocidade;
 }
 
-void Personagem::setPodePular(bool podepular)
-{
-	podePular = podepular;
-}
-
-void Personagem::setAlturaPulo(float alturapulo)
-{
-	alturaPulo = alturapulo;
-}
-
 float Personagem::getVelocidade()
 {
 	return Velocidade;
 }
+
+void Personagem::setPodePular(bool podepular)
+{
+}
+
 

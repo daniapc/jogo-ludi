@@ -1,11 +1,14 @@
 #pragma once
 #include "Inimigo.h"
-#include "Fase.h"
+#include "Atirador.h"
+//#include "Fase.h"
 
-class Chefao : public Inimigo
+class Fase;
+
+class Chefao : public Inimigo, public Atirador
 {
 private:
-	Fase* faseAtual;
+	//Fase* faseAtual;
 
 public:
 	Chefao();
@@ -13,10 +16,10 @@ public:
 
 	void colidir(Personagem* personagem);
 	void inicializa();
-	void setFaseAtual(Fase* faseatual);
+	//void setFaseAtual(Fase* faseatual);
 	void atualiza(float deltaTempo);
-	void atiraProjetil(float altura);
-	void atiraProjetil2();
+	//void atiraProjetil(float altura);
+	//void atiraProjetil2();
 	void atiraProjeteis();
 	void salvar();
 };

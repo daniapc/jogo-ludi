@@ -2,117 +2,124 @@
 
 ListaEntidades::ListaEntidades()
 {
-    pPrimeiro = NULL;
-    pUltimo = NULL;
+    
 }
 
 ListaEntidades::~ListaEntidades()
 {
-    Elemento* pAux = NULL;
 
-    pAux = pPrimeiro;
+    listaEntidades.limparTudo();
+}
 
-    while (pAux != NULL)
-    {
-        pPrimeiro = pPrimeiro->getProx();
-        delete pAux;
-        pAux = NULL;
-        pAux = pPrimeiro;
-    }
-    pAux = NULL;
-    pPrimeiro = NULL;
-    pUltimo = NULL;
+Entidade* ListaEntidades::getAtual()
+{
+    return listaEntidades.getAtual();
 }
 
 void ListaEntidades::inclua(Entidade* pentidade)
-   {
-        Elemento* pAux = NULL;
-
-        pAux = new Elemento();
-        pAux->setEntidade(pentidade);
-
-        if (pPrimeiro == NULL)
-        {
-            pPrimeiro = pAux;
-            pUltimo = pAux;
-        }
-        else
-        {
-            pUltimo->setProx(pAux);
-            pAux->setAnte(pUltimo);
-            pUltimo = pAux;
-        }
+{
+    listaEntidades.incluaTipo(pentidade);
 }
 
 void ListaEntidades::atualiza(float deltaTempo)
 {
-    Elemento* pAux = NULL;
+   listaEntidades.inicio();
 
-    pAux = pPrimeiro;
-
-    while (pAux != NULL)
+    while (listaEntidades.getAtual() != NULL)
     {
         Entidade* pE = NULL;
 
-        
-        pE = pAux->getEntidade();
+        pE = listaEntidades.getAtual();
+
         pE->atualiza(deltaTempo);
-        pAux = pAux->getProx();
-        
-        /*
-        pE = pAux->getEntidade();
-        if (pE->getDesalocavel())
-        {
-            Elemento* pAux2 = pAux;
-            pAux = pAux->getProx();
-            if (pAux2->getAnte() != NULL)
-                pAux2->getAnte()->setProx(pAux2->getProx());
-            if (pAux2->getProx() != NULL)
-                pAux2->getProx()->setAnte(pAux2->getAnte());
-            delete pE;
-            delete pAux2;
-        }
-        else
-        {
-            pE->atualiza(deltaTempo);
-            pAux = pAux->getProx();
-        }
-        */
+
+        listaEntidades.proximo();
+
     }
 }
 
-void ListaEntidades::desenhar() const
+void ListaEntidades::limpar()
 {
-    Elemento *pAux = NULL;
+    listaEntidades.inicio();
 
-    pAux = pPrimeiro;
-
-    while (pAux != NULL)
+    while (listaEntidades.getAtual() != NULL)
     {
         Entidade* pE = NULL;
 
-        pE = pAux->getEntidade();
+        pE = listaEntidades.getAtual();
+        listaEntidades.proximo();
+        if (pE->getDesalocavel())
+            listaEntidades.remove(pE);
+
+        
+    }
+}
+
+void ListaEntidades::limparTudo()
+{
+    listaEntidades.limparTudo();
+}
+
+void ListaEntidades::desenhar()
+{
+    listaEntidades.inicio();
+
+    while (listaEntidades.getAtual() != NULL)
+    {
+        Entidade* pE = NULL;
+
+        pE = listaEntidades.getAtual();
     
         pE->desenhar();
 
-        pAux = pAux->getProx();
+        listaEntidades.proximo();
     }
 }
 
 void ListaEntidades::salvar()
 {
-    Elemento* pAux = NULL;
+    listaEntidades.inicio();
 
-    pAux = pPrimeiro;
-
-    while (pAux != NULL)
+    while (listaEntidades.getAtual() != NULL)
     {
         Entidade* pE = NULL;
 
-        pE = pAux->getEntidade();
+        pE = listaEntidades.getAtual();
 
         pE->salvar();
 
-        pAux = pAux->getProx();
+        listaEntidades.proximo();
     }
+}
+
+int ListaEntidades::tamanho()
+{
+    return listaEntidades.tamanho();
+}
+
+void ListaEntidades::proximo()
+{
+    listaEntidades.proximo();
+}
+
+void ListaEntidades::inicio()
+{
+    listaEntidades.inicio();
+}
+
+void ListaEntidades::remove(Entidade* pentidade)
+{
+    listaEntidades.remove(pentidade);
+}
+
+
+Entidade* ListaEntidades::operator[](int indice)
+{
+    listaEntidades.inicio();
+
+    for (int i = 0; i < indice; i++) {
+        listaEntidades.proximo();
+    }
+
+    return getAtual();
 }

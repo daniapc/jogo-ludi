@@ -39,11 +39,20 @@ void MenuFases::LoopMenu(sf::Event* evento)
 			switch (Indice)
 			{
 			case 0:
+				jogo->InicializaJogadores();
 				jogo->InicializaFases();
+
+				jogo->getFazendeira()->setFaseAtual(&jogo->getQuintal());
+				if (jogo->getMultiplayer())
+					jogo->getBruxo()->setFaseAtual(&jogo->getQuintal());
 				jogo->setEstado(4);
 				break;
 			case 1:
-				jogo->InicializaFases();
+				jogo->InicializaJogadores();
+				if (jogo->getMultiplayer())
+					jogo->getBruxo()->setFaseAtual(&jogo->getQuarto());
+				jogo->getFazendeira()->setFaseAtual(&jogo->getQuarto());
+				jogo->InicializaQuarto();
 				jogo->setEstado(5);
 				break;
 			case 2:

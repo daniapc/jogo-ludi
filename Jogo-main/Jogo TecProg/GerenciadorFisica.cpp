@@ -1,6 +1,8 @@
 #include "GerenciadorFisica.h"
 
-GerenciadorFisica::GerenciadorFisica()
+GerenciadorFisica::GerenciadorFisica():
+	listaEntidades(NULL),
+	listaPersonagens(NULL)
 {
 }
 
@@ -8,52 +10,40 @@ GerenciadorFisica::~GerenciadorFisica()
 {
 }
 
-/*
 void GerenciadorFisica::setListaEntidades(ListaEntidades* listaentidades)
 {
 	listaEntidades = listaentidades;
 }
-*/
 
+void GerenciadorFisica::setListaPersonagens(ListaPersonagens* listapersonagens)
+{
+	listaPersonagens = listapersonagens;
+}
+
+/*
 void GerenciadorFisica::setFazendeira(Jogador* fazendeira)
 {
 	pFazendeira = fazendeira;
-}
-
-/*
-void GerenciadorFisica::incluaPlataforma(Plataforma* plataforma)
-{
-	ListaPlataformas.push_back(plataforma);
-}
-*/
-
-void GerenciadorFisica::incluaPersonagem(Personagem* personagem)
-{
-	ListaPersonagens.push_back(personagem);
-}
-
-/*
-void GerenciadorFisica::incluaProjetil(Projetil* projetil)
-{
-	ListaProjeteis.push_back(projetil);
 }
 */
 
 void GerenciadorFisica::incluaEntidade(Entidade* entidade)
 {
-	ListaEntidades.push_back(entidade);
+	listaEntidades->inclua(entidade);
 }
+
 
 void GerenciadorFisica::checaColisoes()
 {
-	for (unsigned int i = 0; i < ListaPersonagens.size(); i++)
-	{
-		for (unsigned int j = 0; j < ListaEntidades.size(); j++)
-			if (ListaPersonagens[i] != NULL && ListaEntidades[j] != NULL)
-				checaColisao(ListaPersonagens[i], ListaEntidades[j]);
-	}
 
-	checaColisaoParede(pFazendeira);
+	for (unsigned int i = 0; i < listaPersonagens->tamanho(); i++)
+	{
+		for (unsigned int j = 0; j < listaEntidades->tamanho(); j++)
+		{
+			checaColisao((*listaPersonagens)[i], (*listaEntidades)[j]);
+		}
+	}
+	//cout << listaEntidades->tamanho() << endl;
 }
 
 void GerenciadorFisica::checaColisao(Personagem* personagem, Entidade* entidade)
@@ -67,13 +57,6 @@ void GerenciadorFisica::checaColisao(Personagem* personagem, Entidade* entidade)
 	{
 		entidade->colidir(personagem);
 	}
-	
-	if (entidade->getPosicao().x <= entidade->getDimensoes().x / 2
-		|| entidade->getPosicao().x >= COMPRIMENTO_CENARIO - entidade->getDimensoes().x / 2
-		|| entidade->getPosicao().y <= 0
-		|| entidade->getPosicao().y >= ALTURA_RESOLUCAO)
-		entidade->setDesalocavel(true);
-
 }
 
 void GerenciadorFisica::checaColisaoParede(Personagem* personagem)

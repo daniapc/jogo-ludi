@@ -1,11 +1,25 @@
 #include "Estatico.h"
 
-Estatico::Estatico()
+Estatico::Estatico():
+	Inimigo(),
+	CooldownInvencibilidadeMax(3.0f),
+	CooldownInvencibilidade(0.0f)
 {
+	CooldownAtaqueMax = 1.0f;
 }
 
 Estatico::~Estatico()
 {
+}
+
+bool Estatico::podeMorrer()
+{
+	if (CooldownInvencibilidade >= CooldownInvencibilidadeMax)
+		CooldownInvencibilidade = 0;
+	if ((CooldownInvencibilidade) / (CooldownInvencibilidadeMax) <= 0.5)
+		return true;
+	else
+		return false;
 }
 
 void Estatico::atualiza(float deltaTempo)
@@ -18,12 +32,6 @@ void Estatico::atualiza(float deltaTempo)
 		this->setDimensoes(sf::Vector2f(COMPRIMENTO_ESTATICO, ALTURA_ESTATICO));
 		this->setOrigem();
 	}
-	
-	if (Desalocavel)
-	{
-		this->setDimensoes(sf::Vector2f(0.f, 0.f));
-		this->setVelocidade(0.f);
-	}
 
 	Movimento.y += 981.f * deltaTempo;
 	this->movimenta(Movimento * deltaTempo);
@@ -35,18 +43,17 @@ void Estatico::atualiza(float deltaTempo)
 void Estatico::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel() && this->podeAtacar())
+	{
 		cout << "Colidiu Estático!" << endl;
-		//Dar dano
+		CooldownAtaque = 0;
+		personagem->setVida(personagem->getVida() - 1);
+		if (personagem->getVida() <= 0)
+			personagem->setDesalocavel(true);
+	}
 }
 
 void Estatico::inicializa()
-{
-	Amigavel = false;
-	Neutralizavel = 1;
-	CooldownAtaque = 0.0f;
-	CooldownAtaqueMax = 1.0f;
-	CooldownInvencibilidade = 0.0f;
-	CooldownInvencibilidadeMax = 3.0f;
+{	
 }
 
 void Estatico::movimenta(sf::Vector2f movimento)

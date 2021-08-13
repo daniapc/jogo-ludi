@@ -4,11 +4,13 @@
 class Estatico : public Inimigo
 {
 private: 
+    float CooldownInvencibilidade, CooldownInvencibilidadeMax;
 
 public:
     Estatico();
     ~Estatico();
 
+    bool podeMorrer();
     void atualiza(float deltaTempo);
     void colidir(Personagem* personagem);
     void inicializa();

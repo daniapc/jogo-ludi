@@ -11,5 +11,6 @@ public:
 	virtual ~Ente();
 
 	void setJanela(sf::RenderWindow* janela);
+	sf::RenderWindow* getJanela();
 };
 

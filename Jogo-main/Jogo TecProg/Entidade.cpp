@@ -2,9 +2,9 @@
 #include "Personagem.h"
 
 Entidade::Entidade():
+	Ente(),
 	Desalocavel(false)
 {
-	Janela = NULL;
 }
 
 Entidade::~Entidade()
@@ -21,6 +21,7 @@ void Entidade::setDimensoes(sf::Vector2f dimensoes)
 {
 	DimensoesCorpo = dimensoes;
 	Corpo.setSize(DimensoesCorpo);
+	Corpo.setOrigin(DimensoesCorpo.x / 2, DimensoesCorpo.y / 2);
 }
 
 sf::Vector2f Entidade::getDimensoes()
@@ -57,7 +58,7 @@ bool Entidade::getDesalocavel()
 
 void Entidade::setOrigem()
 {
-	Corpo.setOrigin(DimensoesCorpo.x / 2, DimensoesCorpo.y / 2);
+	
 }
 
 void Entidade::setTextura(const string textura)

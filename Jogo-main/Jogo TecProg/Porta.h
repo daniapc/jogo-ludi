@@ -12,6 +12,7 @@ public:
 	Porta();
 	~Porta();
 
+	void salvar();
 	void setJogo(Jogo* jg);
 	void colidir(Personagem* personagem);
 };
