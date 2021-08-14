@@ -17,7 +17,6 @@ public:
 	Menu(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
 	~Menu();
 
-	//void LoopMenu(sf::Event* evento);
 	void moverCima();
 	void moverBaixo();
 	void desenhar();

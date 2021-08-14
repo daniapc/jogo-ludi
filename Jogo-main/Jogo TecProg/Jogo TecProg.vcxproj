@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Atirador.cpp" />
+    <ClCompile Include="Cenario.cpp" />
     <ClCompile Include="Chefao.cpp" />
     <ClCompile Include="Creditos.cpp" />
     <ClCompile Include="Ente.cpp" />
@@ -156,11 +157,10 @@
     <ClCompile Include="Estatico.cpp" />
     <ClCompile Include="Fantasma.cpp" />
     <ClCompile Include="Fase.cpp" />
-    <ClCompile Include="GerenciadorFisica.cpp" />
+    <ClCompile Include="GerenciadorColisoes.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogo.cpp" />
-    <ClCompile Include="Lista.cpp" />
     <ClCompile Include="ListaEntidades.cpp" />
     <ClCompile Include="ListaPersonagens.cpp" />
     <ClCompile Include="main.cpp" />
@@ -183,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Atirador.h" />
+    <ClInclude Include="Cenario.h" />
     <ClInclude Include="Chefao.h" />
     <ClInclude Include="Creditos.h" />
     <ClInclude Include="Ente.h" />
@@ -191,7 +192,7 @@
     <ClInclude Include="Estatico.h" />
     <ClInclude Include="Fantasma.h" />
     <ClInclude Include="Fase.h" />
-    <ClInclude Include="GerenciadorFisica.h" />
+    <ClInclude Include="GerenciadorColisoes.h" />
     <ClInclude Include="GerenciadorGrafico.h" />
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="Jogo.h" />

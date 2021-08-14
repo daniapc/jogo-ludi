@@ -6,7 +6,6 @@ ListaPersonagens::ListaPersonagens()
 
 ListaPersonagens::~ListaPersonagens()
 {
-
 	listaPersonagens.limparTudo();
 }
 
@@ -40,7 +39,6 @@ void ListaPersonagens::limpar()
 		{
 			listaPersonagens.pop(pE);
 		}
-
 	}
 }
 
@@ -58,7 +56,6 @@ void ListaPersonagens::inicio()
 {
 	listaPersonagens.inicio();
 }
-
 
 Personagem* ListaPersonagens::operator[](int indice)
 {

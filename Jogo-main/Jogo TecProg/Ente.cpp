@@ -1,20 +1,18 @@
 #include "Ente.h"
+#include "GerenciadorGrafico.h"
 
-Ente::Ente():
-	Janela(NULL)
+Ente::Ente()
+	//Janela(NULL)
 {
 }
 
 Ente::~Ente()
 {
+	//Janela = NULL;
 }
 
-void Ente::setJanela(sf::RenderWindow* janela)
+void Ente::setGerenciadorGrafico(GerenciadorGrafico* pgerenciadorgrafico)
 {
-	Janela = janela;
+	pGerenciadorGrafico = pgerenciadorgrafico;
 }
 
-sf::RenderWindow* Ente::getJanela()
-{
-	return Janela;
-}

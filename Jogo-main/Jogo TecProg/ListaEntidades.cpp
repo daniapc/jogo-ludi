@@ -7,7 +7,6 @@ ListaEntidades::ListaEntidades()
 
 ListaEntidades::~ListaEntidades()
 {
-
     listaEntidades.limparTudo();
 }
 
@@ -34,7 +33,6 @@ void ListaEntidades::atualiza(float deltaTempo)
         pE->atualiza(deltaTempo);
 
         listaEntidades.proximo();
-
     }
 }
 
@@ -49,9 +47,10 @@ void ListaEntidades::limpar()
         pE = listaEntidades.getAtual();
         listaEntidades.proximo();
         if (pE->getDesalocavel())
+        {
             listaEntidades.remove(pE);
-
-        
+        }
+            
     }
 }
 
@@ -111,7 +110,6 @@ void ListaEntidades::remove(Entidade* pentidade)
 {
     listaEntidades.remove(pentidade);
 }
-
 
 Entidade* ListaEntidades::operator[](int indice)
 {

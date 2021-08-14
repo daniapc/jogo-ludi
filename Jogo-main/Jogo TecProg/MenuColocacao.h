@@ -11,7 +11,6 @@ private:
 	bool Digitando;
 	sf::String Nome;
 	int Limite;
-
 	int EstadoAnterior;
 
 public:
@@ -20,13 +19,12 @@ public:
 
 	//void setEditavel(bool editavel);
 
-
 	void Recupera();
 	void Inicializa();
 
 	void setEditavel(bool Editavel);
 	void setEstadoAnterior(int estadoanterior);
 
-	void LoopMenu(sf::Event* evento);
+	void LoopMenu(char tecla);
 };
 

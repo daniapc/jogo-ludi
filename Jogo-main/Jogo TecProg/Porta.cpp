@@ -1,15 +1,11 @@
 #include "Porta.h"
 #include "Jogo.h"
 
-
 Porta::Porta():
 	Obstaculo(),
 	jogo(NULL)
 {
-	this->setPosicao(sf::Vector2f(COMPRIMENTO_CENARIO - 150.f , ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 50.f)));
-	this->setDimensoes(sf::Vector2f(50.f, 100.f));
-	//this->setOrigem();
-	//this->setTextura("");
+
 }
 
 Porta::~Porta()
@@ -21,10 +17,10 @@ void Porta::salvar()
 	ofstream gravadorPorta("saves/Porta.dat", ios::app);
 
 	if (!gravadorPorta)
-		cout << "Erro." << endl;
+		cout << "Erro Gravar Porta." << endl;
 
-	gravadorPorta << this->getPosicao().x << ' '
-		<< this->getPosicao().y << ' ' << endl;
+	gravadorPorta << this->getPosicaoX()  << ' '
+		<< this->getPosicaoY()  << ' ' << endl;
 
 	gravadorPorta.close();
 }
@@ -40,23 +36,20 @@ void Porta::colidir(Personagem* personagem)
 	{
 		if (jogo->getEstado() == 4)
 		{
-
-			jogo->getFazendeira()->setPosicao(sf::Vector2f(200.f, 200.f));
+			
 			jogo->getFazendeira()->setFaseAtual(&jogo->getQuarto());
+			jogo->getFazendeira()->setPosicao(200.f, 200.f);
 			if (jogo->getMultiplayer())
 			{
-				jogo->getBruxo()->setPosicao(sf::Vector2f(200.f, 200.f));
 				jogo->getBruxo()->setFaseAtual(&jogo->getQuarto());
+				jogo->getBruxo()->setPosicao(200.f, 200.f);
 			}
-		
-			//jogo->InicializaQuarto();
 
 			jogo->setEstado(5);
 			jogo->getQuintal().limparTudo();
 		}
 		else 
 		{
-			//jogo->getMenuColocacao().setEditavel(true);
 			jogo->setEstado(7);	
 			jogo->getQuarto().limparTudo();
 		}

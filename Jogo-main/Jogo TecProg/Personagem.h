@@ -16,12 +16,6 @@ public:
 	Personagem();
 	~Personagem();
 
-	virtual void inicializa() = 0;
-	virtual void atualiza(float deltaTempo);
-	virtual void colidir();
-
-	virtual bool podeMorrer();
-	void setCooldownAtaque(float cooldownataque);
 	void setOlhaDireita(bool olhardireita);
 	bool getOlharDireita();
 	void setColidePlataforma(bool colideplataforma);
@@ -30,12 +24,19 @@ public:
 	int getVida();
 	void setAmigavel(bool amigavel);
 	bool getAmigavel();
-	bool podeAtacar();
+	float getVelocidade();
+	void setCooldownAtaque(float cooldownataque);
 	void setMovimentoX(float movimentox);
 	void setMovimentoY(float movimentoy);
 	void setVelocidade(float velocidade);
-	float getVelocidade();
+
+	bool podeAtacar();
+
 	virtual void setPodePular(bool podepular);
+	virtual bool podeMorrer();
+
 	virtual void salvar() = 0;
+	virtual void atualiza(float deltaTempo) = 0;
+	virtual void colidir(Personagem* personagem);
 };
 

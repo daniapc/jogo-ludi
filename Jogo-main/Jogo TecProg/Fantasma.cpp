@@ -9,19 +9,18 @@ Fantasma::Fantasma():
 	limiteYBaixo(ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_FANTASMA / 2))
 {
 	CooldownAtaqueMax = 0.5f;
+	this->setColidePlataforma(false);
+	this->setVelocidade(200.f);
+	this->setVida(2);
 }
 
 Fantasma::~Fantasma()
 {
 }
 
-void Fantasma::setLimiteXEsq(float limesq)
+void Fantasma::setLimitesX(float limesq, float limdir)
 {
 	limiteXEsq = limesq;
-}
-
-void Fantasma::setLimiteXDir(float limdir)
-{
 	limiteXDir = limdir;
 }
 
@@ -47,37 +46,34 @@ void Fantasma::colidir(Personagem* personagem)
 	}
 }
 
-void Fantasma::inicializa()
-{
-}
-
 void Fantasma::atualiza(float deltaTempo)
 {
-
 	CooldownAtaque += deltaTempo;
 
-	Movimento = sf::Vector2f(0.f, 0.f);
-	sf::Vector2f posicao = getPosicao();
+	MovimentoX = 0.f;
+	MovimentoY = 0.f;
 
-	if (posicao.x <= limiteXEsq)
+	float posicaox = getPosicaoX(), posicaoy = getPosicaoY();
+
+	if (posicaox <= limiteXEsq)
 		olharDireita = true;
-	else if (posicao.x >= limiteXDir)
+	else if (posicaox >= limiteXDir)
 		olharDireita = false;
-	if (olharDireita && posicao.x < limiteXDir)
-		Movimento.x += Velocidade;
-	else if (!olharDireita && posicao.x > limiteXEsq)
-		Movimento.x -= Velocidade;
+	if (olharDireita && posicaox < limiteXDir)
+		MovimentoX += Velocidade;
+	else if (!olharDireita && posicaox > limiteXEsq)
+		MovimentoX -= Velocidade;
 
-	if (posicao.y >= limiteYBaixo)
+	if (posicaoy >= limiteYBaixo)
 		cima = true;
-	else if (posicao.y <= limiteYCima)
+	else if (posicaoy <= limiteYCima)
 		cima = false;
-	if (cima && posicao.y > limiteYCima)
-		Movimento.y -= Velocidade;
-	else if (!cima && posicao.y < limiteYBaixo)
-		Movimento.y += Velocidade;
+	if (cima && posicaoy > limiteYCima)
+		MovimentoY -= Velocidade;
+	else if (!cima && posicaoy < limiteYBaixo)
+		MovimentoY += Velocidade;
 
-	this->movimenta(Movimento * deltaTempo);
+	this->movimenta(MovimentoX* deltaTempo, MovimentoY* deltaTempo);
 }
 
 void Fantasma::salvar()
@@ -90,14 +86,10 @@ void Fantasma::salvar()
 			cout << "Erro." << endl;
 
 		gravadorFantasma << this->getVida() << ' '
-			<< this->getPosicao().x << ' '
-			<< this->getPosicao().y << ' '
-			<< this->getMovimento().x << ' '
-			<< this->getMovimento().y << ' '
+			<< this->getPosicaoX() << ' '
+			<< this->getPosicaoY() << ' '
 			<< this->limiteXDir << ' '
 			<< this->limiteXEsq << ' '
-			<< this->limiteYCima << ' '
-			<< this->limiteYBaixo << ' ' 
 			<< this->CooldownAtaque << endl;
 
 		gravadorFantasma.close();

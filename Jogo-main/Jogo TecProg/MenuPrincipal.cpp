@@ -32,15 +32,13 @@ MenuPrincipal::~MenuPrincipal()
 {
 }
 
-void MenuPrincipal::LoopMenu(sf::Event* evento)
+void MenuPrincipal::LoopMenu(char tecla)
 {
-	if (evento->type == sf::Event::KeyPressed)
-	{
-		if (evento->key.code == sf::Keyboard::Key::W)
+		if (tecla == 'w' || tecla == 'W')
 			moverCima();
-		if (evento->key.code == sf::Keyboard::Key::S)
+		if (tecla == 's' || tecla == 'S')
 			moverBaixo();
-		if (evento->key.code == sf::Keyboard::Key::Enter)
+		if (tecla == 13)
 		{
 			switch (Indice)
 			{
@@ -55,16 +53,15 @@ void MenuPrincipal::LoopMenu(sf::Event* evento)
 				jogo->Recuperar();
 				break;
 			case 2:
-
 				jogo->getMenuColocacao().setEstadoAnterior(jogo->getEstado());
 				jogo->getMenuColocacao().setEditavel(false);
 				jogo->setEstado(3);
 				break;
 			case 3:
-				Janela->close();
+				pGerenciadorGrafico->getJanela().close();
 				break;
 			}
 		}
-	}
+	
 }
 

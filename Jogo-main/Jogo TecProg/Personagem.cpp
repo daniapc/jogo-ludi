@@ -1,6 +1,5 @@
 #include "Personagem.h"
 
-
 Personagem::Personagem():
 	Entidade(),
 	Neutralizavel(true),
@@ -20,11 +19,6 @@ Personagem::~Personagem()
 
 void Personagem::setVida(int vida)
 {
-	/*
-	if (vida == 0)
-		Desalocavel = true;
-	*/
-	
 	Vida = vida;
 }
 
@@ -43,17 +37,13 @@ bool Personagem::getAmigavel()
 	return Amigavel;
 }
 
-void Personagem::atualiza(float deltaTempo)
-{
-}
-
-void Personagem::colidir()
-{
-}
-
 bool Personagem::podeMorrer()
 {
 	return true;
+}
+
+void Personagem::colidir(Personagem* personagem)
+{
 }
 
 void Personagem::setCooldownAtaque(float cooldownataque)
@@ -90,12 +80,12 @@ bool Personagem::podeAtacar()
 
 void Personagem::setMovimentoX(float movimentox)
 {
-	Movimento.x = movimentox;
+	MovimentoX  = movimentox;
 }
 
 void Personagem::setMovimentoY(float movimentoy)
 {
-	Movimento.y = movimentoy;
+	MovimentoY  = movimentoy;
 }
 
 void Personagem::setVelocidade(float velocidade)

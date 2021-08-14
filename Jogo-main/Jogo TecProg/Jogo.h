@@ -19,6 +19,7 @@ private:
 	Quarto Fase_Quarto;
 	Jogador* Fazendeira;
 	Jogador* Bruxo;
+	//Jogador* Lixo;
 	int Estado;
 	bool Multiplayer;
 	MenuPrincipal menuPrincipal;
@@ -38,6 +39,7 @@ public:
 	Quintal& getQuintal();
 	void setMultiplayer(bool multiplayer);
 	bool getMultiplayer();
+	GerenciadorGrafico& getGerenciadorGrafico();
 
 	MenuColocacao& getMenuColocacao();
 	
@@ -55,6 +57,10 @@ public:
 	void Salvar();
 	void Recuperar();
 	void LimparArquivos();
+
+	void setEstadoAtual(int estado);
+
+	void MenusJogo(int estado, char tecla);
 
 	void RecuperarJogadores();
 };

@@ -1,6 +1,5 @@
 #include "Espinho.h"
 
-
 Espinho::Espinho():
 	Obstaculo(),
 	CooldownDano(0.0f),
@@ -43,11 +42,9 @@ void Espinho::salvar()
 	if (!gravadorEspinho)
 		cout << "Erro." << endl;
 
-	gravadorEspinho << this->getPosicao().x << ' '
-		<< this->getPosicao().y << ' ' <<  endl;
-		//<< this->CooldownAtaque << endl;
+	gravadorEspinho << this->getPosicaoX()  << ' '
+		<< this->getPosicaoY()  << ' ' <<  endl;
 
 	gravadorEspinho.close();
 }
 
-//FALTA COOLDOWN DE ATAQUE

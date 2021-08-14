@@ -2,14 +2,14 @@
 #include "stdafx.h"
 #include "Ente.h"
 #include "Plataforma.h"
-//#include "Jogador.h"
-#include "GerenciadorFisica.h"
+#include "GerenciadorColisoes.h"
 #include "Obstaculo.h"
 #include "Espinho.h"
 #include "Estatico.h"
 #include "ListaEntidades.h"
 #include "ListaPersonagens.h"
 #include "Projetil.h"
+#include "Cenario.h"
 
 class Jogo;
 class Jogador;
@@ -17,59 +17,46 @@ class Jogador;
 class Fase : public Ente
 {
 protected:
-	Entidade Cenario;
-	Jogador* Fazendeira;
-	Jogador* Bruxo;
-	GerenciadorFisica gerenciadorFisica;
+	Cenario Background;
+	//Entidade Cenario;
+	Jogador* pFazendeira;
+	Jogador* pBruxo;
+	Jogo* pJogo;
+	//sf::View* pView; //pGerenciadorGrafico
+
+	GerenciadorColisoes gerenciadorColisoes;
 	ListaEntidades listaEntidades;
 	ListaPersonagens listaPersonagens;
-
-	//vector<Projetil*> PiscinaProjeteis;
-	Jogo* jogo;
-
-	sf::View* View;
-
+	
 public:
 	Fase();
 	virtual ~Fase();
 
-	virtual void inicializa() = 0;
-	virtual void desenhar() = 0;
+	void setJogo(Jogo* pjogo);
+	Jogo* getJogo();
+	void setFazendeira(Jogador* pfazendeira);
+	Jogador* getFazendeira();
+	void setBruxo(Jogador* pbruxo);
 
-	virtual void criaPlataformas() = 0;
+	void criaObstaculo(Entidade* pentidade, float dimx, float dimy, float posx, float posy, const string textura);
+	void criaInimigo(Personagem* ppersonagem, float dimx, float dimy, float posx, float posy, const string textura);
+	void criaBordas();
 
 	//Cria objetos que estão em ambas as fases
-	void criaPlataforma(sf::Vector2f posicao, const string textura = "textures/Plataforma_meio.png");
-	void criaPlataforma(sf::Vector2f posicao, const string textura, sf::Vector2f tamanho);
-	void criaBordas();
-	void criaEstatico(sf::Vector2f posicao, const string textura = "");
-	void criaEspinho(sf::Vector2f posicao, const string textura = "");
-	void criaTeia(sf::Vector2f posicao, const string textura = "textures/Teia.png");
 
-
-	virtual void setChefaoMorreu(bool chefaomorreu);
-
-	//vector<Projetil*>& getPiscinaProjeteis();
-	Jogador* getFazendeira();
-	GerenciadorFisica getGerenciadorFisica();
-	void setFazendeira(Jogador* fazendeira);
-	void setBruxo(Jogador* bruxo);
-
-	virtual void atualiza(float deltaTempo);
 	void atualizaView();
-
-	//void incrementaPontuacao();
 	void incluaProjetil(Projetil* projetil);
-	void setView(sf::View* view);
 	void salvar();
 
-	void setJogo(Jogo* jg);
-	Jogo* getJogo();
-
-	void recuperarProjeteis();
-	void recuperarEstaticos();
-	void recuperarEspinhos();
+	void recuperarProjeteis(Fase* fase, const string textura = "");
+	void recuperarEstaticos(const string textura = "");
+	void recuperarEspinhos(const string textura = "");
 	void recuperarTeias();
-	//void recuperarJogadores();
+	
+	virtual void setChefaoMorreu(bool chefaomorreu);
+
+	virtual void inicializa() = 0;
+	virtual void atualiza(float deltaTempo) = 0;
+	virtual void criaPlataformas() = 0;
 };
 

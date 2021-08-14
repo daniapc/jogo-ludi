@@ -1,16 +1,18 @@
 #pragma once
 #include "stdafx.h"
+//#include "GerenciadorGrafico.h"
+
+class GerenciadorGrafico;
 
 class Ente
 {
 protected:
-	sf::RenderWindow* Janela;
+	GerenciadorGrafico* pGerenciadorGrafico;
 
 public:
 	Ente();
 	virtual ~Ente();
 
-	void setJanela(sf::RenderWindow* janela);
-	sf::RenderWindow* getJanela();
+	void setGerenciadorGrafico(GerenciadorGrafico* pgerenciadorgrafico);
 };
 

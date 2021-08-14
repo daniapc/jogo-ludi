@@ -4,7 +4,6 @@
 #include "Espinho.h"
 #include "Fantasma.h"
 #include "Estatico.h"
-#include "GerenciadorFisica.h"
 #include "Porta.h"
 
 class Jogo;
@@ -19,12 +18,13 @@ public:
 	~Quintal();
 
 	void inicializa();
-	void desenhar();
 	void atualiza(float deltaTempo);
 	void limparTudo();
 
-	void criaPassaro(sf::Vector2f posicao);
+	//void criaPassaro(sf::Vector2f posicao);
 	void criaPlataformas();
+	void criaPlataforma(float posx, float posy);
+
 
 	void recuperar();
 	void recuperarPassaros();

@@ -10,7 +10,7 @@ public:
 	Obstaculo();
 	~Obstaculo();
 
-	virtual void colidir(Personagem* personagem);
+	virtual void colidir(Personagem* personagem) = 0;
 	virtual void atualiza(float deltaTempo);
 	virtual void salvar();
 };

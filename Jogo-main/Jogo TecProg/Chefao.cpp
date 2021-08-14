@@ -4,6 +4,9 @@
 Chefao::Chefao(): Inimigo(), Atirador()
 {
 	CooldownAtaqueMax = 1;
+	this->setVida(3);
+	this->setVelocidade(50.f);
+	this->setColidePlataforma(false);
 }
 
 Chefao::~Chefao()
@@ -20,33 +23,23 @@ void Chefao::colidir(Personagem* personagem)
 	}
 }
 
-void Chefao::inicializa()
-{
-}
-
-/*
-void Chefao::setFaseAtual(Fase* faseatual)
-{
-	faseAtual = faseatual;
-}
-
-*/
-
 void Chefao::atualiza(float deltaTempo)
 {
 	if (Desalocavel)
 		faseAtual->setChefaoMorreu(true);
 
-	Movimento = sf::Vector2f(0.f, 0.f);
+	MovimentoX = 0.f;
+	MovimentoY = 0.f;
 
-	float deltax = faseAtual->getFazendeira()->getPosicao().x - this->getPosicao().x;
+	cout << "aqui" << endl;
+	float deltax = faseAtual->getFazendeira()->getPosicaoX()  - this->getPosicaoX() ;
 	float modulo = sqrt(deltax*deltax);
 
 	if (modulo != 0.f)
-		Movimento.x += Velocidade * deltax / modulo;
-	Movimento.y += 981.f * deltaTempo;
+		MovimentoX += Velocidade * deltax / modulo;
+	//Movimento.y += 981.f * deltaTempo;
 	
-	if (Movimento.x > 0)
+	if (MovimentoX > 0)
 		olharDireita = true;
 	else
 		olharDireita = false;
@@ -59,25 +52,15 @@ void Chefao::atualiza(float deltaTempo)
 		CooldownAtaque = 0;
 	}
 
-	this->movimenta(Movimento * deltaTempo);
+	this->movimenta(MovimentoX * deltaTempo, MovimentoY * deltaTempo);
 }
-
-
-
 
 void Chefao::atiraProjeteis()
 {
-	atiraProjetilHorizontal(this, getPosicao().y);
-	atiraProjetilHorizontal(this, getPosicao().y +  getDimensoes().y/2);
-	atiraProjetilHorizontal(this, getPosicao().y - getDimensoes().y/2);
+	atiraProjetilHorizontal(this, getPosicaoY() );
+	atiraProjetilHorizontal(this, getPosicaoY()  +  getDimensoesY() /2);
+	atiraProjetilHorizontal(this, getPosicaoY()  - getDimensoesY() /2);
 	atiraProjetilDirecionado(this, 20.0f);
-	/*
-	atiraProjetil2();
-	atiraProjetil(this->getPosicao().y + this->getDimensoes().y / 2);
-	atiraProjetil(this->getPosicao().y);
-	atiraProjetil(this->getPosicao().y - this->getDimensoes().y / 2);
-	*/
-
 }
 
 void Chefao::salvar()
@@ -87,11 +70,11 @@ void Chefao::salvar()
 		ofstream gravadorChefao("saves/Chefao.dat", ios::app);
 
 		if (!gravadorChefao)
-			cout << "Erro." << endl;
+			cout << "Erro Gravar Chefao." << endl;
 
 		gravadorChefao << this->getVida() << ' '
-			<< this->getPosicao().x << ' '
-			<< this->getPosicao().y << ' '
+			<< this->getPosicaoX() << ' '
+			<< this->getPosicaoY()  << ' '
 			<< this->CooldownAtaque << endl;
 
 		gravadorChefao.close();

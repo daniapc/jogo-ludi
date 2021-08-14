@@ -15,7 +15,6 @@ public:
     void inclua(Entidade* pentidade); 
     void atualiza(float deltaTempo);
     void limpar();
-
     void limparTudo();
     void desenhar();
     void salvar();
@@ -24,7 +23,6 @@ public:
     void inicio();
 
     void remove(Entidade* pentidade);
-
 
     Entidade* operator[](int indice);
 };

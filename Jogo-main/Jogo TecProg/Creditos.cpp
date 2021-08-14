@@ -28,15 +28,13 @@ Creditos::~Creditos()
 }
 
 
-void Creditos::LoopMenu(sf::Event* evento)
+void Creditos::LoopMenu(char tecla)
 {
-	if (evento->type == sf::Event::KeyPressed)
-	{
-		if (evento->key.code == sf::Keyboard::Key::W)
+		if (tecla == 'w' || tecla == 'W')
 			moverCima();
-		if (evento->key.code == sf::Keyboard::Key::S)
+		if (tecla == 's' || tecla == 'S')
 			moverBaixo();
-		if (evento->key.code == sf::Keyboard::Key::Enter)
+		if (tecla == 13)
 		{
 			switch (Indice)
 			{
@@ -50,6 +48,6 @@ void Creditos::LoopMenu(sf::Event* evento)
 				break;
 			}
 		}
-	}
+	
 
 }

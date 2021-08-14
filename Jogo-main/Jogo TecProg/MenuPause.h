@@ -14,7 +14,7 @@ public:
 
 	void setEstadoAtual(int estadoatual);
 	int getEstadoAtual();
-	void LoopMenu(sf::Event* evento);
+	void LoopMenu(char tecla);
 
 	void Inicializa();
 };

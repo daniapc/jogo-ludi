@@ -12,15 +12,13 @@ MenuColocacao::~MenuColocacao()
 {
 }
 
-void MenuColocacao::LoopMenu(sf::Event* evento)
+void MenuColocacao::LoopMenu(char tecla)
 {
 	menu[Indice].setFillColor(sf::Color::Red);
 
-	if (Digitando){
-
-		if (evento->type == sf::Event::TextEntered)
-		{
-			if (evento->text.unicode == '.')
+	if (Digitando)
+	{
+			if (tecla == 13)
 			{
 				menu[Indice].setFillColor(sf::Color::Green);
 				menu[5].setFillColor(sf::Color::Red);
@@ -33,84 +31,81 @@ void MenuColocacao::LoopMenu(sf::Event* evento)
 				string saux;
 				stringstream ss;
 
-				if (evento->text.unicode == '\b') {
+				if (tecla == '\b') {
 					if (Nome.getSize() != 0)
 						Nome.erase(Nome.getSize() - 1);
 				}
-				else if (evento->text.unicode > 31 && evento->text.unicode < 128) {
-					Nome.insert(Nome.getSize(), evento->text.unicode);
+				else if (tecla > 31 && tecla < 128) {
+					Nome.insert(Nome.getSize(), tecla);
 				}
 
-				//if (jogo->getFazendeira() != NULL)
 				ss << jogo->getFazendeira()->getPontuacao();
-				//else
-					//ss << 0;
 
 				saux = ss.str() + " - " + Nome;
 				cout << ss.str() << endl;
 				menu[Indice].setString(saux);
 			}
+	}
+	 
+	else {
+		cout << "Digitando = " << Digitando << endl;
+		if (tecla == 'w' || tecla == 'W')
+			if (Indice != Limite)
+				moverCima();
+		if (tecla == 's' || tecla == 'S')
+			moverBaixo();
+		if (tecla == 13)
+		{
+			if (Indice < 5) {
+				Digitando = true;
+				menu[Indice].setString("0 - ");
+			}
+			else
+				switch (Indice)
+				{
+				case 5:
+				{
+					ofstream deletarColocacao("saves/Colocacao.dat", ios::out);
+					deletarColocacao.close();
+
+					ofstream gravadorColocacao("saves/Colocacao.dat", ios::app);
+					if (!gravadorColocacao)
+						cout << "Erro Gravar Colocacao." << endl;
+
+					for (int i = 1; i <= 4; i++) {
+						string saux = menu[i].getString();
+						while (saux.back() == ' ')
+							saux.pop_back();
+
+						gravadorColocacao << saux << '\n';
+					}
+
+
+					gravadorColocacao.close();
+				}
+				break;
+				case 6:
+					menu[1].setString("0 - Vazio");
+					menu[2].setString("0 - Vazio");
+					menu[3].setString("0 - Vazio");
+					menu[4].setString("0 - Vazio");
+					break;
+				case 7:
+					menu[Indice].setFillColor(sf::Color::Green);
+					jogo->setEstado(EstadoAnterior);
+					break;
+				}
+
 		}
 	}
-	else
-		if (evento->type == sf::Event::KeyPressed)
-		{
-			if (evento->key.code == sf::Keyboard::Key::W)
-				if (Indice != Limite)
-					moverCima();
-			if (evento->key.code == sf::Keyboard::Key::S)
-				moverBaixo();
-			if (evento->key.code == sf::Keyboard::Key::Enter)
-			{
-				if (Indice < 5)
-					Digitando = true;
-				else 
-					switch (Indice)
-					{
-						case 5:
-						{
-							ofstream deletarColocacao("saves/Colocacao.dat", ios::out);
-							deletarColocacao.close();
-
-							ofstream gravadorColocacao("saves/Colocacao.dat", ios::app);
-							if (!gravadorColocacao)
-								cout << "Erro." << endl;
-
-							for (int i = 1; i <= 4; i++) {
-								string saux = menu[i].getString();
-								while (saux.back() == ' ')
-									saux.pop_back();
-
-								gravadorColocacao << saux << '\n';
-							}
-							
-
-							gravadorColocacao.close();
-						}
-							break;
-						case 6:
-							menu[1].setString("0 - Vazio");
-							menu[2].setString("0 - Vazio");
-							menu[3].setString("0 - Vazio");
-							menu[4].setString("0 - Vazio");							
-							break;
-						case 7:
-							menu[Indice].setFillColor(sf::Color::Green);
-							jogo->setEstado(EstadoAnterior);
-							break;
-					}
-				
-			}
-		}
 }
 
 void MenuColocacao::Recupera() 
 {
-
 	ifstream recuperadorColocacao("saves/Colocacao.dat", ios::in);
 
 	if (!recuperadorColocacao)
-		cout << "Erro." << endl;
+		cout << "Erro Recuperar Colocacao." << endl;
 
 	int i = 1;
 	string aux, string = "";
@@ -176,7 +171,6 @@ void MenuColocacao::Inicializa()
 	menu[7].setString("Voltar");
 	menu[7].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 600));
 	menu[7].setFont(Fonte);
-
 
 }
 

@@ -34,8 +34,8 @@ void Teia::salvar()
 	if (!gravadorTeia)
 		cout << "Erro." << endl;
 
-	gravadorTeia << this->getPosicao().x << ' '
-		<< this->getPosicao().y << ' ' << endl;
+	gravadorTeia << this->getPosicaoX()  << ' '
+		<< this->getPosicaoY()  << ' ' << endl;
 
 	gravadorTeia.close();
 }

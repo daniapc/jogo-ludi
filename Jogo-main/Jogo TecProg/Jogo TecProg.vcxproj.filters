@@ -54,7 +54,7 @@
     <ClCompile Include="Estatico.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="GerenciadorFisica.cpp">
+    <ClCompile Include="GerenciadorColisoes.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Obstaculo.cpp">
@@ -102,21 +102,18 @@
     <ClCompile Include="MenuColocacao.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Lista.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="ListaPersonagens.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="Creditos.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Atirador.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
->>>>>>> menu-salvamento
+    <ClCompile Include="Cenario.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo.h">
@@ -158,7 +155,7 @@
     <ClInclude Include="Estatico.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="GerenciadorFisica.h">
+    <ClInclude Include="GerenciadorColisoes.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Obstaculo.h">
@@ -212,14 +209,14 @@
     <ClInclude Include="ListaPersonagens.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="Creditos.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Atirador.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
->>>>>>> menu-salvamento
+    <ClInclude Include="Cenario.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

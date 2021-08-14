@@ -3,7 +3,6 @@
 #include "Espinho.h"
 #include "Fantasma.h"
 #include "Estatico.h"
-#include "GerenciadorFisica.h"
 #include "Chefao.h"
 #include "Porta.h"
 
@@ -23,15 +22,13 @@ public:
 	void atualiza(float deltaTempo);
 	void limparTudo();
 
-	void setChefaoMorreu(bool chefaomorreu);
-
 	void recuperar();
 	void recuperarFantasmas();
 	void recuperarChefao();
-	void recuperarPorta();
 
-	void criaFantasma(sf::Vector2f posicao);
-	void criaChefao(sf::Vector2f posicao);
+	void setChefaoMorreu(bool chefaomorreu);
+
+	void criaPlataforma( float posx, float posy);
 	void criaPlataformas();
 };
 

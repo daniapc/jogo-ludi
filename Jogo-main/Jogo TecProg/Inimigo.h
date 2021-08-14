@@ -10,9 +10,8 @@ public:
 	Inimigo();
 	virtual ~Inimigo();
 
-	virtual void inicializa() = 0;
-	virtual void atualiza();
-	virtual void colidir();
+	virtual void atualiza(float deltaTempo) = 0;
+	virtual void colidir(Personagem* personagem) = 0;
 	virtual void salvar() = 0;
 };
 

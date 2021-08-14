@@ -11,6 +11,6 @@ public:
 	MenuJogadores(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
 	~MenuJogadores();
 
-	void LoopMenu(sf::Event* evento);
+	void LoopMenu(char tecla);
 };
 

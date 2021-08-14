@@ -41,7 +41,6 @@ public:
     void anterior();
     void inicio();
     int tamanho();
-
     void limparTudo();
     void remove(TIPO* ptipo);
     void pop(TIPO* ptipo);
@@ -146,7 +145,6 @@ inline int Lista<TIPO>::tamanho()
 }
 
 template<class TIPO>
-
 inline void Lista<TIPO>::limparTudo()
 {
     Elemento <TIPO>* pAux = NULL;
@@ -195,7 +193,7 @@ inline void Lista<TIPO>::remove(TIPO* ptipo)
         pAux->getAnte()->setProx(pAux->getProx());
     else
     {
-        pPrimeiro->setProx(pAux->getProx());
+        pPrimeiro = pAux->getProx();
         pPrimeiro->setAnte(NULL);
     }
     if (pAux->getProx() != NULL)
@@ -205,7 +203,6 @@ inline void Lista<TIPO>::remove(TIPO* ptipo)
         pUltimo = pAux->getAnte();
         pUltimo->setProx(NULL);
     }
-
     delete pE;
     delete pAux;
 }
@@ -225,7 +222,7 @@ inline void Lista<TIPO>::pop(TIPO* ptipo)
         pAux->getAnte()->setProx(pAux->getProx());
     else
     {
-        pPrimeiro->setProx(pAux->getProx());
+        pPrimeiro = pAux->getProx();
         pPrimeiro->setAnte(NULL);
     }
     if (pAux->getProx() != NULL)
@@ -236,30 +233,6 @@ inline void Lista<TIPO>::pop(TIPO* ptipo)
         pUltimo->setProx(NULL);
     }
 
-   // delete pAux;
+    delete pAux;
 }
-
-/*
-template<class TIPO>
-inline void Lista<TIPO>::removeTipo(TIPO* ptipo){
-    
-}
-*/
-   /*
-        pE = pAux->getEntidade();
-
-            Elemento* pAux2 = pAux;
-            pAux = pAux->getProx();
-            if (pAux2->getAnte() != NULL)
-                pAux2->getAnte()->setProx(pAux2->getProx());
-            if (pAux2->getProx() != NULL)
-                pAux2->getProx()->setAnte(pAux2->getAnte());
-            delete pE;
-            delete pAux2;
-        else
-        {
-            pE->atualiza(deltaTempo);
-            pAux = pAux->getProx();
-        }
-        */
 

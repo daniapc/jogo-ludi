@@ -12,7 +12,7 @@ public:
     Creditos(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
     ~Creditos();
 
-    void LoopMenu(sf::Event* evento);
+    void LoopMenu(char tecla);
 
 };
 
