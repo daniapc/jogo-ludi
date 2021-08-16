@@ -3,16 +3,22 @@
 
 class Jogo;
 
-class Creditos:
-    public Menu
+namespace Menus
 {
-private:
+    class Creditos : public Menu
+    {
+    private:
+        string MensagemFinal;
+        int Limite;
 
-public:
-    Creditos(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
-    ~Creditos();
+    public:
+        Creditos(Jogo* jg);
+        ~Creditos();
 
-    void LoopMenu(char tecla);
+        void setMensagemFinal(string mensagemfinal);
 
-};
+        void LoopMenu(char tecla);
+
+    };
+}
 

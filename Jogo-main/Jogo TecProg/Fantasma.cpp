@@ -55,10 +55,14 @@ void Fantasma::atualiza(float deltaTempo)
 
 	float posicaox = getPosicaoX(), posicaoy = getPosicaoY();
 
-	if (posicaox <= limiteXEsq)
+	if (posicaox <= limiteXEsq) {
 		olharDireita = true;
-	else if (posicaox >= limiteXDir)
+		setSubTextura("textures/Fantasma.png");
+	}
+	else if (posicaox >= limiteXDir) {
 		olharDireita = false;
+		setSubTextura("Fantasma_2");
+	}
 	if (olharDireita && posicaox < limiteXDir)
 		MovimentoX += Velocidade;
 	else if (!olharDireita && posicaox > limiteXEsq)

@@ -1,25 +1,34 @@
 #pragma once
 #include "Ente.h"
 #include "stdafx.h" 
+#include "Cenario.h"
+#include "Texto.h"
 
 class Jogo;
 
-class Menu : public Ente
+namespace Menus
 {
-protected:
-	int Indice, Tamanho;
-	sf::Text* menu;
-	sf::RectangleShape PlanoFundo;
-	sf::Font Fonte;
-	Jogo* jogo;
+	class Menu : public Ente
+	{
+	protected:
+		int Indice, Tamanho, Id;
 
-public:
-	Menu(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
-	~Menu();
+		vector <Texto*> Textos;
+		Jogo* jogo;
+		Cenario PlanoFundo;
 
-	void moverCima();
-	void moverBaixo();
-	void desenhar();
-};
+	public:
+		Menu(Jogo* jg);
+		~Menu();
+
+		void moverCima();
+		void moverBaixo();
+		void desenhar();
+
+		void criaTexto(Texto* t, string mens, string cor, string font, float dim, float posx, float posy);
+	};
+}
+
+
 
 

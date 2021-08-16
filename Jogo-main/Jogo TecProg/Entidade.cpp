@@ -2,17 +2,13 @@
 #include "Personagem.h"
 #include "GerenciadorGrafico.h"
 
-int Entidade::IdAtual = 0;
+int Entidade::IdCorpoAtual = 0;
 
 Entidade::Entidade():
 	Ente(),
 	Desalocavel(false),
 	MovimentoX(0),
 	MovimentoY(0),
-	PosicaoX(0),
-	PosicaoY(0),
-	DimensaoX(0),
-	DimensaoY(0),
 	IdCorpo(0)
 {
 }
@@ -21,85 +17,67 @@ Entidade::~Entidade()
 {
 }
  
-
 void Entidade::setDimensoes(float x, float y)
 {
 	pGerenciadorGrafico->setDimensoes(IdCorpo, x, y);
-	DimensaoX = x;
-	DimensaoY = y;
 }
 
 
-float Entidade::getDimensoesX()
+float Entidade::getDimensoesX() const 
 {
 	return pGerenciadorGrafico->getDimensoesX(IdCorpo);
 }
 
-float Entidade::getDimensoesY()
+float Entidade::getDimensoesY() const
 {
 	return pGerenciadorGrafico->getDimensoesY(IdCorpo);
 }
 
-
-
 void Entidade::setPosicao(float x, float y)
 {
-
 	pGerenciadorGrafico->setPosicao(IdCorpo, x, y);
-	PosicaoX = x;
-	PosicaoY = y;
 }
 
-
-
-float Entidade::getPosicaoX()
+float Entidade::getPosicaoX() const
 {
 	return pGerenciadorGrafico->getPosicaoX(IdCorpo);
 }
 
-float Entidade::getPosicaoY()
+float Entidade::getPosicaoY() const
 {
 	return pGerenciadorGrafico->getPosicaoY(IdCorpo);
 }
 
 
-float Entidade::getMovimentoX()
+void Entidade::setMovimento(float x, float y)
+{
+	MovimentoX = x;
+	MovimentoY = y;
+}
+
+float Entidade::getMovimentoX() const
 {
 	return MovimentoX;
 }
 
-float Entidade::getMovimentoY()
+float Entidade::getMovimentoY() const
 {
 	return MovimentoY;
 }
-
 
 void Entidade::setDesalocavel(bool desalocavel)
 {
 	Desalocavel = desalocavel;
 }
 
-bool Entidade::getDesalocavel()
+bool Entidade::getDesalocavel() const
 {
 	return Desalocavel;
 }
 
-void Entidade::setTextura(const string textura)
+void Entidade::incrementaIdCorpoAtual()
 {
-	/*
-		if (!Textura.loadFromFile(textura))
-        cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
-	*/
-	//pGerenciadorGrafico->
-
-	//Corpo.setTexture(&Textura);
-	Textura = textura;
-
-}
-
-void Entidade::incrementaIdAtual()
-{
-	IdAtual++;
+	IdCorpoAtual++;
 }
 
 void Entidade::setId(int id)
@@ -107,14 +85,19 @@ void Entidade::setId(int id)
 	IdCorpo = id;
 }
 
-int Entidade::getIdAtual()
+int Entidade::getIdCorpoAtual() const
 {
-	return IdAtual;
+	return IdCorpoAtual;
 }
-
-int Entidade::getId()
+ 
+int Entidade::getId() const
 {
 	return IdCorpo;
+}
+
+void Entidade::setSubTextura(string subtext)
+{
+	pGerenciadorGrafico->setSubTextura(IdCorpo, subtext);
 }
 
 void Entidade::colidir(Personagem* personagem)

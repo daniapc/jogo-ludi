@@ -2,13 +2,11 @@
 #include "GerenciadorGrafico.h"
 
 Ente::Ente()
-	//Janela(NULL)
 {
 }
 
 Ente::~Ente()
 {
-	//Janela = NULL;
 }
 
 void Ente::setGerenciadorGrafico(GerenciadorGrafico* pgerenciadorgrafico)

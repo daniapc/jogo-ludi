@@ -2,18 +2,18 @@
 
 Jogo::Jogo() :
     gerenciadorGrafico(),
-    menuPrincipal(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO, 4, this),
-    menuJogadores(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO, 3, this),
-    menuFases(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO, 3, this),
-    menuPause(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO, 5, this),
-    menuColocacao(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO, 8, this),
-    creditos(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO, 2, this),
+    menuPrincipal(this),
+    menuJogadores(this),
+    menuFases(this),
+    menuPause(this),
+    menuColocacao(this),
+    creditos(this),
     Estado(0),
-    Fazendeira(NULL),
-    Bruxo(NULL),
-    Multiplayer(false)
+    Jogador1(NULL),
+    Jogador2(NULL),
+    Multiplayer(false),
+    Jogador1Fazendeira(true)
 {
-
 	Executar();
 }
 
@@ -29,13 +29,16 @@ void Jogo::Executar()
 
 void Jogo::Inicializa()
 {
-
     menuPrincipal.setGerenciadorGrafico(&gerenciadorGrafico);
     menuJogadores.setGerenciadorGrafico(&gerenciadorGrafico);
     menuFases.setGerenciadorGrafico(&gerenciadorGrafico);
     menuPause.setGerenciadorGrafico(&gerenciadorGrafico);
     menuColocacao.setGerenciadorGrafico(&gerenciadorGrafico);
     creditos.setGerenciadorGrafico(&gerenciadorGrafico);
+    
+    gerenciadorGrafico.CarregarJogo();
+    menuPrincipal.InicializaPlanoFundo();
+
     menuColocacao.Recupera();
 
 }
@@ -74,7 +77,47 @@ void Jogo::MenusJogo(int estado, char tecla)
     }
 }
 
-void Jogo::setEstado(int estado)
+void Jogo::Atualiza(float deltaTempo)
+{
+    switch (Estado) {
+    case 0: //Menu Principal
+        gerenciadorGrafico.resetaView();
+        menuPrincipal.desenhar();
+        break;
+    case 1: //Menu Jogadores
+        gerenciadorGrafico.resetaView();
+        menuJogadores.desenhar();
+        break;
+    case 2: //Menu Fases
+        gerenciadorGrafico.resetaView();
+        menuFases.desenhar();
+        break;
+    case 3: //Menu Colocações
+        gerenciadorGrafico.resetaView();
+        menuColocacao.desenhar();
+        break;
+    case 4: //Fase Quintal
+        Fase_Quintal.atualiza(deltaTempo);
+        break;
+    case 5: //Fase Quarto
+        Fase_Quarto.atualiza(deltaTempo);
+        break;
+    case 6: //Pausar Tela
+        gerenciadorGrafico.resetaView();
+        menuPause.desenhar();
+        break;
+    case 7:
+        gerenciadorGrafico.resetaView();
+        creditos.desenhar();
+        break;
+    }
+}
+
+void Jogo::mensagemCreditos(string mensagem){
+    creditos.setMensagemFinal(mensagem);
+}
+
+void Jogo::setEstado(const int estado)
 {
     Estado = estado;
 }
@@ -84,14 +127,14 @@ int Jogo::getEstado()
     return Estado;
 }
 
-Jogador* Jogo::getBruxo()
+Jogador* Jogo::getJogador2()
 {
-    return Bruxo;
+    return Jogador2;
 }
 
-Jogador* Jogo::getFazendeira()
+Jogador* Jogo::getJogador1()
 {
-    return Fazendeira;
+    return Jogador1;
 }
 
 Quarto& Jogo::getQuarto()
@@ -109,7 +152,7 @@ void Jogo::setMultiplayer(bool multiplayer)
     Multiplayer = multiplayer;
 }
 
-bool Jogo::getMultiplayer()
+bool Jogo::getMultiplayer() const
 {
     return Multiplayer;
 }
@@ -119,66 +162,27 @@ GerenciadorGrafico& Jogo::getGerenciadorGrafico()
     return gerenciadorGrafico;
 }
 
-MenuColocacao& Jogo::getMenuColocacao()
+Menus::MenuColocacao& Jogo::getMenuColocacao()
 {
     return menuColocacao;
-}
-
-void Jogo::Atualiza(float deltaTempo)
-{
-    //Estado = MenuPrincipal.getEstado();
-
-    switch (Estado) {
-        case 0: //Menu Principal
-            gerenciadorGrafico.resetaView();
-            menuPrincipal.desenhar();
-            break;
-        case 1: //Menu Jogadores
-            gerenciadorGrafico.resetaView();
-            menuJogadores.desenhar();
-            break;
-        case 2: //Menu Fases
-            gerenciadorGrafico.resetaView();
-            menuFases.desenhar();
-            break;
-        case 3: //Menu Colocações
-            gerenciadorGrafico.resetaView();
-            menuColocacao.desenhar();
-            break;
-        case 4: //Fase Quintal
-            Fase_Quintal.atualiza(deltaTempo);
-            break; 
-        case 5: //Fase Quarto
-            Fase_Quarto.atualiza(deltaTempo);
-            break;
-        case 6: //Pausar Tela
-            gerenciadorGrafico.resetaView();
-            menuPause.desenhar();
-            break;
-        case 7: 
-            gerenciadorGrafico.resetaView();
-            creditos.desenhar();
-            break;
-    }
 }
 
 void Jogo::InicializaFases()
 {
     if (!Multiplayer)
-        Bruxo = NULL;    
+        Jogador2 = NULL;    
 
-    InicializaQuarto();
     InicializaQuintal();
+    InicializaQuarto();
 }
 
 void Jogo::InicializaQuintal()
 {
     if (!Multiplayer)
-        Bruxo = NULL;
+        Jogador2 = NULL;
     Fase_Quintal.setGerenciadorGrafico(&gerenciadorGrafico);
-    Fase_Quintal.setFazendeira(Fazendeira);
-    Fase_Quintal.setBruxo(Bruxo);
-    //Fase_Quintal.setView(&gerenciadorGrafico.getView());
+    Fase_Quintal.setJogador1(Jogador1);
+    Fase_Quintal.setJogador2(Jogador2);
     Fase_Quintal.setJogo(this);
     Fase_Quintal.inicializa();
 }
@@ -188,53 +192,35 @@ void Jogo::InicializaQuarto()
     cout << "Apareceu?" << endl;
 
     if (!Multiplayer)
-        Bruxo = NULL;
+        Jogador2 = NULL;
 
     Fase_Quarto.setGerenciadorGrafico(&gerenciadorGrafico);
 
-    Fase_Quarto.setFazendeira(Fazendeira);
-    Fase_Quarto.setBruxo(Bruxo);
-    //Fase_Quarto.setView(&gerenciadorGrafico.getView());
+    Fase_Quarto.setJogador1(Jogador1);
+    Fase_Quarto.setJogador2(Jogador2);
     Fase_Quarto.setJogo(this);
-
     Fase_Quarto.inicializa();
 }
 
 void Jogo::InicializaJogadores()
 {
-   // Jogador* lixo = new Jogador();
-   // gerenciadorGrafico.criaCorpo(lixo, 0, 0, 0, 0, "");
-
-    Fazendeira = new Jogador();
-
-    Fazendeira->setGerenciadorGrafico(&gerenciadorGrafico);
-    gerenciadorGrafico.criaCorpo(Fazendeira, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, "textures/Fazendeira.png");
-    
-    Fazendeira->setDimensoes( COMPRIMENTO_JOGADOR, ALTURA_JOGADOR );
-    Fazendeira->setPosicao( 800.f, 220.f );
-    Fazendeira->setTextura("textures/Fazendeira.png");
-    Fazendeira->setTeclas('D', 'A', 'W', ' ');
-    Fazendeira->setVelocidade(400.f);
-    Fazendeira->setAlturaPulo(250.f);
+    Jogador1 = new Jogador();
+    Jogador1->setGerenciadorGrafico(&gerenciadorGrafico);
+    Jogador1->setTexturas(Jogador1Fazendeira);
+    gerenciadorGrafico.criaCorpo(Jogador1, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, 
+        Jogador1->getTextura());
+    Jogador1->setTeclas('D', 'A', 'W', ' ');
 
     if (Multiplayer)
     {
-        Bruxo = new Jogador();
-        Bruxo->setGerenciadorGrafico(&gerenciadorGrafico);
-        gerenciadorGrafico.criaCorpo(Bruxo, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, "textures/Bruxo.png");
-        Bruxo->setDimensoes( COMPRIMENTO_JOGADOR, ALTURA_JOGADOR  );
-        Bruxo->setPosicao( 640.f, 320.f );
-        Bruxo->setTextura("textures/Bruxo.png");
-        Bruxo->setTeclas('R', 'L','U', 'E');
-        Bruxo->setVelocidade(400.f);
-        Bruxo->setAlturaPulo(250.f);
+        Jogador2 = new Jogador();
+        Jogador2->setGerenciadorGrafico(&gerenciadorGrafico);
+        Jogador2->setTexturas(!Jogador1Fazendeira);
+        gerenciadorGrafico.criaCorpo(Jogador2, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, 
+            Jogador2->getTextura());
+        Jogador2->setTeclas('R', 'L','U', 'E');
     }
-
-
 }
-
-
-
 
 void Jogo::Salvar()
 {
@@ -250,7 +236,8 @@ void Jogo::Salvar()
         cout << "Erro Estado." << endl;
     gravadorEstado << menuPause.getEstadoAtual() << ' ' 
          << Multiplayer << ' '
-         << Fazendeira->getPontuacao() << endl;
+         << Jogador1->getPontuacao() << ' ' 
+         << Jogador1Fazendeira << endl;
     gravadorEstado.close();
 }
 
@@ -264,39 +251,44 @@ void Jogo::Recuperar()
     int estado, pontos;
 
     while (!recuperadorEstado.eof())
-        recuperadorEstado >> estado >> Multiplayer >> pontos;
+        recuperadorEstado >> estado >> Multiplayer >> pontos >> Jogador1Fazendeira;
 
-    //menuColocacao.Recupera();
-
-    //gerenciadorGrafico.criaCorpo(Lixo, 0, 0, 0, 0, "");
     RecuperarJogadores();
 
-    Fase_Quintal.setFazendeira(Fazendeira);
-    Fase_Quintal.setBruxo(Bruxo);
-    Fase_Quarto.setFazendeira(Fazendeira);
-    Fase_Quarto.setBruxo(Bruxo);
+    Fase_Quintal.setJogador1(Jogador1);
+    Fase_Quintal.setJogador2(Jogador2);
+    Fase_Quarto.setJogador1(Jogador1);
+    Fase_Quarto.setJogador2(Jogador2);
     Fase_Quintal.setGerenciadorGrafico(&getGerenciadorGrafico());
     Fase_Quarto.setGerenciadorGrafico(&getGerenciadorGrafico());
     if (estado == 4)
     {
-        //Fase_Quintal.setView(&gerenciadorGrafico.getView());
         Fase_Quintal.setJogo(this);
         Fase_Quintal.recuperar();
         Estado = estado;
     }
     else if (estado == 5)
     {
-        //Fase_Quarto.setView(&gerenciadorGrafico.getView());
         Fase_Quarto.setJogo(this);
         Fase_Quarto.recuperar();
         Estado = estado;
     }
     for (int i = 0; i < pontos / 10; i++) 
     {
-        Fazendeira->incrementaPontuacao();
+        Jogador1->incrementaPontuacao();
     }
 
     recuperadorEstado.close();
+}
+
+void Jogo::setJogador1Fazendeira(bool fazendeira)
+{
+    Jogador1Fazendeira = fazendeira;
+}
+
+bool Jogo::getJogador1Fazendeira() const
+{
+    return Jogador1Fazendeira;
 }
 
 void Jogo::LimparArquivos() 
@@ -329,8 +321,6 @@ void Jogo::setEstadoAtual(int estado)
 
 }
 
-
-
 void Jogo::RecuperarJogadores()
 {
     ifstream recuperadorJogadores("saves/Jogadores.dat", ios::in);
@@ -340,46 +330,38 @@ void Jogo::RecuperarJogadores()
 
     int vida;
     float posx, posy, movx, movy, cooldown;
+    bool jogador1fazendeira;
 
     recuperadorJogadores >> vida >> posx >> posy >> movx >> movy >> cooldown;
 
-    Fazendeira = new Jogador();
-    Fazendeira->setGerenciadorGrafico(&getGerenciadorGrafico());
-    gerenciadorGrafico.criaCorpo(Fazendeira, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, "textures/Fazendeira.png");
-
-    Fazendeira->setVida(vida);
-    Fazendeira->setPosicao( posx, posy );
-    Fazendeira->setTextura("textures/Fazendeira.png");
-    Fazendeira->setTeclas('D', 'A', 'W', ' ');
-    Fazendeira->setMovimentoX(movx);
-    Fazendeira->setMovimentoY(movy);
-    Fazendeira->setCooldownAtaque(cooldown);
-    Fazendeira->setVelocidade(400.f);
-    Fazendeira->setAlturaPulo(250.f);
-    Fazendeira->setColidePlataforma(true);
-    Fazendeira->setDimensoes( COMPRIMENTO_JOGADOR, ALTURA_JOGADOR );
-
+    Jogador1 = new Jogador();
+    Jogador1->setGerenciadorGrafico(&getGerenciadorGrafico());
+    Jogador1->setTexturas(Jogador1Fazendeira);
+    gerenciadorGrafico.criaCorpo(Jogador1, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, 
+        Jogador1->getTextura());
+    Jogador1->setTeclas('D', 'A', 'W', ' ');
+    Jogador1->setVida(vida);
+    Jogador1->setPosicao( posx, posy );
+    Jogador1->setMovimentoX(movx);
+    Jogador1->setMovimentoY(movy);
+    Jogador1->setCooldownAtaque(cooldown);
 
     if (getMultiplayer())
     {
-        cout << "criou bruxo" << endl;
-        Bruxo = new Jogador();
+        cout << "criou Jogador2" << endl;
+        Jogador2 = new Jogador();
         recuperadorJogadores >> vida >> posx >> posy >> movx >> movy >> cooldown;
 
-        Bruxo->setTextura("textures/Bruxo.png");
-        Fazendeira->setGerenciadorGrafico(&getGerenciadorGrafico());
-        gerenciadorGrafico.criaCorpo(Bruxo, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, "textures/Bruxo.png");
-        Bruxo->setVida(vida);
-        Bruxo->setPosicao( posx, posy );
-        Bruxo->setTeclas('R', 'L', 'U', 'E');
-        Bruxo->setMovimentoX(movx);
-        Bruxo->setMovimentoY(movy);
-        Bruxo->setCooldownAtaque(cooldown);
-        Bruxo->setVelocidade(400.f);
-        Bruxo->setAlturaPulo(250.f);
-        Bruxo->setColidePlataforma(true);
-        Bruxo->setDimensoes( COMPRIMENTO_JOGADOR, ALTURA_JOGADOR );
-
+        Jogador2->setGerenciadorGrafico(&getGerenciadorGrafico());
+        Jogador2->setTexturas(!Jogador1Fazendeira);
+        gerenciadorGrafico.criaCorpo(Jogador2, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, 
+            Jogador2->getTextura());
+        Jogador2->setTeclas('R', 'L', 'U', 'E');
+        Jogador2->setVida(vida);
+        Jogador2->setPosicao( posx, posy );
+        Jogador2->setMovimentoX(movx);
+        Jogador2->setMovimentoY(movy);
+        Jogador2->setCooldownAtaque(cooldown);
     }
 
     recuperadorJogadores.close();

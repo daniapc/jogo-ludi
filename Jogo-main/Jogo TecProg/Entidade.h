@@ -8,44 +8,38 @@ class GerenciadorGrafico;
 class Entidade : public Ente
 {
 protected:
-	float DimensaoX, DimensaoY;
 
 	float MovimentoX, MovimentoY;
-
-	float PosicaoX, PosicaoY;
-
-	string Textura;
+	bool Desalocavel;
 
 	int IdCorpo;
-	static int IdAtual;
-	bool Desalocavel;
+	static int IdCorpoAtual;
 	
 public:
 	Entidade();
 	virtual ~Entidade();
 
 	void setDimensoes(float x, float y);
-
-	float getDimensoesX();
-	float getDimensoesY();
+	float getDimensoesX() const;
+	float getDimensoesY() const;
 		
-;
 	void setPosicao(float x, float y);
-	float getPosicaoX();
-	float getPosicaoY();
+	float getPosicaoX() const;
+	float getPosicaoY() const;
 
-	float getMovimentoX();
-	float getMovimentoY();
+	void setMovimento(float x, float y);
+	float getMovimentoX() const;
+	float getMovimentoY() const;
 
 	void setDesalocavel(bool desalocavel);
-	bool getDesalocavel();
+	bool getDesalocavel() const;
 
-	void setTextura(const string textura);
-
-	void incrementaIdAtual();
+	void incrementaIdCorpoAtual();
 	void setId(int id);
-	int getIdAtual();
-	int getId();
+	int getIdCorpoAtual() const;
+	int getId() const;
+
+	void setSubTextura(string subtext);
 
 	void movimenta(float movimentox, float movimentoy);
 	void desenhar();

@@ -1,48 +1,57 @@
 #include "Menu.h"
 #include "Jogo.h"
 
-Menu::Menu(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg)
+Menus::Menu::Menu(Jogo* jg): PlanoFundo()
 {
-	if (!Fonte.loadFromFile("arial.ttf"))
-		cout << "Erro ao carregar fonte." << endl;
-
+	srand(time(NULL));
 	jogo = jg;
 	Indice = 0;
-	Tamanho = tamanho;
+	Tamanho = 0;
+	Id = rand() % 2;
 }
 
-Menu::~Menu()
+Menus::Menu::~Menu()
 {
 }
 
-void Menu::moverCima()
+void Menus::Menu::criaTexto(Texto* t, string mens, string cor, string font, float dim, float posx, float posy)
+{
+	t->setMensagem(mens);
+	t->setCor(cor);
+	t->setFonte(font);
+	t->setDimensao(dim);
+	t->setPosicoes(posx, posy);
+}
+
+void Menus::Menu::moverCima()
 {
 
 	if (Indice <= 0)
 		Indice = 0;
 	else
 	{
-		menu[Indice].setFillColor(sf::Color::Green);
+		Textos[Indice]->setCor("Preto");
 		Indice--;
-		menu[Indice].setFillColor(sf::Color::Red);
+		Textos[Indice]->setCor("Vermelho");
 	}
 
 }
 
-void Menu::moverBaixo()
+void Menus::Menu::moverBaixo()
 {
 	if (Indice >= Tamanho - 1)
 		Indice = Tamanho - 1;
 	else
 	{
-		menu[Indice].setFillColor(sf::Color::Green);
+		Textos[Indice]->setCor("Preto");
 		Indice++;
-		menu[Indice].setFillColor(sf::Color::Red);
+		Textos[Indice]->setCor("Vermelho");
 	}
 }
 
-void Menu::desenhar()
+void Menus::Menu::desenhar()
 {
-	for (int i = 0; i < Tamanho; i++)
-		pGerenciadorGrafico->desenhar(menu[i]);
+	pGerenciadorGrafico->desenhar(PlanoFundo.getId() + Id, false);
+	for (int i = 0; i < Tamanho; i++) 
+		pGerenciadorGrafico->desenhar(*Textos[i]);
 }

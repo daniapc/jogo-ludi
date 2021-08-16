@@ -1,46 +1,42 @@
 #include "MenuJogadores.h"
 #include "Jogo.h"
 
-MenuJogadores::MenuJogadores(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg):
-	Menu(comprimento, altura, tamanho, jg)
+Menus::MenuJogadores::MenuJogadores(Jogo* jg):
+	Menu(jg),
+	LimiteBaixo(2),
+	LimiteCima(0)
 {
-
-	menu = new sf::Text[Tamanho];
-	menu[0].setFillColor(sf::Color::Red);
-	menu[0].setCharacterSize(24);
-	menu[0].setString("1 Jogador");
-	menu[0].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 250));
-	menu[0].setFont(Fonte);
-	menu[1].setFillColor(sf::Color::Green);
-	menu[1].setCharacterSize(24);
-	menu[1].setString("2 Jogadores");
-	menu[1].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 350));
-	menu[1].setFont(Fonte);
-	menu[2].setFillColor(sf::Color::Green);
-	menu[2].setCharacterSize(24);
-	menu[2].setString("Voltar");
-	menu[2].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 450));
-	menu[2].setFont(Fonte);
-
+	Inicializa();
 }
 
-MenuJogadores::~MenuJogadores()
+Menus::MenuJogadores::~MenuJogadores()
 {
 }
 
-void MenuJogadores::LoopMenu(char tecla)
+void Menus::MenuJogadores::LoopMenu(char tecla)
 {
 	
 		if (tecla == 'w' || tecla == 'W')
-			moverCima();
+			if (Indice > LimiteCima)
+				moverCima();
 		if (tecla == 's' || tecla == 'S')
-			moverBaixo();
+			if (Indice < LimiteBaixo)
+				moverBaixo();
 		if (tecla == 13)
 		{
 			switch (Indice)
 			{
 			case 0:
-				jogo->setEstado(2);
+				Textos[0]->setCor("Transparente");
+				Textos[1]->setCor("Transparente");
+				Textos[2]->setCor("Transparente");
+				Textos[3]->setCor("Preto");
+				Textos[4]->setCor("Vermelho");
+				Textos[5]->setCor("Preto");
+				Textos[6]->setCor("Preto");
+				LimiteCima = 4;
+				LimiteBaixo = 6;
+				Indice = 4;
 				break;
 			case 1:
 				jogo->setMultiplayer(true);
@@ -52,8 +48,94 @@ void MenuJogadores::LoopMenu(char tecla)
 				moverCima();
 				moverCima();
 			}
+			break;
+			case 4:
+				jogo->setJogador1Fazendeira(true);
+				jogo->setEstado(2);
+				break;
+			case 5:
+				jogo->setJogador1Fazendeira(false);
+				jogo->setEstado(2);
+				break;
+			case 6:
+				Textos[0]->setCor("Vermelho");
+				Textos[1]->setCor("Preto");
+				Textos[2]->setCor("Preto");
+				Textos[3]->setCor("Transparente");
+				Textos[4]->setCor("Transparente");
+				Textos[5]->setCor("Transparente");
+				Textos[6]->setCor("Transparente");
+				LimiteCima = 0;
+				LimiteBaixo = 2;
+				Indice = 0;
 				break;
 			}
 		}
-	
+}
+
+void Menus::MenuJogadores::Inicializa() {
+
+	Texto* novo = new Texto();
+	novo->setCor("Vermelho");
+	novo->setDimensao(30);
+	novo->setMensagem("1 Jogador");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(30);
+	novo->setMensagem("2 Jogadores");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(30);
+	novo->setMensagem("Voltar");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 450);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Transparente");
+	novo->setDimensao(30);
+	novo->setMensagem("Escolha com qual jogador jogar:");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Transparente");
+	novo->setDimensao(30);
+	novo->setMensagem("Fazendeira");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Transparente");
+	novo->setDimensao(30);
+	novo->setMensagem("Bruxo");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 400);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Transparente");
+	novo->setDimensao(30);
+	novo->setMensagem("Voltar");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 500);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
 }

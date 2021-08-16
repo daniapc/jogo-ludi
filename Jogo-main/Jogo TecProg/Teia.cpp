@@ -17,16 +17,6 @@ void Teia::colidir(Personagem* personagem)
 	}
 }
 
-void Teia::setLentidao(float lentidao)
-{
-	Lentidao = lentidao;
-}
-
-float Teia::getLentidao()
-{
-	return Lentidao;
-}
-
 void Teia::salvar()
 {
 	ofstream gravadorTeia("saves/Teias.dat", ios::app);

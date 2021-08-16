@@ -37,12 +37,12 @@ void Porta::colidir(Personagem* personagem)
 		if (jogo->getEstado() == 4)
 		{
 			
-			jogo->getFazendeira()->setFaseAtual(&jogo->getQuarto());
-			jogo->getFazendeira()->setPosicao(200.f, 200.f);
+			jogo->getJogador1()->setFaseAtual(&jogo->getQuarto());
+			jogo->getJogador1()->setPosicao(200.f, 200.f);
 			if (jogo->getMultiplayer())
 			{
-				jogo->getBruxo()->setFaseAtual(&jogo->getQuarto());
-				jogo->getBruxo()->setPosicao(200.f, 200.f);
+				jogo->getJogador2()->setFaseAtual(&jogo->getQuarto());
+				jogo->getJogador2()->setPosicao(200.f, 200.f);
 			}
 
 			jogo->setEstado(5);
@@ -50,6 +50,7 @@ void Porta::colidir(Personagem* personagem)
 		}
 		else 
 		{
+			jogo->mensagemCreditos("Voce Venceu!");
 			jogo->setEstado(7);	
 			jogo->getQuarto().limparTudo();
 		}

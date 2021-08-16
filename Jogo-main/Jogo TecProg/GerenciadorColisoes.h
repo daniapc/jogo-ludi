@@ -24,8 +24,6 @@ public:
 	void setListaEntidades(ListaEntidades* plistaentidades);
 	void setListaPersonagens(ListaPersonagens* plistapersonagens);
 
-	void incluaEntidade(Entidade* entidade);
-
 	void checaColisoes();
 	void checaColisao(Personagem* personagem, Entidade* entidade);
 };

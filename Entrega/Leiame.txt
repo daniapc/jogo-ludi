@@ -1,0 +1,4 @@
+Compilado com: compilador padrão Visual Studio 2019
+Padrão usado: C++11
+Para SO: Windows 64 bit
+Biblioteca gráfica utilizada: SFML 2.5.1

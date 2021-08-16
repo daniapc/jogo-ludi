@@ -1,32 +1,43 @@
 #include "MenuFases.h"
 #include "Jogo.h"
 
-MenuFases::MenuFases(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg):
-	Menu(comprimento, altura, tamanho, jg)
+Menus::MenuFases::MenuFases(Jogo* jg):
+	Menu(jg)
 {
-	menu = new sf::Text[Tamanho];
-	menu[0].setFillColor(sf::Color::Red);
-	menu[0].setCharacterSize(24);
-	menu[0].setString("Fase 1");
-	menu[0].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 250));
-	menu[0].setFont(Fonte);
-	menu[1].setFillColor(sf::Color::Green);
-	menu[1].setCharacterSize(24);
-	menu[1].setString("Fase 2");
-	menu[1].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 350));
-	menu[1].setFont(Fonte);
-	menu[2].setFillColor(sf::Color::Green);
-	menu[2].setCharacterSize(24);
-	menu[2].setString("Voltar");
-	menu[2].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 450));
-	menu[2].setFont(Fonte);
+	Texto* novo = new Texto();
+	novo->setCor("Vermelho");
+	novo->setDimensao(24);
+	novo->setMensagem("Fase 1");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo = novo;
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Fase 2");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Voltar");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 450);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
 }
 
-MenuFases::~MenuFases()
+Menus::MenuFases::~MenuFases()
 {
 }
 
-void MenuFases::LoopMenu(char tecla)
+void Menus::MenuFases::LoopMenu(char tecla)
 {
 
 		if (tecla == 'w' || tecla == 'W')
@@ -40,23 +51,23 @@ void MenuFases::LoopMenu(char tecla)
 			case 0:
 				jogo->InicializaJogadores();
 				jogo->InicializaFases();
-				jogo->getFazendeira()->setFaseAtual(&jogo->getQuintal());
+				jogo->getJogador1()->setFaseAtual(&jogo->getQuintal());
 				if (jogo->getMultiplayer())
-					jogo->getBruxo()->setFaseAtual(&jogo->getQuintal());
+					jogo->getJogador2()->setFaseAtual(&jogo->getQuintal());
 				jogo->setEstado(4);
 				break;
 			case 1:
 				jogo->InicializaJogadores();
-				cout << "Apareceu?" << endl;
 
 				if (jogo->getMultiplayer())
-					jogo->getBruxo()->setFaseAtual(&jogo->getQuarto());
-				jogo->getFazendeira()->setFaseAtual(&jogo->getQuarto());
+					jogo->getJogador2()->setFaseAtual(&jogo->getQuarto());
+				jogo->getJogador1()->setFaseAtual(&jogo->getQuarto());
 				jogo->InicializaQuarto();
 				jogo->setEstado(5);
 				break;
 			case 2:
 			{
+				jogo->setMultiplayer(false);
 				jogo->setEstado(1);
 				moverCima();
 				moverCima();

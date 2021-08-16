@@ -10,8 +10,6 @@ public:
 	~Teia();
 
 	void colidir(Personagem* personagem);
-	void setLentidao(float lentidao);
-	float getLentidao();
 	void salvar();
 };
 

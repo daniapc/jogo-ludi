@@ -5,26 +5,27 @@
 
 class Jogo;
 
-class MenuColocacao : public Menu
+namespace Menus
 {
-private:
-	bool Digitando;
-	sf::String Nome;
-	int Limite;
-	int EstadoAnterior;
+	class MenuColocacao : public Menu
+	{
+	private:
+		bool Digitando;
+		string Nome;
+		int Limite;
+		int EstadoAnterior;
 
-public:
-	MenuColocacao(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
-	~MenuColocacao();
+	public:
+		MenuColocacao(Jogo* jg);
+		~MenuColocacao();
 
-	//void setEditavel(bool editavel);
+		void Recupera();
+		void Inicializa();
 
-	void Recupera();
-	void Inicializa();
+		void setEditavel(bool Editavel);
+		void setEstadoAnterior(int estadoanterior);
 
-	void setEditavel(bool Editavel);
-	void setEstadoAnterior(int estadoanterior);
-
-	void LoopMenu(char tecla);
-};
+		void LoopMenu(char tecla);
+	};
+}
 

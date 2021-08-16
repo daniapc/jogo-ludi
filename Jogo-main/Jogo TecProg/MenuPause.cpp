@@ -1,27 +1,27 @@
 #include "MenuPause.h"
 #include "Jogo.h"
 
-MenuPause::MenuPause(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg):
-	Menu(comprimento, altura, tamanho, jg)
+Menus::MenuPause::MenuPause(Jogo* jg):
+	Menu(jg)
 {
 	Inicializa();
 }
 
-MenuPause::~MenuPause()
+Menus::MenuPause::~MenuPause()
 {
 }
 
-void MenuPause::setEstadoAtual(int estadoatual)
+void Menus::MenuPause::setEstadoAtual(int estadoatual)
 {
 	EstadoAtual = estadoatual;
 }
 
-int MenuPause::getEstadoAtual()
+int Menus::MenuPause::getEstadoAtual() const
 {
 	return EstadoAtual;
 }
 
-void MenuPause::LoopMenu(char tecla)
+void Menus::MenuPause::LoopMenu(char tecla)
 {
 		if (tecla == 'w' || tecla == 'W')
 			moverCima();
@@ -53,38 +53,51 @@ void MenuPause::LoopMenu(char tecla)
 	
 }
 
-void MenuPause::Inicializa()
+void Menus::MenuPause::Inicializa()
 {
-	menu = new sf::Text[Tamanho];
-	menu[0].setFillColor(sf::Color::Red);
-	menu[0].setCharacterSize(24);
-	menu[0].setString("Retomar");
-	menu[0].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 150));
-	menu[0].setFont(Fonte);
+	Texto* novo = new Texto();
+	novo->setCor("Vermelho");
+	novo->setDimensao(24);
+	novo->setMensagem("Retomar");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 150);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
 
-	menu[1].setFillColor(sf::Color::Green);
-	menu[1].setCharacterSize(24);
-	menu[1].setString("Salvar jogo");
-	menu[1].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 250));
-	menu[1].setFont(Fonte);
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Salvar jogo");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
 
-	menu[2].setFillColor(sf::Color::Green);
-	menu[2].setCharacterSize(24);
-	menu[2].setString("Salvar pontuação");
-	menu[2].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 350));
-	menu[2].setFont(Fonte);
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Salvar pontuacao");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
 
-	menu[3].setFillColor(sf::Color::Green);
-	menu[3].setCharacterSize(24);
-	menu[3].setString("Voltar ao Menu Principal");
-	menu[3].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 450));
-	menu[3].setFont(Fonte);	
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Voltar ao Menu Principal");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 450);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
 
-	menu[4].setFillColor(sf::Color::Green);
-	menu[4].setCharacterSize(24);
-	menu[4].setString("Sair do Jogo");
-	menu[4].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 550));
-	menu[4].setFont(Fonte);
-
-
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Sair do jogo");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 550);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+	
 }

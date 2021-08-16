@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-//#include "GerenciadorGrafico.h"
 
 class GerenciadorGrafico;
 

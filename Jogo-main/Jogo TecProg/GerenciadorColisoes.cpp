@@ -20,19 +20,13 @@ void GerenciadorColisoes::setListaPersonagens(ListaPersonagens* listapersonagens
 	plistaPersonagens = listapersonagens;
 }
 
-void GerenciadorColisoes::incluaEntidade(Entidade* entidade)
-{
-	plistaEntidades->inclua(entidade);
-}
-
-
 void GerenciadorColisoes::checaColisoes()
 {
 	for (unsigned int i = 0; i < plistaPersonagens->tamanho(); i++)
 	{
 		for (unsigned int j = 0; j < plistaEntidades->tamanho(); j++)
 		{
-			checaColisao((*plistaPersonagens)[i], (*plistaEntidades)[j]);
+			checaColisao((*plistaPersonagens)(i), (*plistaEntidades)[j]);
 		}
 	}
 }

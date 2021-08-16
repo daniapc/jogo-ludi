@@ -21,9 +21,8 @@ public:
 	void atualiza(float deltaTempo);
 	void limparTudo();
 
-	//void criaPassaro(sf::Vector2f posicao);
 	void criaPlataformas();
-	void criaPlataforma(float posx, float posy);
+	void criaPlataforma(float posx, float posy, string subtextura = "Plataforma_Quintal_2");
 
 
 	void recuperar();

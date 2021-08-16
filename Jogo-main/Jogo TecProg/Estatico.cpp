@@ -2,7 +2,7 @@
 
 Estatico::Estatico():
 	Inimigo(),
-	CooldownInvencibilidadeMax(3.0f),
+	CooldownInvencibilidadeMax(4.0f),
 	CooldownInvencibilidade(0.0f)
 {
 	CooldownAtaqueMax = 1.0f;
@@ -26,10 +26,19 @@ bool Estatico::podeMorrer()
 
 void Estatico::atualiza(float deltaTempo)
 {
-	if (podeMorrer()) 
-		this->setDimensoes(COMPRIMENTO_ESTATICO + 20.f, ALTURA_ESTATICO + 2*6.3);
-	else 
+
+	setSubTextura(SubTextura[0]);
+	if (podeMorrer()) {
+		this->setDimensoes(COMPRIMENTO_ESTATICO + 20.f, ALTURA_ESTATICO + 2 * 6.3);
+		setSubTextura(SubTextura[2]);
+	}
+	else {
 		this->setDimensoes(COMPRIMENTO_ESTATICO, ALTURA_ESTATICO);
+		setPosicao(getPosicaoX(), getPosicaoY() + 3.f);
+	}
+
+	if (CooldownInvencibilidade >= CooldownInvencibilidadeMax*7/8)
+		setSubTextura(SubTextura[1]);
 
 	MovimentoY += 981.f * deltaTempo;
 	this->movimenta(MovimentoX * deltaTempo, MovimentoY* deltaTempo);
@@ -42,19 +51,26 @@ void Estatico::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel() && this->podeAtacar())
 	{
-		cout << "Colidiu Estático!" << endl;
 		CooldownAtaque = 0;
 		personagem->setVida(personagem->getVida() - 1);
 		if (personagem->getVida() <= 0)
 			personagem->setDesalocavel(true);
 	}
 }
-/*
-void Estatico::movimenta(sf::Vector2f movimento)
+void Estatico::setTexturas(bool Quintal)
 {
-	Corpo.move(movimento);
+	if (Quintal) {
+		SubTextura[0] = "textures/Monstro_Moita.png";
+		SubTextura[1] = "Monstro_Moita_2";
+		SubTextura[2] = "Monstro_Moita_3";
+	}
+	else {
+		SubTextura[0] = "textures/Monstro_Roupas.png";
+		SubTextura[1] = "Monstro_Roupas_2";
+		SubTextura[2] = "Monstro_Roupas_3";
+	}
 }
-*/
+
 
 
 void Estatico::salvar()

@@ -180,6 +180,7 @@
     <ClCompile Include="Quarto.cpp" />
     <ClCompile Include="Quintal.cpp" />
     <ClCompile Include="Teia.cpp" />
+    <ClCompile Include="Texto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Atirador.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Quintal.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Teia.h" />
+    <ClInclude Include="Texto.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

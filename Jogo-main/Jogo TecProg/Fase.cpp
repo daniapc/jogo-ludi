@@ -4,9 +4,8 @@
 
 Fase::Fase():
 	Ente(),
-	//pView(NULL),
-	pFazendeira(NULL),
-	pBruxo(NULL),
+	pJogador1(NULL),
+	pJogador2(NULL),
 	pJogo(NULL)
 {
 }
@@ -19,28 +18,15 @@ void Fase::criaObstaculo(Entidade* pentidade, float dimx, float dimy, float posx
 {
 	pentidade->setGerenciadorGrafico(pGerenciadorGrafico);
 	pGerenciadorGrafico->criaCorpo(static_cast<Entidade*>(pentidade), dimx, dimy, posx, posy, textura);
-	
-	//pentidade->setDimensoes(dimx, dimy);
-	//pentidade->setPosicao(posx, posy);
-	//pentidade->setTextura(textura);
-
-
 	listaEntidades.inclua(static_cast <Entidade*>(pentidade));
 }
 
 void Fase::criaInimigo(Personagem* ppersonagem, float dimx, float dimy, float posx, float posy, const string textura)
 {
 	ppersonagem->setGerenciadorGrafico(pGerenciadorGrafico);
-
 	pGerenciadorGrafico->criaCorpo(static_cast <Entidade*>(ppersonagem), dimx, dimy, posx, posy, textura);
-	ppersonagem->setDimensoes(dimx, dimy);
-	ppersonagem->setPosicao(posx, posy);
-	ppersonagem->setTextura(textura);
-
-
 	listaEntidades.inclua(static_cast <Entidade*>(ppersonagem));
 	listaPersonagens.inclua(static_cast <Personagem*> (ppersonagem));
-
 }
 
 void Fase::criaBordas()
@@ -49,8 +35,7 @@ void Fase::criaBordas()
 	Plataforma* chao = new Plataforma();
 	criaObstaculo(chao, COMPRIMENTO_CENARIO, ALTURA_PLATAFORMA,
 		COMPRIMENTO_CENARIO / 2, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA / 2,
-		"");
-
+		"textures/Pseudo_Invisivel.png");
 	Plataforma* esquerda = new Plataforma();
 	criaObstaculo(esquerda, COMPRIMENTO_PLATAFORMA, ALTURA_RESOLUCAO,
 		-COMPRIMENTO_PLATAFORMA / 2, ALTURA_RESOLUCAO / 2,
@@ -65,28 +50,31 @@ void Fase::setChefaoMorreu(bool chefaomorreu)
 {
 }
 
-Jogador* Fase::getFazendeira()
+Jogador* Fase::getJogador1() const
 {
-	return pFazendeira;
+	return pJogador1;
 }
 
-void Fase::setFazendeira(Jogador* fazendeira)
+void Fase::setJogador1(Jogador* Jogador1)
 {
-	pFazendeira = fazendeira;
+	pJogador1 = Jogador1;
 }
 
-void Fase::setBruxo(Jogador* bruxo)
+void Fase::setJogador2(Jogador* Jogador2)
 {
-	pBruxo = bruxo;
+	pJogador2 = Jogador2;
 }
 
-
+Jogador* Fase::getJogador2() const
+{
+	return pJogador2;
+}
 
 void Fase::atualizaView()
 {
-	if (pFazendeira->getPosicaoX()  > COMPRIMENTO_RESOLUCAO / 2 && pFazendeira->getPosicaoX()  < COMPRIMENTO_CENARIO - COMPRIMENTO_RESOLUCAO / 2)
-		pGerenciadorGrafico->atualizaView(pFazendeira->getPosicaoX(), ALTURA_RESOLUCAO/2);
-	else if (pFazendeira->getPosicaoX()  > COMPRIMENTO_CENARIO - COMPRIMENTO_RESOLUCAO / 2)
+	if (pJogador1->getPosicaoX()  > COMPRIMENTO_RESOLUCAO / 2 && pJogador1->getPosicaoX()  < COMPRIMENTO_CENARIO - COMPRIMENTO_RESOLUCAO / 2)
+		pGerenciadorGrafico->atualizaView(pJogador1->getPosicaoX(), ALTURA_RESOLUCAO/2);
+	else if (pJogador1->getPosicaoX()  > COMPRIMENTO_CENARIO - COMPRIMENTO_RESOLUCAO / 2)
 		pGerenciadorGrafico->atualizaView(COMPRIMENTO_CENARIO - COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO/2);
 	else
 		pGerenciadorGrafico->atualizaView(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO/2);
@@ -102,7 +90,7 @@ void Fase::setJogo(Jogo* jg)
 	pJogo = jg;
 }
 
-Jogo* Fase::getJogo()
+Jogo* Fase::getJogo() const
 {
 	return pJogo;
 }
@@ -122,28 +110,29 @@ void Fase::recuperarProjeteis(Fase* fase, const string textura)
 	while (!recuperadorProjeteis.eof())
 	{
 		Projetil* novo = NULL;
-		float posx, posy, velx, vely;
+		float posx, posy, velx, vely, lado;
 		bool amigavel;
+		string textura;
 
-		recuperadorProjeteis >> posx >> posy >> velx >> vely >> amigavel;
+		recuperadorProjeteis >> posx >> posy >> velx >> vely >> amigavel >> textura >> lado;
 
 		novo = new Projetil();
-		novo->setVelocidade(velx, vely);
-		novo->setPosicao( posx, posy );
-		novo->setDimensoes( 10.f, 10.f );
-		novo->setAmigavel(amigavel);
-		novo->setGerenciadorGrafico(pGerenciadorGrafico);
-		novo->setTextura(textura);
-		novo->setFaseAtual(fase);
-		incluaProjetil(novo);
 
-		pGerenciadorGrafico->criaCorpo(novo, 10.f, 10.f, posx, posy, "");
+		novo->setGerenciadorGrafico(pGerenciadorGrafico);
+		pGerenciadorGrafico->criaCorpo(novo, lado, lado, posx, posy, "textures/Projeteis.png");
+		novo->setSubTextura(textura);
+		novo->setVelocidade(velx, vely);
+		novo->setAmigavel(amigavel);
+		novo->setFaseAtual(fase);
+
+		incluaProjetil(novo);
+		
 	}
 
 	recuperadorProjeteis.close();
 }
 
-void Fase::recuperarEstaticos(const string textura)
+void Fase::recuperarEstaticos(bool Quintal, const string textura)
 {
 	ifstream recuperadorEstaticos("saves/Estaticos.dat", ios::in);
 
@@ -162,9 +151,9 @@ void Fase::recuperarEstaticos(const string textura)
 
 		novo->setVida(vida);
 		novo->setCooldownAtaque(cooldown);
-
 		criaInimigo(static_cast <Personagem*> (novo), COMPRIMENTO_ESTATICO, ALTURA_ESTATICO ,
 			 posx, posy , textura);
+		novo->setTexturas(Quintal);
 	}
 
 	recuperadorEstaticos.close();
@@ -210,7 +199,7 @@ void Fase::recuperarTeias()
 		novo = new Teia();
 
 		criaObstaculo(static_cast <Entidade*>(novo),  COMPRIMENTO_TEIA, ALTURA_TEIA ,
-			 posx, posy , "");
+			 posx, posy , "textures/Teia.png");
 	}
 
 	recuperadorTeias.close();

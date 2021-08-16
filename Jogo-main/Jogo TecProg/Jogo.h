@@ -17,34 +17,35 @@ private:
 	GerenciadorGrafico gerenciadorGrafico;
 	Quintal Fase_Quintal;
 	Quarto Fase_Quarto;
-	Jogador* Fazendeira;
-	Jogador* Bruxo;
-	//Jogador* Lixo;
-	int Estado;
+	Jogador* Jogador1;
+	Jogador* Jogador2;
+ 	int Estado;
 	bool Multiplayer;
-	MenuPrincipal menuPrincipal;
-	MenuJogadores menuJogadores;
-	MenuFases menuFases;
-	MenuPause menuPause;
-	MenuColocacao menuColocacao;
-	Creditos creditos;
+	Menus::MenuPrincipal menuPrincipal;
+	Menus::MenuJogadores menuJogadores;
+	Menus::MenuFases menuFases;
+	Menus::MenuPause menuPause;
+	Menus::MenuColocacao menuColocacao;
+	Menus::Creditos creditos;
+
+	bool Jogador1Fazendeira;
 
 public:
 	Jogo();
 	~Jogo();
 
-	void setEstado(int estado);
+	void setEstado(const int estado);
 	int getEstado();
 	Quarto& getQuarto();
 	Quintal& getQuintal();
 	void setMultiplayer(bool multiplayer);
-	bool getMultiplayer();
+	bool getMultiplayer() const;
 	GerenciadorGrafico& getGerenciadorGrafico();
 
-	MenuColocacao& getMenuColocacao();
+	Menus::MenuColocacao& getMenuColocacao();
 	
-	Jogador* getBruxo();
-	Jogador* getFazendeira();
+	Jogador* getJogador2();
+	Jogador* getJogador1();
 
 	void Atualiza(float deltaTempo);
 	void Inicializa();
@@ -58,7 +59,12 @@ public:
 	void Recuperar();
 	void LimparArquivos();
 
+	void setJogador1Fazendeira(bool fazendeira);
+	bool getJogador1Fazendeira() const;
+
 	void setEstadoAtual(int estado);
+
+	void mensagemCreditos(string mensagem);
 
 	void MenusJogo(int estado, char tecla);
 

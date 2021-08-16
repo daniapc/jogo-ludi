@@ -12,19 +12,21 @@ protected:
 	float CooldownAtaque, CooldownAtaqueMax;
 	int Neutralizavel;
 
+	float CooldownAnimacao, CooldownAnimacaoMax;
+
 public:
 	Personagem();
 	~Personagem();
 
 	void setOlhaDireita(bool olhardireita);
-	bool getOlharDireita();
+	bool getOlharDireita() const;
 	void setColidePlataforma(bool colideplataforma);
-	bool getColidePlataforma();
+	bool getColidePlataforma() const;
 	void setVida(int vida);
-	int getVida();
+	int getVida() const;
 	void setAmigavel(bool amigavel);
-	bool getAmigavel();
-	float getVelocidade();
+	bool getAmigavel() const;
+	float getVelocidade() const;
 	void setCooldownAtaque(float cooldownataque);
 	void setMovimentoX(float movimentox);
 	void setMovimentoY(float movimentoy);

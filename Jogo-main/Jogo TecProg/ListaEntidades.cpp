@@ -2,7 +2,6 @@
 
 ListaEntidades::ListaEntidades()
 {
-    
 }
 
 ListaEntidades::~ListaEntidades()
@@ -104,11 +103,6 @@ void ListaEntidades::proximo()
 void ListaEntidades::inicio()
 {
     listaEntidades.inicio();
-}
-
-void ListaEntidades::remove(Entidade* pentidade)
-{
-    listaEntidades.remove(pentidade);
 }
 
 Entidade* ListaEntidades::operator[](int indice)

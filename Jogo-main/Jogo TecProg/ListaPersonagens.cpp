@@ -57,7 +57,7 @@ void ListaPersonagens::inicio()
 	listaPersonagens.inicio();
 }
 
-Personagem* ListaPersonagens::operator[](int indice)
+Personagem* ListaPersonagens::operator()(int indice)
 {
 	listaPersonagens.inicio();
 

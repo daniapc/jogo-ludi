@@ -3,19 +3,22 @@
 
 class Jogo;
 
-class MenuPause : public Menu
+namespace Menus
 {
-private:
-	int EstadoAtual;
+	class MenuPause : public Menu
+	{
+	private:
+		int EstadoAtual;
 
-public:
-	MenuPause(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
-	~MenuPause();
+	public:
+		MenuPause(Jogo* jg);
+		~MenuPause();
 
-	void setEstadoAtual(int estadoatual);
-	int getEstadoAtual();
-	void LoopMenu(char tecla);
+		void setEstadoAtual(int estadoatual);
+		int getEstadoAtual() const;
+		void LoopMenu(char tecla);
 
-	void Inicializa();
-};
+		void Inicializa();
+	};
+}
 

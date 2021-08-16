@@ -28,7 +28,7 @@ public:
 
 	void setChefaoMorreu(bool chefaomorreu);
 
-	void criaPlataforma( float posx, float posy);
+	void criaPlataforma( float posx, float posy, string subtextura = "Plataforma_Quarto_2");
 	void criaPlataformas();
 };
 

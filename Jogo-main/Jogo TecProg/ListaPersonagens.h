@@ -19,6 +19,6 @@ public:
     void proximo();
     void inicio();
 
-    Personagem* operator[](int indice);
+    Personagem* operator()(int indice);
 };
 

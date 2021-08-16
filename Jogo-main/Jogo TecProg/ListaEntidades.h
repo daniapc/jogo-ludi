@@ -22,8 +22,6 @@ public:
     void proximo();
     void inicio();
 
-    void remove(Entidade* pentidade);
-
     Entidade* operator[](int indice);
 };
 

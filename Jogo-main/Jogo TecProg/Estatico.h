@@ -5,6 +5,7 @@ class Estatico : public Inimigo
 {
 private: 
     float CooldownInvencibilidade, CooldownInvencibilidadeMax;
+    string SubTextura[3];
 
 public:
     Estatico();
@@ -13,7 +14,8 @@ public:
     bool podeMorrer();
     void atualiza(float deltaTempo);
     void colidir(Personagem* personagem);
-    //void movimenta(sf::Vector2f movimento);
+    void setTexturas(bool Quintal);
+
     void salvar();
 };
 

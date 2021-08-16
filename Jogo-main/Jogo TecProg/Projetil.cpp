@@ -9,20 +9,12 @@ Projetil::~Projetil()
 {
 }
 
-/*
-void Projetil::setMovimento(sf::Vector2f movimento)
-{
-	Movimento = movimento;
-}
-*/
-
-
 void Projetil::setAmigavel(bool amigavel)
 {
 	this->Amigavel = amigavel;
 }
 
-bool Projetil::getAmigavel()
+bool Projetil::getAmigavel() const
 {
 	return Amigavel;
 }
@@ -38,8 +30,8 @@ void Projetil::colidir(Personagem* personagem)
 			if (!personagem->getAmigavel())
 			{
 				if (faseAtual != NULL) {
-					faseAtual->getFazendeira()->incrementaPontuacao();
-					cout << faseAtual->getFazendeira()->getPontuacao() << endl;
+					faseAtual->getJogador1()->incrementaPontuacao();
+					cout << faseAtual->getJogador1()->getPontuacao() << endl;
 				}
 			}
 		}
@@ -72,21 +64,20 @@ void Projetil::setVelocidade(float velx, float vely)
 	VelocidadeX = velx;
 	VelocidadeY = vely;
 }
-float Projetil::getVelocidadeX()
+void Projetil::setTextura(string textura)
+{
+	Textura = textura;
+}
+
+float Projetil::getVelocidadeX() const
 {
 	return VelocidadeX;
 }
 
-float Projetil::getVelocidadeY()
+float Projetil::getVelocidadeY() const
 {
 	return VelocidadeY;
 }
-/*
-sf::Vector2f Projetil::getVelocidade()
-{
-	return Velocidade;
-}
-*/
 
 
 void Projetil::setFaseAtual(Fase* faseatual)
@@ -107,7 +98,9 @@ void Projetil::salvar()
 			<< this->getPosicaoY() << ' '
 			<< this->getVelocidadeX() << ' '
 			<< this->getVelocidadeY() << ' '
-			<< this->getAmigavel() << endl;
+			<< this->getAmigavel() << ' '
+			<< Textura << ' '
+			<< this->getDimensoesX() << endl;
 
 		gravadorProjetil.close();
 	}

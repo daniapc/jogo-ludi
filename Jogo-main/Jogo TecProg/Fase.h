@@ -18,11 +18,9 @@ class Fase : public Ente
 {
 protected:
 	Cenario Background;
-	//Entidade Cenario;
-	Jogador* pFazendeira;
-	Jogador* pBruxo;
+	Jogador* pJogador1;
+	Jogador* pJogador2;
 	Jogo* pJogo;
-	//sf::View* pView; //pGerenciadorGrafico
 
 	GerenciadorColisoes gerenciadorColisoes;
 	ListaEntidades listaEntidades;
@@ -33,23 +31,23 @@ public:
 	virtual ~Fase();
 
 	void setJogo(Jogo* pjogo);
-	Jogo* getJogo();
-	void setFazendeira(Jogador* pfazendeira);
-	Jogador* getFazendeira();
-	void setBruxo(Jogador* pbruxo);
+	Jogo* getJogo() const;
+	void setJogador1(Jogador* pJogador1);
+	Jogador* getJogador1() const;
+	void setJogador2(Jogador* pJogador2);
+	Jogador* getJogador2() const;
 
 	void criaObstaculo(Entidade* pentidade, float dimx, float dimy, float posx, float posy, const string textura);
 	void criaInimigo(Personagem* ppersonagem, float dimx, float dimy, float posx, float posy, const string textura);
 	void criaBordas();
 
-	//Cria objetos que estão em ambas as fases
 
 	void atualizaView();
 	void incluaProjetil(Projetil* projetil);
 	void salvar();
 
 	void recuperarProjeteis(Fase* fase, const string textura = "");
-	void recuperarEstaticos(const string textura = "");
+	void recuperarEstaticos(bool Quintal, const string textura = "");
 	void recuperarEspinhos(const string textura = "");
 	void recuperarTeias();
 	

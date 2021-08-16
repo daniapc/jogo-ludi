@@ -1,39 +1,54 @@
 #include "Creditos.h"
 #include "Jogo.h"
 
-Creditos::Creditos(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg) :
-	Menu(comprimento, altura, tamanho, jg)
+Menus::Creditos::Creditos(Jogo* jg) :
+	Menu(jg), Limite(2)
 {
+	MensagemFinal = "Voce Perdeu.";
 
-	//setDimensoes(sf::Vector2f(COMPRIMENTO_JOGADOR, ALTURA_JOGADOR));
-    //setOrigem();
-    //setPosicao(sf::Vector2f(COMPRIMENTO_RESOLUCAO/2, ALTURA_RESOLUCAO));
-    //setTextura("");
-	
-	menu = new sf::Text[Tamanho];
-	menu[0].setFillColor(sf::Color::Red);
-	menu[0].setCharacterSize(24);
-	menu[0].setString("Salvar Pontuação");
-	menu[0].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO*3/4, 500));
-	menu[0].setFont(Fonte);
-	menu[1].setFillColor(sf::Color::Green);
-	menu[1].setCharacterSize(24);
-	menu[1].setString("Voltar ao Menu Principal");
-	menu[1].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO * 3/4, 550));
-	menu[1].setFont(Fonte);
+	Texto* novo = new Texto();
+	novo->setCor("Vermelho");
+	novo->setDimensao(24);
+	novo->setMensagem("Salvar Pontuacao");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO * 3 / 4, 500);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(24);
+	novo->setMensagem("Voltar ao Menu Principal");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO * 3 / 4, 550);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	criaTexto(novo, MensagemFinal, "Azul", "KidsPlay", 48, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
+	Textos.push_back(novo);
+	Tamanho++;
+
 }
 
-Creditos::~Creditos()
+Menus::Creditos::~Creditos()
 {
 }
 
+void Menus::Creditos::setMensagemFinal(string mensagemfinal){
+	MensagemFinal = mensagemfinal;
 
-void Creditos::LoopMenu(char tecla)
+	criaTexto(Textos[2], MensagemFinal, "Azul", "Arial", 48, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
+}
+
+
+void Menus::Creditos::LoopMenu(char tecla)
 {
 		if (tecla == 'w' || tecla == 'W')
 			moverCima();
 		if (tecla == 's' || tecla == 'S')
-			moverBaixo();
+			if(Indice < Limite)
+				moverBaixo();
 		if (tecla == 13)
 		{
 			switch (Indice)
@@ -45,6 +60,7 @@ void Creditos::LoopMenu(char tecla)
 				break;
 			case 1:
 				jogo->setEstado(0);
+				jogo->mensagemCreditos("Voce Perdeu.");
 				break;
 			}
 		}

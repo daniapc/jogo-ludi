@@ -4,7 +4,7 @@ class Cenario :
     public Entidade
 {
 private:
-    //
+    
 public:
     Cenario();
     ~Cenario();

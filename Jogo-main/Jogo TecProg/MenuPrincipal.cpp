@@ -1,38 +1,64 @@
 #include "MenuPrincipal.h"
 #include "Jogo.h"
 
-MenuPrincipal::MenuPrincipal(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg):
-Menu(comprimento, altura, tamanho, jg)
+Menus::MenuPrincipal::MenuPrincipal(Jogo* jg):
+Menu(jg)
 {
-	menu = new sf::Text[Tamanho];
-	menu[0].setFillColor(sf::Color::Red);
-	menu[0].setCharacterSize(24);
-	menu[0].setString("Novo Jogo");
-	menu[0].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO/4, 250));
-	menu[0].setFont(Fonte);
-	menu[1].setFillColor(sf::Color::Green);
-	menu[1].setCharacterSize(24);
-	menu[1].setString("Carregar Jogo");
-	menu[1].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 350));
-	menu[1].setFont(Fonte);
-	menu[2].setFillColor(sf::Color::Green);
-	menu[2].setCharacterSize(24);
-	menu[2].setString("Verificar Pontuação");
-	menu[2].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 450));
-	menu[2].setFont(Fonte);
-	menu[3].setFillColor(sf::Color::Green);
-	menu[3].setCharacterSize(24);
-	menu[3].setString("Sair");
-	menu[3].setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 550));
-	menu[3].setFont(Fonte);
+	Tamanho = 0;
+	Texto* novo = new Texto();
+	novo->setCor("Vermelho");
+	novo->setDimensao(30);
+	novo->setMensagem("Novo Jogo");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
 
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(30);
+	novo->setMensagem("Recuperar Jogo Salvo");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(30);
+	novo->setMensagem("Scoreboard");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 450);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	novo = new Texto();
+	novo->setCor("Preto");
+	novo->setDimensao(30);
+	novo->setMensagem("Sair");
+	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 550);
+	novo->setFonte("KidsPlay");
+	Textos.push_back(novo);
+	Tamanho++;
+
+	
 }
 
-MenuPrincipal::~MenuPrincipal()
+Menus::MenuPrincipal::~MenuPrincipal()
 {
 }
 
-void MenuPrincipal::LoopMenu(char tecla)
+void Menus::MenuPrincipal::InicializaPlanoFundo(){
+	PlanoFundo.setGerenciadorGrafico(pGerenciadorGrafico);
+pGerenciadorGrafico->criaCorpo(static_cast<Entidade*>(&PlanoFundo), COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO,
+		COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2, "textures/Menu1.png");
+	Cenario* novo = new Cenario();
+	novo->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(static_cast<Entidade*>(novo), COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO,
+		COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2, "textures/Menu2.png");
+}
+
+void Menus::MenuPrincipal::LoopMenu(char tecla)
 {
 		if (tecla == 'w' || tecla == 'W')
 			moverCima();
@@ -58,7 +84,7 @@ void MenuPrincipal::LoopMenu(char tecla)
 				jogo->setEstado(3);
 				break;
 			case 3:
-				pGerenciadorGrafico->getJanela().close();
+				pGerenciadorGrafico->fechar();
 				break;
 			}
 		}

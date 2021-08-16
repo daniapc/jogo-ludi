@@ -1,15 +1,14 @@
 #include "GerenciadorGrafico.h"
 #include "Jogo.h"
 
-//int GerenciadorGrafico::IdAtual = 0;
-
 GerenciadorGrafico::GerenciadorGrafico() :
     Janela(sf::VideoMode(static_cast <unsigned int>(COMPRIMENTO_RESOLUCAO), static_cast <unsigned int>(ALTURA_RESOLUCAO)),
-        "Jogo"/*, sf::Style::Fullscreen*/),
+        "Jogo"),
     View(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2), sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO))
-    //IdAtual(0)
 {
     Janela.setView(View);
+
+
 }
 
 void GerenciadorGrafico::LoopJogo(Jogo* jogo, int estado)
@@ -17,25 +16,28 @@ void GerenciadorGrafico::LoopJogo(Jogo* jogo, int estado)
     sf::Clock Tempo;
     int Estado = estado;
 
-    while (isOpen())
+    while (Janela.isOpen())
     {
         sf::Event evento;
-        while (getJanela().pollEvent(evento))
+        while (Janela.pollEvent(evento))
         {
             if (evento.type == sf::Event::TextEntered) {
                 if (evento.text.unicode == 27)
                 {
-                    jogo->setEstadoAtual(Estado);
-                    Estado = 6;
-                    jogo->setEstado(6);
+                    int estadoant = jogo->getEstado();
+                    if (estadoant == 4 || estadoant == 5) {
+                        jogo->setEstadoAtual(Estado);
+                        Estado = 6;
+                        jogo->setEstado(6);
+                    }
                 }
                 jogo->MenusJogo(Estado, evento.text.unicode);
             }
             if (evento.type == sf::Event::Closed)
-                getJanela().close();
+                Janela.close();
         }
 
-        clear();
+        Janela.clear();
         float DeltaTempo = Tempo.restart().asSeconds();
         if (DeltaTempo > 1.f / 20.f)
             DeltaTempo = 1.f / 20.f;
@@ -43,29 +45,38 @@ void GerenciadorGrafico::LoopJogo(Jogo* jogo, int estado)
         jogo->Atualiza(DeltaTempo);
         Estado = jogo->getEstado();
 
-        updateView();
+        Janela.setView(View);
 
-        display();
+        Janela.display();
     }
+}
+
+void GerenciadorGrafico::CarregarJogo()
+{
+    
+        InicializaFontes();
+        sf::RectangleShape Fundo_Carregamento;
+        Fundo_Carregamento.setSize(sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO));
+        CarregaTextura("textures/Menu2.png");
+        Fundo_Carregamento.setTexture(&Texturas["textures/Menu2.png"]);
+        sf::Text Carregamento;
+        Carregamento.setFillColor(sf::Color::Black);
+        Carregamento.setFont(Fontes["KidsPlay"]);
+        Carregamento.setString("Carregando Jogo...");
+        Carregamento.setCharacterSize(48);
+        Carregamento.setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 4, 350.f));
+        Janela.draw(Fundo_Carregamento);
+        Janela.draw(Carregamento);
+        Janela.display();
+
+        InicializaTexturas();
+        InicializaSubTexturas();
+        InicializaCores();
+    
 }
 
 GerenciadorGrafico::~GerenciadorGrafico()
 {
-}
-
-sf::RenderWindow& GerenciadorGrafico::getJanela()
-{
-	return Janela;
-}
-
-sf::View& GerenciadorGrafico::getView()
-{
-	return View;
-}
-
-void GerenciadorGrafico::updateView()
-{
-	Janela.setView(View);
 }
 
 void GerenciadorGrafico::resetaView()
@@ -80,48 +91,50 @@ void GerenciadorGrafico::atualizaView(float x, float y)
 
 void GerenciadorGrafico::criaCorpo(Entidade* pentidade, float dimx, float dimy, float posx, float posy, string text)
 {
-    //int i = 0;
-
-    //for (i = 0; i < 50; i++) {
-    //    Texturas[i]. == text;
-    //}
-    sf::Texture* Textura = new sf::Texture();
-
     sf::RectangleShape* Corpo = new sf::RectangleShape();
 
     Corpo->setSize(sf::Vector2f(dimx, dimy));
     Corpo->setPosition(sf::Vector2f(posx, posy));
     Corpo->setOrigin(dimx/2, dimy/2);
-    
+    Corpo->setTexture(&Texturas[text]);
+    if (SubTexturas[text] != sf::IntRect(0,0,0,0))
+        Corpo->setTextureRect(SubTexturas[text]);
 
-
-    if (text == "" || !Textura->loadFromFile(text)) {
-        cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
-        Corpo->setFillColor(sf::Color::White);
-    }
-   // Corpo->setTextureRect(sf::IntRect(150, 300, 300, 300));
-    Corpo->setTexture(Textura);
     ListaCorpos.push_back(Corpo);
 
+    pentidade->setDesalocavel(false);
     if (pentidade != NULL)
-        pentidade->setId(pentidade->getIdAtual());
+        pentidade->setId(pentidade->getIdCorpoAtual());
 
-    pentidade->incrementaIdAtual();
+    pentidade->incrementaIdCorpoAtual();
+}
 
-    //IdAtual++;
+
+void GerenciadorGrafico::desenhar(Texto texto)
+{
+    sf::Text taux;
+
+    taux.setFillColor(Cores[texto.getCor()]);
+    taux.setCharacterSize(texto.getDimensao());
+    taux.setString(texto.getMensagem());
+    taux.setPosition(sf::Vector2f(texto.getPosicaoX(), texto.getPosicaoY()));
+    taux.setFont(Fontes[texto.getFonte()]);
+
+    Janela.draw(taux);
+}
+
+void GerenciadorGrafico::desenhar(sf::Text texto)
+{
+    Janela.draw(texto);
 }
 
 void GerenciadorGrafico::setDimensoes(int id, float x, float y)
 {
-    if (id == NULL)
-        cout << "Erro 1 get set Posicao" << endl;
-    else if (id <= 0 || id >= ListaCorpos.size())
-        cout << "Erro 2 get set Posicao" << endl;
-    else
-        ListaCorpos[id]->setSize(sf::Vector2f(x, y));
+    ListaCorpos[id]->setSize(sf::Vector2f(x, y));
+    ListaCorpos[id]->setOrigin( x / 2,  y / 2);
 }
 
-float GerenciadorGrafico::getDimensoesX(int id)
+float GerenciadorGrafico::getDimensoesX(int id) const
 {
     if (ListaCorpos[id] != NULL)
         return ListaCorpos[id]->getSize().x;
@@ -132,7 +145,7 @@ float GerenciadorGrafico::getDimensoesX(int id)
 
 }
 
-float GerenciadorGrafico::getDimensoesY(int id)
+float GerenciadorGrafico::getDimensoesY(int id) const
 {
     if (ListaCorpos[id] != NULL)
         return ListaCorpos[id]->getSize().y;
@@ -145,11 +158,10 @@ float GerenciadorGrafico::getDimensoesY(int id)
 
 void GerenciadorGrafico::setPosicao(int id, float x, float y)
 {
-    //if (ListaCorpos[id] == NULL)
-   //      cout << "ErrogetsetPosicao" << endl;
-    if (id == NULL)
-        cout << "Erro setPosicao" << endl;
-    else if (id < 0 || id >= ListaCorpos.size())
+
+   // if (id == NULL)
+   //     cout << "Erro setPosicao" << endl;
+    if (id < 0 || id >= ListaCorpos.size())
         cout << "Erro setPosicao" << endl;
     else {
         
@@ -158,15 +170,21 @@ void GerenciadorGrafico::setPosicao(int id, float x, float y)
 
 }
 
-float GerenciadorGrafico::getPosicaoX(int id)
+float GerenciadorGrafico::getPosicaoX(int id) const
 {
     return ListaCorpos[id]->getPosition().x;
 }
 
-float GerenciadorGrafico::getPosicaoY(int id)
+float GerenciadorGrafico::getPosicaoY(int id) const
 {
     return ListaCorpos[id]->getPosition().y;
 }
+
+void GerenciadorGrafico::setSubTextura(int id, string subtext)
+{
+    ListaCorpos[id]->setTextureRect(SubTexturas[subtext]);
+}
+
 
 
 void GerenciadorGrafico::desenhar(int id, bool desalocavel)
@@ -178,14 +196,9 @@ void GerenciadorGrafico::desenhar(int id, bool desalocavel)
         delete (ListaCorpos[id]);
 }
 
-void GerenciadorGrafico::desenhar(sf::Text texto)
-{
-	Janela.draw(texto);
-}
-
 void GerenciadorGrafico::fechar()
 {
-	Janela.close();
+    Janela.close();
 }
 
 void GerenciadorGrafico::movimenta(int id, float x, float y)
@@ -195,53 +208,38 @@ void GerenciadorGrafico::movimenta(int id, float x, float y)
          ListaCorpos[id]->move(sf::Vector2f(x, y));
 }
 
-void GerenciadorGrafico::display()
-{
-	Janela.display();
-}
-
-void GerenciadorGrafico::clear()
-{
-	Janela.clear();
-}
-
-bool GerenciadorGrafico::isOpen()
-{
-	return Janela.isOpen();
-}
-
 void GerenciadorGrafico::TeclaApertada(char* direita, char* esquerda, char* pulo, char* atira)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         *direita = 'D';
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         *esquerda = 'A';
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         *pulo = 'W';
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         *atira = ' ';
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         if (*direita == 'D')
             *direita = '>';
         else
             *direita = 'R';
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         if (*esquerda == 'A')
             *esquerda = '<';
         else
             *esquerda = 'L';
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         if (*pulo == 'W')
             *pulo = 'J';
         else
             *pulo = 'U';
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
     {
         if (*atira == ' ')
             *atira = 'S';
@@ -249,4 +247,117 @@ void GerenciadorGrafico::TeclaApertada(char* direita, char* esquerda, char* pulo
             *atira = 'E';
     }
 }
+
+void GerenciadorGrafico::CarregaTextura(string textura)
+{
+    sf::Texture Textura;
+    if (!Textura.loadFromFile(textura))
+        cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
+    Texturas[textura] = Textura;
+}
+
+void GerenciadorGrafico::InicializaTexturas()
+{
+    //CarregaTextura("");
+    CarregaTextura("textures/Fazendeira.png");
+    CarregaTextura("textures/Bruxo.png");
+    CarregaTextura("textures/Pseudo_Invisivel.png");
+    CarregaTextura("textures/Plataforma_Quintal.png");
+    CarregaTextura("textures/Plataforma_Quarto.png");
+    CarregaTextura("textures/Monstro_Moita.png");
+    CarregaTextura("textures/Monstro_Roupas.png");
+    CarregaTextura("textures/Teia.png");
+    CarregaTextura("textures/Espinhos_Galhos.png");
+    CarregaTextura("textures/Espinhos_Materiais.png");
+    CarregaTextura("textures/Passaro.png");
+    CarregaTextura("textures/Fantasma.png");
+    CarregaTextura("textures/Bicho_Papao.png");
+    CarregaTextura("textures/Projeteis.png");
+    CarregaTextura("textures/Inicio_Fim.png");
+    CarregaTextura("textures/Quintal.png");
+    CarregaTextura("textures/Quarto.png");
+    CarregaTextura("textures/Menu1.png");
+    //CarregaTextura("textures/Menu2.png");
+}
+
+
+void GerenciadorGrafico::InicializaFontes()
+{
+    sf::Font *Fonte = new sf::Font();
+    if (!Fonte->loadFromFile("arial.ttf"))
+        cout << "Erro ao carregar fonte." << endl;
+    Fontes["Arial"] = *Fonte;
+    Fonte = new sf::Font();
+    if (!Fonte->loadFromFile("KidsPlay.ttf"))
+        cout << "Erro ao carregar fonte." << endl;
+    Fontes["KidsPlay"] = *Fonte;
+
+}
+
+void GerenciadorGrafico::InicializaCores()
+{
+    Cores["Vermelho"] = sf::Color::Red;
+    Cores["Verde"] = sf::Color::Green;
+    Cores["Azul"] = sf::Color::Blue;
+    Cores["Transparente"] = sf::Color::Transparent;
+    Cores["Preto"] = sf::Color::Black;
+    Cores["Ciano"] = sf::Color::Cyan;
+    Cores["Amarelo"] = sf::Color::Yellow;
+
+}
+
+void GerenciadorGrafico::InicializaSubTexturas()
+{
+    SubTexturas["textures/Fazendeira.png"] = sf::IntRect(285, 0, 660, 820); SubTexturas["Fazendeira_2"] = sf::IntRect(1045, 0, 660, 820); SubTexturas["Fazendeira_3"] = sf::IntRect(1800, 0, 630, 820);
+    SubTexturas["Fazendeira_4"] = sf::IntRect(2540, 0, 640, 820); SubTexturas["Fazendeira_5"] = sf::IntRect(3280, 0, 640, 820); SubTexturas["Fazendeira_6"] = sf::IntRect(4025, 0, 640, 820);
+    SubTexturas["Fazendeira_7"] = sf::IntRect(0, 875, 640, 820); SubTexturas["Fazendeira_8"] = sf::IntRect(745, 875, 640, 820); SubTexturas["Fazendeira_9"] = sf::IntRect(1485, 875, 900, 820);
+    SubTexturas["Fazendeira_10"] = sf::IntRect(2495, 875, 900, 820); SubTexturas["Fazendeira_11"] = sf::IntRect(3490, 820, 680, 820); SubTexturas["Fazendeira_12"] = sf::IntRect(4270, 820, 680, 820);
+
+    SubTexturas["textures/Bruxo.png"] = sf::IntRect(145, 0, 530, 820); SubTexturas["Bruxo_2"] = sf::IntRect(820, 0, 530, 820); SubTexturas["Bruxo_3"] = sf::IntRect(1495, 0, 530, 820);
+    SubTexturas["Bruxo_4"] = sf::IntRect(2130, 0, 530, 820); SubTexturas["Bruxo_5"] = sf::IntRect(2765, 0, 530, 820); SubTexturas["Bruxo_6"] = sf::IntRect(3405, 0, 530, 820);
+    SubTexturas["Bruxo_7"] = sf::IntRect(0, 930, 480, 820); SubTexturas["Bruxo_8"] = sf::IntRect(630, 930, 480, 820); SubTexturas["Bruxo_9"] = sf::IntRect(1260, 930, 700, 820);
+    SubTexturas["Bruxo_10"] = sf::IntRect(2100, 930, 700, 820); SubTexturas["Bruxo_11"] = sf::IntRect(2855, 950, 520, 820); SubTexturas["Bruxo_12"] = sf::IntRect(3460, 950, 520, 820);
+
+    SubTexturas["textures/Plataforma_Quintal.png"] = sf::IntRect(0, 0, 620, 630); SubTexturas["Plataforma_Quintal_2"] = sf::IntRect(660, 0, 620, 630); SubTexturas["Plataforma_Quintal_3"] = sf::IntRect(1320, 10, 620, 630);
+    SubTexturas["Plataforma_Quintal_4"] = sf::IntRect(1995, 0, 620, 630); SubTexturas["Plataforma_Quintal_5"] = sf::IntRect(2675, 0, 620, 630);
+
+    SubTexturas["textures/Plataforma_Quarto.png"] = sf::IntRect(0, 0, 630, 650); SubTexturas["Plataforma_Quarto_2"] = sf::IntRect(725,10, 620, 630); SubTexturas["Plataforma_Quarto_3"] = sf::IntRect(1450, 10, 620, 630);
+    SubTexturas["Plataforma_Quarto_4"] = sf::IntRect(2175, 10, 620, 630); SubTexturas["Plataforma_Quarto_5"] = sf::IntRect(2915, 10, 620, 630);
+
+    SubTexturas["textures/Monstro_Moita.png"] = sf::IntRect(0, 140, 880, 480); SubTexturas["Monstro_Moita_2"] = sf::IntRect(880, 140, 880, 480); SubTexturas["Monstro_Moita_3"] = sf::IntRect(1770, 0, 1020, 620);
+    SubTexturas["textures/Monstro_Roupas.png"] = sf::IntRect(0, 140, 880, 480); SubTexturas["Monstro_Roupas_2"] = sf::IntRect(880, 140, 880, 480); SubTexturas["Monstro_Roupas_3"] = sf::IntRect(1770, 0, 1020, 620);
+
+    SubTexturas["textures/Teia.png"] = sf::IntRect(0, 0, 490, 490); SubTexturas["Teia_2"] = sf::IntRect(615, 0, 490, 490);
+
+    SubTexturas["Espinhos_Galhos_2"] = sf::IntRect(0, 0, 760, 475); SubTexturas["textures/Espinhos_Galhos.png"] = sf::IntRect(870, 0, 760, 475);
+    SubTexturas["Espinhos_Materiais_2"] = sf::IntRect(0, 0, 760, 475); SubTexturas["textures/Espinhos_Materiais.png"] = sf::IntRect(770, 0, 760, 475);
+
+    SubTexturas["textures/Passaro.png"] = sf::IntRect(0, 0, 630, 525); SubTexturas["Passaro_2"] = sf::IntRect(750,  0, 630, 525);
+    SubTexturas["Passaro_3"] = sf::IntRect(1475, 0, 630, 525); SubTexturas["Passaro_4"] = sf::IntRect(2220,  0, 630, 525);
+
+    SubTexturas["textures/Fantasma.png"] = sf::IntRect(0, 0, 630, 500); SubTexturas["Fantasma_2"] = sf::IntRect(780, 0, 630, 500);
+
+    SubTexturas["textures/Bicho_Papao.png"] = sf::IntRect(405, 10, 1565, 1580); SubTexturas["Bicho_Papao_2"] = sf::IntRect(2280, 0, 1565, 1580); SubTexturas["Bicho_Papao_3"] = sf::IntRect(4120, 10, 1280, 1725);
+    SubTexturas["Bicho_Papao_4"] = sf::IntRect(5665, 10, 1565, 1580); SubTexturas["Bicho_Papao_5"] = sf::IntRect(7500, 0, 1565, 1580); SubTexturas["Bicho_Papao_6"] = sf::IntRect(9345, 0, 1280, 1725);;
+    SubTexturas["Bicho_Papao_7"] = sf::IntRect(0, 290, 110, 130);
+
+    SubTexturas["textures/Projeteis.png"] = sf::IntRect(0, 0, 126, 134); SubTexturas["Projeteis_2"] = sf::IntRect(170,  0, 126, 134); SubTexturas["Projeteis_3"] = sf::IntRect(340,  0, 156, 134);
+    SubTexturas["Projeteis_4"] = sf::IntRect(535,  0, 155, 134); SubTexturas["Projeteis_5"] = sf::IntRect(735,  0, 140, 134); SubTexturas["Projeteis_6"] = sf::IntRect(918, 0, 140, 134);
+    SubTexturas["Projeteis_7"] = sf::IntRect(1101, 0, 100, 134); SubTexturas["Projeteis_8"] = sf::IntRect(1240, 0, 140, 134); SubTexturas["Projeteis_9"] = sf::IntRect(1390, 0, 140, 134);
+
+    SubTexturas["textures/Inicio_Fim.png"] = sf::IntRect(0, 500, 520, 580); SubTexturas["Inicio_Fim_2"] = sf::IntRect(820, 110, 835, 1360); SubTexturas["Inicio_Fim_3"] = sf::IntRect(1950, 135, 225, 1300);
+    SubTexturas["Inicio_Fim_4"] = sf::IntRect(2475, 135, 225, 1300); SubTexturas["Inicio_Fim_5"] = sf::IntRect(3000, 0, 620, 1580);
+
+    SubTexturas["textures/Quintal.png"] = sf::IntRect(0, 0, 3829, 1089);
+    SubTexturas["textures/Quarto.png"] = sf::IntRect(0, 0, 3959, 1093);
+
+    SubTexturas["textures/Menu1.png"] = sf::IntRect(0, 0, 1627, 1000);
+    SubTexturas["textures/Menu2.png"] = sf::IntRect(0, 0, 1627, 1000);
+}
+
+
+
+
+
+
 

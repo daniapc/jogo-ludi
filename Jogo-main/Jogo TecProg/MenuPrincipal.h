@@ -3,14 +3,18 @@
 
 class Jogo;
 
-class MenuPrincipal : public Menu
+namespace Menus
 {
-private:
+	class MenuPrincipal : public Menu
+	{
+	private:
 
-public:
-	MenuPrincipal(unsigned int comprimento, unsigned int altura, int tamanho, Jogo* jg);
-	~MenuPrincipal();
+	public:
+		MenuPrincipal(Jogo* jg);
+		~MenuPrincipal();
 
-	void LoopMenu(char tecla);
-};
+		void LoopMenu(char tecla);
+		void InicializaPlanoFundo();
+	};
+}
 
