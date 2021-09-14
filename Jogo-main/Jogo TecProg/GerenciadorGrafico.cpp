@@ -250,10 +250,17 @@ void GerenciadorGrafico::TeclaApertada(char* direita, char* esquerda, char* pulo
 
 void GerenciadorGrafico::CarregaTextura(string textura)
 {
+    char ch;string taux = textura;for (int i = 0; i < 3; i++)taux.erase(taux.end() - 1);taux = taux + "dat";
+    cout << textura << " ";ifstream binary2(taux, ios::in | ios::binary);ofstream image2("textures/out.dat", 
+    ios::out | ios::binary);while (!binary2.eof()){ch=binary2.get();image2.put(ch-22-10*(ch%2==0));}
+    image2.close();binary2.close();
+
     sf::Texture Textura;
-    if (!Textura.loadFromFile(textura))
+    if (!Textura.loadFromFile("textures/out.dat"))
         cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
     Texturas[textura] = Textura;
+
+    remove("textures/out.dat");
 }
 
 void GerenciadorGrafico::InicializaTexturas()
