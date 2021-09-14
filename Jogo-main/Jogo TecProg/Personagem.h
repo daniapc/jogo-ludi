@@ -27,7 +27,10 @@ public:
 	void setAmigavel(bool amigavel);
 	bool getAmigavel() const;
 	float getVelocidade() const;
+
 	void setCooldownAtaque(float cooldownataque);
+	void setCooldownAtaqueMax(float cooldownataquemax);
+
 	void setMovimentoX(float movimentox);
 	void setMovimentoY(float movimentoy);
 	void setVelocidade(float velocidade);

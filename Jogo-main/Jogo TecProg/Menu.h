@@ -11,11 +11,10 @@ namespace Menus
 	class Menu : public Ente
 	{
 	protected:
-		int Indice, Tamanho, Id;
+		int Indice, Tamanho, *Ids, TamIds;
 
 		vector <Texto*> Textos;
 		Jogo* jogo;
-		Cenario PlanoFundo;
 
 	public:
 		Menu(Jogo* jg);
@@ -25,6 +24,7 @@ namespace Menus
 		void moverBaixo();
 		void desenhar();
 
+		void InicializaPlanoFundo();
 		void criaTexto(Texto* t, string mens, string cor, string font, float dim, float posx, float posy);
 	};
 }

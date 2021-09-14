@@ -103,7 +103,6 @@ void Quarto::atualiza(float deltaTempo)
 
 	if (ChefaoMorreu)
 	{
-		cout << "Sumonando porta." << endl;
 		ChefaoMorreu = false;
 		Porta* cabideiro = new Porta();
 		cabideiro->setGerenciadorGrafico(pGerenciadorGrafico);
@@ -222,6 +221,9 @@ void Quarto::recuperarChefao()
 		if (estadochefao == 0) {
 			novo->setDimensoes(COMPRIMENTO_CHEFAO / 10, ALTURA_CHEFAO / 10);
 			novo->setSubTextura("Bicho_Papao_7");
+		}
+		else if (estadochefao == 2) {
+			novo->setCooldownAtaqueMax(0.5f);
 		}
 	}
 

@@ -14,7 +14,6 @@ namespace Menus
 		~MenuPrincipal();
 
 		void LoopMenu(char tecla);
-		void InicializaPlanoFundo();
 	};
 }
 

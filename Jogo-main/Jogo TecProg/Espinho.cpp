@@ -27,7 +27,6 @@ void Espinho::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel() && this->podeDarDano())
 	{
-		cout << "Colidiu Espinho!" << endl;
 		personagem->setVida(personagem->getVida() - 1);
 		CooldownDano = 0.0f;
 		if (personagem->getVida() <= 0)

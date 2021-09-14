@@ -1,13 +1,15 @@
 #include "Menu.h"
 #include "Jogo.h"
 
-Menus::Menu::Menu(Jogo* jg): PlanoFundo()
+Menus::Menu::Menu(Jogo* jg)
 {
 	srand(time(NULL));
 	jogo = jg;
 	Indice = 0;
 	Tamanho = 0;
-	Id = rand() % 2;
+	TamIds = 0;
+	Ids = NULL;
+	//Id = 0;
 }
 
 Menus::Menu::~Menu()
@@ -51,7 +53,25 @@ void Menus::Menu::moverBaixo()
 
 void Menus::Menu::desenhar()
 {
-	pGerenciadorGrafico->desenhar(PlanoFundo.getId() + Id, false);
+	for (int i = 0; i < TamIds; i++)
+		pGerenciadorGrafico->desenhar(Ids[i], false);
 	for (int i = 0; i < Tamanho; i++) 
 		pGerenciadorGrafico->desenhar(*Textos[i]);
+}
+
+void Menus::Menu::InicializaPlanoFundo() {
+	Cenario* verde = new Cenario(); //id = 0
+	verde->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(static_cast<Entidade*>(verde), COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO,
+		COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2, "textures/Menu1.png");
+
+	Cenario* beje = new Cenario(); //id = 1
+	beje->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(static_cast<Entidade*>(beje), COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO,
+		COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2, "textures/Menu2.png");
+
+	Cenario* titulo = new Cenario(); //id = 2
+	titulo->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(static_cast<Entidade*>(titulo), COMPRIMENTO_RESOLUCAO/4, ALTURA_RESOLUCAO/4,
+		COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO * 2/8, "textures/Titulo1.png");
 }

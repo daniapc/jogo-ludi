@@ -35,13 +35,14 @@ void Fase::criaBordas()
 	Plataforma* chao = new Plataforma();
 	criaObstaculo(chao, COMPRIMENTO_CENARIO, ALTURA_PLATAFORMA,
 		COMPRIMENTO_CENARIO / 2, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA / 2,
-		"textures/Pseudo_Invisivel.png");
+		"textures/Bruxo_menu.png"); //Aproveitando apenas o espaço vazio 
+	chao->setSubTextura("Transparente");
 	Plataforma* esquerda = new Plataforma();
-	criaObstaculo(esquerda, COMPRIMENTO_PLATAFORMA, ALTURA_RESOLUCAO,
+	criaObstaculo(esquerda, COMPRIMENTO_PLATAFORMA, ALTURA_RESOLUCAO*2,
 		-COMPRIMENTO_PLATAFORMA / 2, ALTURA_RESOLUCAO / 2,
 		"");
 	Plataforma* direita = new Plataforma();
-	criaObstaculo(direita, COMPRIMENTO_PLATAFORMA, ALTURA_RESOLUCAO,
+	criaObstaculo(direita, COMPRIMENTO_PLATAFORMA, ALTURA_RESOLUCAO*2,
 		COMPRIMENTO_CENARIO + COMPRIMENTO_PLATAFORMA / 2, ALTURA_RESOLUCAO / 2,
 		"");
 }

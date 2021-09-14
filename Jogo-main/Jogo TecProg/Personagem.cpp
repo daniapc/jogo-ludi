@@ -53,6 +53,11 @@ void Personagem::setCooldownAtaque(float cooldownataque)
 	CooldownAtaque = cooldownataque;
 }
 
+void Personagem::setCooldownAtaqueMax(float cooldownataquemax)
+{
+	CooldownAtaqueMax = cooldownataquemax;
+}
+
 void Personagem::setOlhaDireita(bool olhardireita)
 {
 	olharDireita = olhardireita;

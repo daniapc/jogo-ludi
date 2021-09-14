@@ -9,6 +9,8 @@ class GerenciadorGrafico
 {
 private:
 
+	sf::RectangleShape Barra_Carregamento;
+
 	vector<sf::RectangleShape*> ListaCorpos;
 
 	map<string, sf::Texture> Texturas;

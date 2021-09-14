@@ -50,7 +50,7 @@ void Porta::colidir(Personagem* personagem)
 		}
 		else 
 		{
-			jogo->mensagemCreditos("Voce Venceu!");
+			jogo->mensagemCreditos("Venceu o jogo!");
 			jogo->setEstado(7);	
 			jogo->getQuarto().limparTudo();
 		}

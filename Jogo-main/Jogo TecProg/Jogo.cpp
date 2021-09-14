@@ -189,7 +189,6 @@ void Jogo::InicializaQuintal()
 
 void Jogo::InicializaQuarto()
 {
-    cout << "Apareceu?" << endl;
 
     if (!Multiplayer)
         Jogador2 = NULL;

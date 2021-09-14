@@ -38,7 +38,6 @@ void Fantasma::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel() && this->podeAtacar())
 	{
-		cout << "Colidiu Fantasma!" << endl;
 		personagem->setVida(personagem->getVida() - 1);
 		CooldownAtaque = 0.0f;
 		if (personagem->getVida() <= 0)

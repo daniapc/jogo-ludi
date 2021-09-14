@@ -2,14 +2,14 @@
 #include "Jogo.h"
 
 Menus::Creditos::Creditos(Jogo* jg) :
-	Menu(jg), Limite(2)
+	Menu(jg), Limite(1)
 {
-	MensagemFinal = "Voce Perdeu.";
+	MensagemFinal = "Perdeu o jogo.";
 
 	Texto* novo = new Texto();
 	novo->setCor("Vermelho");
 	novo->setDimensao(24);
-	novo->setMensagem("Salvar Pontuacao");
+	novo->setMensagem("Salvar Scoreboard");
 	novo->setPosicoes(COMPRIMENTO_RESOLUCAO * 3 / 4, 500);
 	novo->setFonte("KidsPlay");
 	Textos.push_back(novo);
@@ -28,7 +28,6 @@ Menus::Creditos::Creditos(Jogo* jg) :
 	criaTexto(novo, MensagemFinal, "Azul", "KidsPlay", 48, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
 	Textos.push_back(novo);
 	Tamanho++;
-
 }
 
 Menus::Creditos::~Creditos()
@@ -38,7 +37,7 @@ Menus::Creditos::~Creditos()
 void Menus::Creditos::setMensagemFinal(string mensagemfinal){
 	MensagemFinal = mensagemfinal;
 
-	criaTexto(Textos[2], MensagemFinal, "Azul", "Arial", 48, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
+	criaTexto(Textos[2], MensagemFinal, "Azul", "KidsPlay", 48, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
 }
 
 
@@ -60,7 +59,7 @@ void Menus::Creditos::LoopMenu(char tecla)
 				break;
 			case 1:
 				jogo->setEstado(0);
-				jogo->mensagemCreditos("Voce Perdeu.");
+				jogo->mensagemCreditos("Perdeu o jogo.");
 				break;
 			}
 		}

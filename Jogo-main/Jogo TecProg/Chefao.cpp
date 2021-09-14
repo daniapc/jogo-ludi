@@ -19,7 +19,6 @@ void Chefao::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel())
 	{
-		cout << "Colidiu chefao" << endl;
 		personagem->setVida(personagem->getVida()-1);
 	}
 }
@@ -150,7 +149,6 @@ void Chefao::atualizaEstado2(float deltaTempo)
 	if (this->podeAtacar())
 	{
 		this->atiraProjetilDirecionado(this, LADO_PROJETIL * 3);
-
 		CooldownAtaque = 0;
 	}
 
