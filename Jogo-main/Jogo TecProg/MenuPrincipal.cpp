@@ -7,10 +7,10 @@ Menu(jg)
 	TamIds = 2;
 	Ids = new int[TamIds];
 	Ids[0] = 0;
-	Ids[1] = 2;
+	Ids[1] = 3;
 
 	Texto* novo = new Texto();
-	criaTexto(novo, "Novo Jogo", "Vermelho", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 325);
+	criaTexto(novo, "Novo Jogo", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 325);
 	Textos.push_back(novo);
 	Tamanho++;
 
@@ -53,11 +53,13 @@ void Menus::MenuPrincipal::LoopMenu(char tecla)
 			case 1:
 				jogo->getQuintal().limparTudo();
 				jogo->getQuarto().limparTudo();
+				Indice = 0;
 				jogo->Recuperar();
 				break;
 			case 2:
 				jogo->getMenuColocacao().setEstadoAnterior(jogo->getEstado());
 				jogo->getMenuColocacao().setEditavel(false);
+				Indice = 0;
 				jogo->setEstado(3);
 				break;
 			case 3:

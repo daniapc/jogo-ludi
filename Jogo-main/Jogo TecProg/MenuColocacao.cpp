@@ -14,15 +14,11 @@ Menus::MenuColocacao::~MenuColocacao()
 
 void Menus::MenuColocacao::LoopMenu(char tecla)
 {
-	cout << "Indice: " << Indice << endl;
-	Textos[Indice]->setCor("Vermelho");
 
 	if (Digitando)
 	{
 			if (tecla == 13)
 			{
-				Textos[Indice]->setCor("Preto");
-				Textos[5]->setCor("Vermelho");
 				Indice = 5;
 				Digitando = false;
 				Nome.clear();
@@ -43,13 +39,11 @@ void Menus::MenuColocacao::LoopMenu(char tecla)
 				ss << jogo->getJogador1()->getPontuacao();
 
 				saux = ss.str() + " - " + Nome;
-				cout << ss.str() << endl;
 				Textos[Indice]->setMensagem(saux);
 			}
 	}
 	 
 	else {
-		cout << "Digitando = " << Digitando << endl;
 		if (tecla == 'w' || tecla == 'W')
 			if (Indice != Limite)
 				moverCima();
@@ -94,7 +88,6 @@ void Menus::MenuColocacao::LoopMenu(char tecla)
 						Textos[i]->setMensagem("0 - Vazio");
 					break;
 				case 7:
-					Textos[Indice]->setCor("Preto");
 					jogo->setEstado(EstadoAnterior);
 					break;
 				}
@@ -131,76 +124,48 @@ void Menus::MenuColocacao::Recupera()
 void Menus::MenuColocacao::Inicializa()
 {
 	Digitando = false;
+
+	TamIds = 1;
+	Ids = new int[TamIds];
+	Ids[0] = 1;
+
 	Texto* novo = new Texto();
-	novo->setCor("Azul");
-	novo->setDimensao(24);
-	novo->setMensagem("Pontuacao:");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 150);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Scoreboard", "Preto", "KidsPlay", 50, COMPRIMENTO_RESOLUCAO * 1 / 2, 125);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("0 - Vazio");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 200);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "0 - Vazio", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 200);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("0 - Vazio");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "0 - Vazio", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 250);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("0 - Vazio");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 300);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "0 - Vazio", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 300);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("0 - Vazio");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "0 - Vazio", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 350);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Salvar Scoreboard");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 500);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Salvar Scoreboard", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 500);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Apagar Tudo");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 550);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Apagar Tudo", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 550);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo = novo;
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Voltar");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 600);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Voltar", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 600);
 	Textos.push_back(novo);
 	Tamanho++;
 }

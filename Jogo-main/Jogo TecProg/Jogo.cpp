@@ -38,7 +38,6 @@ void Jogo::Inicializa()
     
     gerenciadorGrafico.CarregarJogo();
     menuPrincipal.InicializaPlanoFundo();
-
     menuColocacao.Recupera();
 
 }
@@ -67,7 +66,7 @@ void Jogo::MenusJogo(int estado, char tecla)
         menuColocacao.LoopMenu(tecla);
         break;
 
-    case 6:
+    case 6: //Menu Pause
         menuPause.LoopMenu(tecla);
         break;
 

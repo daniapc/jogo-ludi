@@ -32,7 +32,7 @@ public:
 	void atualizaView(float x, float y);
 	void fechar();
 
-	void desenhar(Texto texto);
+	void desenhar(Texto texto, int selecionado, int indice);
 	void desenhar(sf::Text texto);
 
 	void criaCorpo(Entidade* pentidade, float dimx, float dimy, float posx, float posy, string textura);

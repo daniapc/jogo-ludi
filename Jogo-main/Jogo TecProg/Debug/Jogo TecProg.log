@@ -1,2 +1,8 @@
-﻿  MenuPrincipal.cpp
+﻿  GerenciadorGrafico.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(144,44): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(172,27): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(183,27): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(192,22): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(177): warning C4715: 'GerenciadorGrafico::getDimensoesX': nem todos os caminhos de controle retornam um valor
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(188): warning C4715: 'GerenciadorGrafico::getDimensoesY': nem todos os caminhos de controle retornam um valor
   Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Jogo TecProg.exe

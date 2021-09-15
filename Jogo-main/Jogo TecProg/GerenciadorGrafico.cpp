@@ -3,7 +3,7 @@
 
 GerenciadorGrafico::GerenciadorGrafico() :
     Janela(sf::VideoMode(static_cast <unsigned int>(COMPRIMENTO_RESOLUCAO), static_cast <unsigned int>(ALTURA_RESOLUCAO)),
-        "Jogo", sf::Style::Fullscreen
+        "Jogo"//, sf::Style::Fullscreen
     ),
     View(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2), sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO))
 {
@@ -89,27 +89,14 @@ void GerenciadorGrafico::CarregarJogo()
         Creditos.setOrigin(sf::Vector2f(Creditos.getLocalBounds().width / 2.f, Creditos.getLocalBounds().height / 2.f));
         Creditos.setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO * 11 / 16+ 20.f));
 
-        /*
-        sf::Text Carregamento;
-        Carregamento.setFillColor(sf::Color::Black);
-        Carregamento.setFont(Fontes["KidsPlay"]);
-        Carregamento.setCharacterSize(20);
-        Carregamento.setString("Carregando Jogo...");
-        Carregamento.setOrigin(sf::Vector2f(Carregamento.getLocalBounds().width/2.f, Carregamento.getLocalBounds().height/ 2.f));
-        Carregamento.setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO * 13/ 16));        
-        */
-       
-
         for (int i = 0; i < 2; i++) {
             Janela.draw(Fundo_Carregamento);
             Janela.draw(Barra_Carregamento);
-           // Janela.draw(Carregamento);
             Janela.draw(Ludi);
             Janela.draw(Creditos);
             Janela.display();
         }
-
-        //InicializaTexturas();
+        InicializaTexturas();
         InicializaSubTexturas();
         InicializaCores();
 }
@@ -149,7 +136,7 @@ void GerenciadorGrafico::criaCorpo(Entidade* pentidade, float dimx, float dimy, 
 }
 
 
-void GerenciadorGrafico::desenhar(Texto texto)
+void GerenciadorGrafico::desenhar(Texto texto, int selecionado, int indice)
 {
     sf::Text taux;
 
@@ -157,10 +144,14 @@ void GerenciadorGrafico::desenhar(Texto texto)
     taux.setCharacterSize(texto.getDimensao());
     taux.setFont(Fontes[texto.getFonte()]);
     taux.setString(texto.getMensagem());
-    taux.setOrigin(sf::Vector2f(taux.getLocalBounds().width / 2.f, taux.getLocalBounds().height / 2.f));
+    taux.setOrigin(sf::Vector2f(taux.getLocalBounds().width/2.f, taux.getLocalBounds().height/2.f));
     taux.setPosition(sf::Vector2f(texto.getPosicaoX(), texto.getPosicaoY()));
 
     Janela.draw(taux);
+    if (selecionado == indice) {
+        ListaCorpos[2]->setPosition(sf::Vector2f(taux.getPosition().x + taux.getLocalBounds().width/2+50.f, taux.getPosition().y));
+        this->desenhar(2, false);
+    }
 }
 
 void GerenciadorGrafico::desenhar(sf::Text texto)
@@ -283,20 +274,16 @@ void GerenciadorGrafico::TeclaApertada(char* direita, char* esquerda, char* pulo
 
 void GerenciadorGrafico::CarregaTextura(string textura)
 {
-    
-    char ch;string taux = textura;for (int i = 0; i < 3; i++)taux.erase(taux.end() - 1);taux = taux + "dat";
-    cout << textura << " ";ifstream binary2(taux, ios::in | ios::binary);ofstream image2("textures/out.dat",
-    ios::out | ios::binary);while (!binary2.eof()){ch=binary2.get();image2.put(ch-22-10*(ch%2==0));}
-    image2.close();binary2.close();
-
+    string taux = textura;
+    for (int i = 0; i < 3; i++)
+        taux.erase(taux.end() - 1);
+    taux = taux + "dat";
+    cout << textura << " ";
     sf::Texture Textura;
-    if (!Textura.loadFromFile("textures/out.dat"))
+    if (!Textura.loadFromFile(taux))
         cerr << "Erro. Nao foi possivel carregar a textura de uma Entidade." << endl;
-    Texturas[textura] = Textura;
-
-    remove("textures/out.dat");    
-   
-    for (int i = 0; i < 48; i++) {
+    Texturas[textura] = Textura;   
+    for (int i = 0; i < 44; i++) {
         Barra_Carregamento.move(sf::Vector2f(1.f, 0.f));
         Janela.draw(Barra_Carregamento);
         Janela.display();
@@ -323,6 +310,7 @@ void GerenciadorGrafico::InicializaTexturas()
     CarregaTextura("textures/Quarto.png");
     CarregaTextura("textures/Fazendeira.png");
     CarregaTextura("textures/Bruxo.png");
+    CarregaTextura("textures/Selecao.png");
 }
 
 
@@ -396,8 +384,8 @@ void GerenciadorGrafico::InicializaSubTexturas()
     SubTexturas["textures/Inicio_Fim.png"] = sf::IntRect(0, 500, 520, 580); SubTexturas["Inicio_Fim_2"] = sf::IntRect(820, 110, 835, 1360); SubTexturas["Inicio_Fim_3"] = sf::IntRect(1950, 135, 225, 1300);
     SubTexturas["Inicio_Fim_4"] = sf::IntRect(2475, 135, 225, 1300); SubTexturas["Inicio_Fim_5"] = sf::IntRect(3000, 0, 620, 1580);
 
-    SubTexturas["textures/Quintal.png"] = sf::IntRect(0, 0, 3829, 1089);
-    SubTexturas["textures/Quarto.png"] = sf::IntRect(0, 0, 3959, 1093);
+    SubTexturas["textures/Quintal.png"] = sf::IntRect(0, 0, 3829, 1089); SubTexturas["Quintal_Menu"] = sf::IntRect(0, 0, 1914, 1089);
+    SubTexturas["textures/Quarto.png"] = sf::IntRect(0, 0, 3959, 1093); SubTexturas["Quarto_Menu"] = sf::IntRect(0, 0, 1979, 1093);
 
     SubTexturas["textures/Menu1.png"] = sf::IntRect(0, 0, 1627, 1000);
     SubTexturas["textures/Menu2.png"] = sf::IntRect(0, 0, 1627, 1000);

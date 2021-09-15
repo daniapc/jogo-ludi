@@ -36,13 +36,16 @@ void Menus::MenuPause::LoopMenu(char tecla)
 				break;
 			case 1:
 				jogo->Salvar();
+				criaTexto(Textos[1], "(Jogo salvo com sucesso)", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 250);
 				break;
 			case 2:
 				jogo->getMenuColocacao().setEstadoAnterior(6);
 				jogo->getMenuColocacao().setEditavel(true);
+				Indice = 0;
 				jogo->setEstado(3);
 				break;
 			case 3:
+				Indice = 0;
 				jogo->setEstado(0);
 				break;
 			case 4:
@@ -50,54 +53,40 @@ void Menus::MenuPause::LoopMenu(char tecla)
 				break;
 			}
 		}
+		if (jogo->getEstado() != 6) {
+			criaTexto(Textos[1], "Salvar jogo", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 250);
+		}
 	
 }
 
 void Menus::MenuPause::Inicializa()
 {
+	TamIds = 1;
+	Ids = new int[TamIds];
+	Ids[0] = 1;
+
 	Texto* novo = new Texto();
-	novo->setCor("Vermelho");
-	novo->setDimensao(24);
-	novo->setMensagem("Retomar");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 150);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Retomar", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 150);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Salvar jogo");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Salvar jogo", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 250);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Salvar pontuacao");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Salvar Scoreboard", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 350);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Voltar ao Menu Principal");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 450);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Voltar ao Menu Principal", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 450);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Sair do jogo");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 550);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Sair do jogo", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 550);
 	Textos.push_back(novo);
 	Tamanho++;
-	
 }

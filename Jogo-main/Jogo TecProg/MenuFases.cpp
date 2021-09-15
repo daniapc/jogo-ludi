@@ -4,31 +4,24 @@
 Menus::MenuFases::MenuFases(Jogo* jg):
 	Menu(jg)
 {
+	TamIds = 3;
+	Ids = new int[TamIds];
+	Ids[0] = 1;
+	Ids[1] = 6;
+	Ids[2] = 7;
+
 	Texto* novo = new Texto();
-	novo->setCor("Vermelho");
-	novo->setDimensao(24);
-	novo->setMensagem("Fase 1");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 250);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Fase 1 (Quintal)", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 5 / 16, 475);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo = novo;
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Fase 2");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 350);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Fase 2 (Quarto)", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 11 / 16, 475);
 	Textos.push_back(novo);
 	Tamanho++;
 
 	novo = new Texto();
-	novo->setCor("Preto");
-	novo->setDimensao(24);
-	novo->setMensagem("Voltar");
-	novo->setPosicoes(COMPRIMENTO_RESOLUCAO / 4, 450);
-	novo->setFonte("KidsPlay");
+	criaTexto(novo, "Voltar", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 600);
 	Textos.push_back(novo);
 	Tamanho++;
 }
@@ -40,9 +33,9 @@ Menus::MenuFases::~MenuFases()
 void Menus::MenuFases::LoopMenu(char tecla)
 {
 
-		if (tecla == 'w' || tecla == 'W')
+		if (tecla == 'w' || tecla == 'W' || tecla == 'a' || tecla == 'A')
 			moverCima();
-		if (tecla == 's' || tecla == 'S')
+		if (tecla == 's' || tecla == 'S' || tecla == 'd' || tecla == 'D')
 			moverBaixo();
 		if (tecla == 13)
 		{
@@ -63,11 +56,13 @@ void Menus::MenuFases::LoopMenu(char tecla)
 					jogo->getJogador2()->setFaseAtual(&jogo->getQuarto());
 				jogo->getJogador1()->setFaseAtual(&jogo->getQuarto());
 				jogo->InicializaQuarto();
+				Indice = 0;
 				jogo->setEstado(5);
 				break;
 			case 2:
 			{
 				jogo->setMultiplayer(false);
+				Indice = 0;
 				jogo->setEstado(1);
 				moverCima();
 				moverCima();

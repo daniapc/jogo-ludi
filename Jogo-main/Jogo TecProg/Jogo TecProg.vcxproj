@@ -215,9 +215,16 @@
     <ClInclude Include="Projetil.h" />
     <ClInclude Include="Quarto.h" />
     <ClInclude Include="Quintal.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Teia.h" />
     <ClInclude Include="Texto.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Jogo TecProg.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\Icone_Fazendeira.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
