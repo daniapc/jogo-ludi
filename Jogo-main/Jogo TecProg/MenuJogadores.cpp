@@ -27,17 +27,7 @@ void Menus::MenuJogadores::LoopMenu(char tecla)
 			switch (Indice)
 			{
 			case 0:
-				Textos[0]->setCor("Transparente");
-				Textos[1]->setCor("Transparente");
-				Textos[2]->setCor("Transparente");
-				Textos[3]->setCor("Preto");
-				Textos[4]->setCor("Preto");
-				Textos[5]->setCor("Preto");
-				Textos[6]->setCor("Preto");
-				TamIds = 3;
-				LimiteCima = 4;
-				LimiteBaixo = 6;
-				Indice = 4;
+				EstadoSelecionarJogador();
 				break;
 			case 1:
 				jogo->setMultiplayer(true);
@@ -54,26 +44,18 @@ void Menus::MenuJogadores::LoopMenu(char tecla)
 			break;
 			case 4:
 				jogo->setJogador1Fazendeira(true);
-				Indice = 4;
+				//Indice = 4;
+				EstadoMultiplayer();
 				jogo->setEstado(2);
 				break;
 			case 5:
 				jogo->setJogador1Fazendeira(false);
-				Indice = 4;
+				//Indice = 4;
+				EstadoMultiplayer();
 				jogo->setEstado(2);
 				break;
 			case 6:
-				Textos[0]->setCor("Preto");
-				Textos[1]->setCor("Preto");
-				Textos[2]->setCor("Preto");
-				Textos[3]->setCor("Transparente");
-				Textos[4]->setCor("Transparente");
-				Textos[5]->setCor("Transparente");
-				Textos[6]->setCor("Transparente");
-				TamIds = 1;
-				LimiteCima = 0;
-				LimiteBaixo = 2;
-				Indice = 0;
+				EstadoMultiplayer();
 				break;
 			}
 		}
@@ -124,4 +106,34 @@ void Menus::MenuJogadores::Inicializa() {
 	Textos.push_back(novo);
 	Tamanho++;
 
+}
+
+void Menus::MenuJogadores::EstadoMultiplayer()
+{
+	Textos[0]->setCor("Preto");
+	Textos[1]->setCor("Preto");
+	Textos[2]->setCor("Preto");
+	Textos[3]->setCor("Transparente");
+	Textos[4]->setCor("Transparente");
+	Textos[5]->setCor("Transparente");
+	Textos[6]->setCor("Transparente");
+	TamIds = 1;
+	LimiteCima = 0;
+	LimiteBaixo = 2;
+	Indice = 0;
+}
+
+void Menus::MenuJogadores::EstadoSelecionarJogador()
+{
+	Textos[0]->setCor("Transparente");
+	Textos[1]->setCor("Transparente");
+	Textos[2]->setCor("Transparente");
+	Textos[3]->setCor("Preto");
+	Textos[4]->setCor("Preto");
+	Textos[5]->setCor("Preto");
+	Textos[6]->setCor("Preto");
+	TamIds = 3;
+	LimiteCima = 4;
+	LimiteBaixo = 6;
+	Indice = 4;
 }

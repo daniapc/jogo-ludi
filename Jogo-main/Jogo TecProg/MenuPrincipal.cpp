@@ -46,6 +46,7 @@ void Menus::MenuPrincipal::LoopMenu(char tecla)
 			switch (Indice)
 			{
 			case 0:
+				jogo->setMultiplayer(false);
 				jogo->setEstado(1);
 				jogo->getQuintal().limparTudo();
 				jogo->getQuarto().limparTudo();

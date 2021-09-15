@@ -33,7 +33,7 @@ Menus::Creditos::~Creditos()
 void Menus::Creditos::setMensagemFinal(string mensagemfinal){
 	MensagemFinal = mensagemfinal;
 
-	criaTexto(Textos[2], MensagemFinal, "Preto", "KidsPlay", 48, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
+	criaTexto(Textos[2], MensagemFinal, "Preto", "KidsPlay", 100, COMPRIMENTO_RESOLUCAO * 1/ 4, 200);
 }
 
 

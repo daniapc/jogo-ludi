@@ -6,7 +6,7 @@ int Jogador::Pontuacao = 0;
 
 Jogador::Jogador() :
 	Personagem(),
-	podePular(true),
+	podePular(false),
 	alturaPulo(250.f)
 {
 	Amigavel = true;

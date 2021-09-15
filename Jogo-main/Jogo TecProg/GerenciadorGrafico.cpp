@@ -85,7 +85,7 @@ void GerenciadorGrafico::CarregarJogo()
         Creditos.setFillColor(sf::Color::Black);
         Creditos.setFont(Fontes["KidsPlay"]);
         Creditos.setCharacterSize(20);
-        Creditos.setString("Desenvolvido por Daniel Augusto Pires de Castro e Francisco Cardoso Becheli\n              Produzido artisticamente por Maira Pires de Castro");
+        Creditos.setString("Desenvolvido por Daniel Augusto Pires de Castro e Francisco Cardoso Becheli\n                 Arte feita por Martemis (Maira Pires de Castro)");
         Creditos.setOrigin(sf::Vector2f(Creditos.getLocalBounds().width / 2.f, Creditos.getLocalBounds().height / 2.f));
         Creditos.setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO * 11 / 16+ 20.f));
 
@@ -311,6 +311,7 @@ void GerenciadorGrafico::InicializaTexturas()
     CarregaTextura("textures/Fazendeira.png");
     CarregaTextura("textures/Bruxo.png");
     CarregaTextura("textures/Selecao.png");
+    cout << endl;
 }
 
 

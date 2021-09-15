@@ -38,11 +38,11 @@ void Porta::colidir(Personagem* personagem)
 		{
 			
 			jogo->getJogador1()->setFaseAtual(&jogo->getQuarto());
-			jogo->getJogador1()->setPosicao(200.f, 200.f);
+			jogo->getJogador1()->setPosicao(100.f, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA - ALTURA_JOGADOR/2);
 			if (jogo->getMultiplayer())
 			{
 				jogo->getJogador2()->setFaseAtual(&jogo->getQuarto());
-				jogo->getJogador2()->setPosicao(200.f, 200.f);
+				jogo->getJogador2()->setPosicao(100.f, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA - ALTURA_JOGADOR / 2);
 			}
 
 			jogo->setEstado(5);

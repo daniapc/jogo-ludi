@@ -17,6 +17,9 @@ namespace Menus
 
 		void LoopMenu(char tecla);
 		void Inicializa();
+
+		void EstadoMultiplayer();
+		void EstadoSelecionarJogador();
 	};
 }
 

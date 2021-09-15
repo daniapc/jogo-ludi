@@ -193,7 +193,6 @@ void Jogo::InicializaQuarto()
         Jogador2 = NULL;
 
     Fase_Quarto.setGerenciadorGrafico(&gerenciadorGrafico);
-
     Fase_Quarto.setJogador1(Jogador1);
     Fase_Quarto.setJogador2(Jogador2);
     Fase_Quarto.setJogo(this);
@@ -205,7 +204,7 @@ void Jogo::InicializaJogadores()
     Jogador1 = new Jogador();
     Jogador1->setGerenciadorGrafico(&gerenciadorGrafico);
     Jogador1->setTexturas(Jogador1Fazendeira);
-    gerenciadorGrafico.criaCorpo(Jogador1, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, 
+    gerenciadorGrafico.criaCorpo(Jogador1, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 100.f, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA - ALTURA_JOGADOR / 2,
         Jogador1->getTextura());
     Jogador1->setTeclas('D', 'A', 'W', ' ');
 
@@ -214,7 +213,7 @@ void Jogo::InicializaJogadores()
         Jogador2 = new Jogador();
         Jogador2->setGerenciadorGrafico(&gerenciadorGrafico);
         Jogador2->setTexturas(!Jogador1Fazendeira);
-        gerenciadorGrafico.criaCorpo(Jogador2, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 640.f, 320.f, 
+        gerenciadorGrafico.criaCorpo(Jogador2, COMPRIMENTO_JOGADOR, ALTURA_JOGADOR, 50.f, ALTURA_RESOLUCAO - ALTURA_PLATAFORMA - ALTURA_JOGADOR / 2,
             Jogador2->getTextura());
         Jogador2->setTeclas('R', 'L','U', 'E');
     }
