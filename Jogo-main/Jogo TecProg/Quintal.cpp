@@ -26,6 +26,18 @@ void Quintal::inicializa()
 		COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO / 2, "textures/Quintal.png");
 	listaEntidades.inclua(static_cast <Entidade*> (&Background));
 
+	Cenario* placa = new Cenario();
+	placa->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(placa, 104.f, 116.f, 200.f, ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f / 2), "textures/Inicio_Fim.png");
+	placa->setSubTextura("textures/Inicio_Fim.png");
+	listaEntidades.inclua(static_cast <Entidade*> (placa));
+
+	Cenario* telhado = new Cenario();
+	telhado->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(telhado, 167.f, 272.f, COMPRIMENTO_CENARIO - 167.f / 2 + 3.f, 360.f, "textures/Inicio_Fim.png");
+	telhado->setSubTextura("Inicio_Fim_2");
+	listaEntidades.inclua(static_cast <Entidade*> (telhado));
+
 	criaPlataformas();
 
 	for (int i = 0; i < rand() % 6 + 3; i++)
@@ -48,17 +60,6 @@ void Quintal::inicializa()
 
 	for (int i = 0; i < rand() % 4 + 3; i++)
 	{
-		Passaro* passaro = new Passaro();
-		passaro->setFaseAtual(this);
-		criaInimigo(static_cast<Personagem*>(passaro),  COMPRIMENTO_PASSARO, ALTURA_PASSARO ,
-			 rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
-				rand() % static_cast<int>(ALTURA_RESOLUCAO / 2) + ALTURA_PASSARO / 2 ,
-			"textures/Passaro.png");
-		passaro->setLimites(passaro->getPosicaoX() , passaro->getPosicaoX() + 300.f);
-	}
-
-	for (int i = 0; i < rand() % 4 + 3; i++)
-	{
 		Estatico* estatico = new Estatico();
 		criaInimigo(static_cast<Personagem*>(estatico),  COMPRIMENTO_ESTATICO, ALTURA_ESTATICO ,
 			 rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
@@ -67,9 +68,20 @@ void Quintal::inicializa()
 		estatico->setTexturas(true);
 	}
 
-	
+	for (int i = 0; i < rand() % 4 + 3; i++)
+	{
+		Passaro* passaro = new Passaro();
+		passaro->setFaseAtual(this);
+		criaInimigo(static_cast<Personagem*>(passaro), COMPRIMENTO_PASSARO, ALTURA_PASSARO,
+			rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
+			rand() % static_cast<int>(ALTURA_RESOLUCAO / 2) + ALTURA_PASSARO / 2,
+			"textures/Passaro.png");
+		passaro->setLimites(passaro->getPosicaoX(), passaro->getPosicaoX() + 300.f);
+		passaro->setPosicao(passaro->getPosicaoX() + rand() % 300, passaro->getPosicaoY());
+	}
+
 	porta.setGerenciadorGrafico(pGerenciadorGrafico);
-	pGerenciadorGrafico->criaCorpo(&porta, 37.5f, 225.f, COMPRIMENTO_CENARIO - 37.5f/2,
+	pGerenciadorGrafico->criaCorpo(&porta, 37.5f, 225.f, COMPRIMENTO_CENARIO - 37.5f/2 + 3.f,
 		ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f/2), "textures/Inicio_Fim.png");
 	porta.setSubTextura("Inicio_Fim_3");
 	porta.setJogo(pJogo);
@@ -89,9 +101,6 @@ void Quintal::atualiza(float deltaTempo)
 {
 	listaPersonagens.limpar();
 	listaEntidades.limpar();
-
-	if (getJogador1() == NULL)
-		cout << "Jogador1 nula" << endl;
 
 	atualizaView();
 
@@ -121,21 +130,31 @@ void Quintal::criaPlataforma(float posx, float posy, string subtextura)
 void Quintal::criaPlataformas()
 {
 	criaBordas();
-	for (int i = 0; i < 10; i++) {
+
+	criaPlataforma(900.f + COMPRIMENTO_PLATAFORMA * 0, 337.5f, "Plataforma_Quintal_4");
+	for (int i = 1; i < 9; i++)
 		criaPlataforma(900.f + COMPRIMENTO_PLATAFORMA * i, 337.5f, "Plataforma_Quintal_2");
-	}
-	for (int i = 0; i < 10; i++) {
-		criaPlataforma(1500.f + COMPRIMENTO_PLATAFORMA * i, 337.5f, "textures/Plataforma_Quintal.png");
-	}
-	for (int i = 0; i < 10; i++) {
-		criaPlataforma(500.f + COMPRIMENTO_PLATAFORMA * i, 517.5f, "Plataforma_Quintal_3");
-	}
-	for (int i = 0; i < 10; i++) {
-		criaPlataforma(1800.f + COMPRIMENTO_PLATAFORMA * i, 157.5f, "Plataforma_Quintal_5");
-	}
-	for (int i = 0; i < 5; i++) {
-		criaPlataforma(2000.f + COMPRIMENTO_PLATAFORMA * i, 517.5f, "Plataforma_Quintal_4");
-	}
+	criaPlataforma(900.f + COMPRIMENTO_PLATAFORMA * 9, 337.5f, "Plataforma_Quintal_3");
+
+	criaPlataforma(1500.f + COMPRIMENTO_PLATAFORMA * 0, 337.5f, "textures/Plataforma_Quintal.png");
+	for (int i = 1; i < 9; i++)
+		criaPlataforma(1500.f + COMPRIMENTO_PLATAFORMA * i, 337.5f, "Plataforma_Quintal_2");
+	criaPlataforma(1500.f + COMPRIMENTO_PLATAFORMA * 9, 337.5f, "Plataforma_Quintal_5");
+
+	criaPlataforma(500.f + COMPRIMENTO_PLATAFORMA * 0, 517.5f, "textures/Plataforma_Quintal.png");
+	for (int i = 1; i < 9; i++) 
+		criaPlataforma(500.f + COMPRIMENTO_PLATAFORMA * i, 517.5f, "Plataforma_Quintal_2");
+	criaPlataforma(500.f + COMPRIMENTO_PLATAFORMA * 9, 517.5f, "Plataforma_Quintal_5");
+
+	criaPlataforma(1800.f + COMPRIMENTO_PLATAFORMA * 0, 157.5f, "Plataforma_Quintal_4");
+	for (int i = 1; i < 9; i++) 
+		criaPlataforma(1800.f + COMPRIMENTO_PLATAFORMA * i, 157.5f, "Plataforma_Quintal_2");
+	criaPlataforma(1800.f + COMPRIMENTO_PLATAFORMA * 9, 157.5f, "Plataforma_Quintal_3");
+
+	criaPlataforma(2000.f + COMPRIMENTO_PLATAFORMA * 0, 517.5f, "textures/Plataforma_Quintal.png");
+	for (int i = 1; i < 4; i++) 
+		criaPlataforma(2000.f + COMPRIMENTO_PLATAFORMA * i, 517.5f, "Plataforma_Quintal_2");
+	criaPlataforma(2000.f + COMPRIMENTO_PLATAFORMA * 4, 517.5f, "Plataforma_Quintal_5");
 }
 
 void Quintal::recuperar()
@@ -185,13 +204,14 @@ void Quintal::recuperarPassaros()
 	if (!recuperadorPassaros)
 		cout << "Erro Passaros." << endl;
 
+	int vida;
+	float posx, posy, limxdir, limxesq, cooldown;
+
+	recuperadorPassaros >> vida >> posx >> posy >> limxdir >> limxesq >> cooldown;
+
 	while (!recuperadorPassaros.eof())
 	{
 		Passaro* novo = NULL;
-		int vida;
-		float posx, posy, limxdir, limxesq, cooldown;
-
-		recuperadorPassaros >> vida >> posx >> posy >> limxdir >> limxesq >> cooldown;
 
 		novo = new Passaro();
 		novo->setVida(vida);
@@ -201,6 +221,8 @@ void Quintal::recuperarPassaros()
 
 		criaInimigo(static_cast <Personagem*> (novo),  COMPRIMENTO_PASSARO, ALTURA_PASSARO ,
 			 posx, posy , "textures/Passaro.png");
+
+		recuperadorPassaros >> vida >> posx >> posy >> limxdir >> limxesq >> cooldown;
 	}
 
 	recuperadorPassaros.close();

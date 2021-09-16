@@ -46,6 +46,7 @@ void Menus::MenuPause::LoopMenu(char tecla)
 				break;
 			case 3:
 				Indice = 0;
+				pGerenciadorGrafico->tocarMusica("Menu_e_Quintal");
 				jogo->setEstado(0);
 				break;
 			case 4:

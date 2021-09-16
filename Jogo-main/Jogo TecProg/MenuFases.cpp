@@ -55,6 +55,7 @@ void Menus::MenuFases::LoopMenu(char tecla)
 				if (jogo->getMultiplayer())
 					jogo->getJogador2()->setFaseAtual(&jogo->getQuarto());
 				jogo->getJogador1()->setFaseAtual(&jogo->getQuarto());
+				pGerenciadorGrafico->tocarMusica("Quarto");
 				jogo->InicializaQuarto();
 				Indice = 0;
 				jogo->setEstado(5);

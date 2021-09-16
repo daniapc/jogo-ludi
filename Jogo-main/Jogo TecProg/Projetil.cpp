@@ -31,7 +31,7 @@ void Projetil::colidir(Personagem* personagem)
 			{
 				if (faseAtual != NULL) {
 					faseAtual->getJogador1()->incrementaPontuacao();
-					cout << faseAtual->getJogador1()->getPontuacao() << endl;
+					cout << "Pontuação: "<< faseAtual->getJogador1()->getPontuacao() << endl;
 				}
 			}
 		}

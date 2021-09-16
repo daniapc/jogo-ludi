@@ -38,8 +38,7 @@ void Menus::MenuJogadores::LoopMenu(char tecla)
 			{
 				Indice = 0;
 				jogo->setEstado(0);
-				moverCima();
-				moverCima();
+				pGerenciadorGrafico->tocarMusica("Menu_e_Quintal");
 			}
 			break;
 			case 4:

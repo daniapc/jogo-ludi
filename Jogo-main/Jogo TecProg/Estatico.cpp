@@ -2,12 +2,12 @@
 
 Estatico::Estatico():
 	Inimigo(),
-	CooldownInvencibilidadeMax(4.0f),
-	CooldownInvencibilidade(0.0f)
+	CooldownInvencibilidadeMax(4.0f)
 {
 	CooldownAtaqueMax = 1.0f;
 	this->setVida(4);
 	this->setVelocidade(100.f);
+	CooldownInvencibilidade = (float)(rand() % 40) / 10;
 }
 
 Estatico::~Estatico()

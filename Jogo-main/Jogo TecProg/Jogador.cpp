@@ -76,6 +76,7 @@ void Jogador::atualiza(float deltaTempo)
 	{
 		Desalocavel = false;
 		faseAtual->getJogo()->setEstado(7);
+		pGerenciadorGrafico->tocarMusica("Creditos");
 	}
 
 	MovimentoX = 0.f;

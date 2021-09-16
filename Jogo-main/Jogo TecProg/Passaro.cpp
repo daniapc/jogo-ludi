@@ -11,7 +11,8 @@ Passaro::Passaro():
 	this->setVelocidade(200.f);
 	this->setTexturaProjetil("Projeteis_5", "Projeteis_6");
 	CooldownAnimacaoMax = 0.25f;
-	CooldownAnimacao = 0.f;
+	CooldownAnimacao = (float)(rand()%25)/100;
+	CooldownAtaque = (float)(rand() % 35) / 10;
 }
 
 Passaro::~Passaro()

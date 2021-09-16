@@ -24,6 +24,7 @@
     <ProjectGuid>{4af9c32e-4adb-46a7-9697-9ee4ab6b868e}</ProjectGuid>
     <RootNamespace>JogoTecProg</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Ludi</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

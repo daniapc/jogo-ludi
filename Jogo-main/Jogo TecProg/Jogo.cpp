@@ -39,7 +39,7 @@ void Jogo::Inicializa()
     gerenciadorGrafico.CarregarJogo();
     menuPrincipal.InicializaPlanoFundo();
     menuColocacao.Recupera();
-
+    gerenciadorGrafico.tocarMusica("Menu_e_Quintal");
 }
 
 void Jogo::LoopJogo()
@@ -268,6 +268,7 @@ void Jogo::Recuperar()
     {
         Fase_Quarto.setJogo(this);
         Fase_Quarto.recuperar();
+        gerenciadorGrafico.tocarMusica("Quarto");
         Estado = estado;
     }
     for (int i = 0; i < pontos / 10; i++) 
@@ -308,8 +309,8 @@ void Jogo::LimparArquivos()
     deletarTeias.close();
     ofstream deletarProjeteis("saves/Projeteis.dat", ios::out);
     deletarProjeteis.close();
-    ofstream deletarPorta("saves/Porta.dat", ios::out);
-    deletarPorta.close();
+    //ofstream deletarPorta("saves/Porta.dat", ios::out);
+    //deletarPorta.close();
 }
 
 void Jogo::setEstadoAtual(int estado)

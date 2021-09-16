@@ -46,7 +46,7 @@ public:
 	void incluaProjetil(Projetil* projetil);
 	void salvar();
 
-	void recuperarProjeteis(Fase* fase, const string textura = "");
+	void recuperarProjeteis(Fase* fase);
 	void recuperarEstaticos(bool Quintal, const string textura = "");
 	void recuperarEspinhos(const string textura = "");
 	void recuperarTeias();

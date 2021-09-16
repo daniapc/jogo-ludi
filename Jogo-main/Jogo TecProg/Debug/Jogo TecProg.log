@@ -1,3 +1,24 @@
-﻿  Jogo.cpp
-C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Jogo.cpp(330,10): warning C4101: 'jogador1fazendeira': variável local não referenciada
-  Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Jogo TecProg.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: O diretório intermediário (Debug\) contém arquivos compartilhados de outro projeto (Jogo TecProg.vcxproj). Isso pode levar a um comportamento incorreto de limpeza e recompilação.
+  Creditos.cpp
+  GerenciadorGrafico.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(143,44): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(171,27): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(182,27): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(191,22): warning C4018: '>=': incompatibilidade de signed/unsigned
+  Quarto.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quarto.cpp(16,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quarto.cpp(34,59): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quarto.cpp(44,59): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quarto.cpp(54,60): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quarto.cpp(64,59): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quarto.cpp(224,19): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+  Quintal.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quintal.cpp(17,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quintal.cpp(47,60): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quintal.cpp(55,60): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quintal.cpp(65,60): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quintal.cpp(76,59): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+  Gerando Código...
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(187): warning C4715: 'GerenciadorGrafico::getDimensoesY': nem todos os caminhos de controle retornam um valor
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(176): warning C4715: 'GerenciadorGrafico::getDimensoesX': nem todos os caminhos de controle retornam um valor
+  Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Ludi.exe

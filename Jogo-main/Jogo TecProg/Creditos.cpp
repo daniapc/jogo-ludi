@@ -24,6 +24,17 @@ Menus::Creditos::Creditos(Jogo* jg) :
 	criaTexto(novo, MensagemFinal, "Preto", "KidsPlay", 100, COMPRIMENTO_RESOLUCAO * 3/8, 200);
 	Textos.push_back(novo);
 	Tamanho++;
+
+	string MensagemCreditos;
+	MensagemCreditos = "\n           Desenvolvimento:\n  Daniel Augusto Pires de Castro\n";
+	MensagemCreditos += "     Francisco Cardoso Becheli\n\n           Arte e texturas:\nMartemis (Maira Pires de Castro)\n";
+	MensagemCreditos += "\n       Trilha-sonora:\nMilena Lais Garcia de Lima\n";
+	MensagemCreditos += "\n      Agradecimentos Especiais:\nProfessor Jean Marcelo Simao\nColegas e amigos do Drole\nMonitores";
+
+	novo = new Texto();
+	criaTexto(novo, MensagemCreditos, "Preto", "KidsPlay", 20, COMPRIMENTO_RESOLUCAO * 3 / 8, 400);
+	Textos.push_back(novo);
+	Tamanho++;
 }
 
 Menus::Creditos::~Creditos()
@@ -56,6 +67,7 @@ void Menus::Creditos::LoopMenu(char tecla)
 			case 1:
 				Indice = 0;
 				jogo->setEstado(0);
+				pGerenciadorGrafico->tocarMusica("Menu_e_Quintal");
 				jogo->mensagemCreditos("Perdeu o jogo.");
 				break;
 			}

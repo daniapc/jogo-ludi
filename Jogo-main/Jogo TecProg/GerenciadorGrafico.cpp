@@ -3,13 +3,11 @@
 
 GerenciadorGrafico::GerenciadorGrafico() :
     Janela(sf::VideoMode(static_cast <unsigned int>(COMPRIMENTO_RESOLUCAO), static_cast <unsigned int>(ALTURA_RESOLUCAO)),
-        "Jogo"//, sf::Style::Fullscreen
+        "Ludi"//, sf::Style::Fullscreen
     ),
     View(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2), sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO))
 {
     Janela.setView(View);
-
-
 }
 
 void GerenciadorGrafico::LoopJogo(Jogo* jogo, int estado)
@@ -97,6 +95,7 @@ void GerenciadorGrafico::CarregarJogo()
             Janela.display();
         }
         InicializaTexturas();
+        InicializaMusicas();
         InicializaSubTexturas();
         InicializaCores();
 }
@@ -225,6 +224,16 @@ void GerenciadorGrafico::fechar()
     Janela.close();
 }
 
+void GerenciadorGrafico::tocarMusica(string musica)
+{
+    std::map<string, sf::Music*>::iterator itr;
+    for (itr = Musicas.begin(); itr != Musicas.end(); itr++)
+        itr->second->stop();
+        
+    Musicas[musica]->play();
+    Musicas[musica]->setLoop(true);
+}
+
 void GerenciadorGrafico::movimenta(int id, float x, float y)
 {
 
@@ -318,14 +327,30 @@ void GerenciadorGrafico::InicializaTexturas()
 void GerenciadorGrafico::InicializaFontes()
 {
     sf::Font *Fonte = new sf::Font();
-    if (!Fonte->loadFromFile("arial.ttf"))
+    if (!Fonte->loadFromFile("fonts/arial.ttf"))
         cout << "Erro ao carregar fonte." << endl;
     Fontes["Arial"] = *Fonte;
     Fonte = new sf::Font();
-    if (!Fonte->loadFromFile("KidsPlay.ttf"))
+    if (!Fonte->loadFromFile("fonts/KidsPlay.ttf"))
         cout << "Erro ao carregar fonte." << endl;
     Fontes["KidsPlay"] = *Fonte;
 
+}
+
+void GerenciadorGrafico::InicializaMusicas()
+{
+    sf::Music *Musica = new sf::Music();
+    if (!Musica->openFromFile("musics/Menu_e_Quintal.ogg"))
+        cout << "Erro ao carregar musica." << endl;
+    Musicas["Menu_e_Quintal"] = Musica;
+    Musica = new sf::Music();
+    if (!Musica->openFromFile("musics/Quarto.ogg"))
+        cout << "Erro ao carregar musica." << endl;
+    Musicas["Quarto"] = Musica;
+    Musica = new sf::Music();
+    if (!Musica->openFromFile("musics/Creditos.ogg"))
+        cout << "Erro ao carregar musica." << endl;
+    Musicas["Creditos"] = Musica;
 }
 
 void GerenciadorGrafico::InicializaCores()
@@ -367,7 +392,7 @@ void GerenciadorGrafico::InicializaSubTexturas()
     SubTexturas["textures/Teia.png"] = sf::IntRect(25, 15, 430, 450); SubTexturas["Teia_2"] = sf::IntRect(640, 15, 430, 450);
 
     SubTexturas["Espinhos_Galhos_2"] = sf::IntRect(0, 0, 760, 475); SubTexturas["textures/Espinhos_Galhos.png"] = sf::IntRect(870, 0, 760, 475);
-    SubTexturas["Espinhos_Materiais_2"] = sf::IntRect(0, 0, 760, 475); SubTexturas["textures/Espinhos_Materiais.png"] = sf::IntRect(770, 0, 760, 475);
+    SubTexturas["Espinhos_Materiais_2"] = sf::IntRect(0, 0, 760, 475); SubTexturas["textures/Espinhos_Materiais.png"] = sf::IntRect(890, 0, 760, 475);
 
     SubTexturas["textures/Passaro.png"] = sf::IntRect(0, 0, 630, 525); SubTexturas["Passaro_2"] = sf::IntRect(750,  0, 630, 525);
     SubTexturas["Passaro_3"] = sf::IntRect(1475, 0, 630, 525); SubTexturas["Passaro_4"] = sf::IntRect(2220,  0, 630, 525);
@@ -383,7 +408,7 @@ void GerenciadorGrafico::InicializaSubTexturas()
     SubTexturas["Projeteis_7"] = sf::IntRect(1101, 0, 100, 134); SubTexturas["Projeteis_8"] = sf::IntRect(1240, 0, 140, 134); SubTexturas["Projeteis_9"] = sf::IntRect(1390, 0, 140, 134);
 
     SubTexturas["textures/Inicio_Fim.png"] = sf::IntRect(0, 500, 520, 580); SubTexturas["Inicio_Fim_2"] = sf::IntRect(820, 110, 835, 1360); SubTexturas["Inicio_Fim_3"] = sf::IntRect(1950, 135, 225, 1300);
-    SubTexturas["Inicio_Fim_4"] = sf::IntRect(2475, 135, 225, 1300); SubTexturas["Inicio_Fim_5"] = sf::IntRect(3000, 0, 620, 1580);
+    SubTexturas["Inicio_Fim_4"] = sf::IntRect(2475, 135, 225, 1300); SubTexturas["Inicio_Fim_5"] = sf::IntRect(3000, 0, 620, 1580); 
 
     SubTexturas["textures/Quintal.png"] = sf::IntRect(0, 0, 3829, 1089); SubTexturas["Quintal_Menu"] = sf::IntRect(0, 0, 1914, 1089);
     SubTexturas["textures/Quarto.png"] = sf::IntRect(0, 0, 3959, 1093); SubTexturas["Quarto_Menu"] = sf::IntRect(0, 0, 1979, 1093);

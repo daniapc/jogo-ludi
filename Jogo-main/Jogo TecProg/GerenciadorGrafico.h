@@ -17,6 +17,7 @@ private:
 	map<string, sf::IntRect> SubTexturas;
 	map<string, sf::Font> Fontes;
 	map<string, sf::Color> Cores;
+	map<string, sf::Music*> Musicas;
 
 	sf::RenderWindow Janela;
 	sf::View View;
@@ -31,6 +32,8 @@ public:
 	void resetaView();
 	void atualizaView(float x, float y);
 	void fechar();
+
+	void tocarMusica(string musica);
 
 	void desenhar(Texto texto, int selecionado, int indice);
 	void desenhar(sf::Text texto);
@@ -56,6 +59,7 @@ public:
 	void InicializaSubTexturas();
 	void InicializaFontes();
 	void InicializaCores();
+	void InicializaMusicas();
 };
 
 

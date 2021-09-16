@@ -101,33 +101,36 @@ void Fase::salvar()
 	listaEntidades.salvar();
 }
 
-void Fase::recuperarProjeteis(Fase* fase, const string textura)
+void Fase::recuperarProjeteis(Fase* fase)
 {
 	ifstream recuperadorProjeteis("saves/Projeteis.dat", ios::in);
 
 	if (!recuperadorProjeteis)
 		cout << "Erro Projeteis." << endl;
 
+	float posx, posy, velx, vely, lado;
+	bool amigavel;
+	string textura;
+
+	recuperadorProjeteis >> posx >> posy >> velx >> vely >> amigavel >> textura >> lado;
+
 	while (!recuperadorProjeteis.eof())
 	{
 		Projetil* novo = NULL;
-		float posx, posy, velx, vely, lado;
-		bool amigavel;
-		string textura;
-
-		recuperadorProjeteis >> posx >> posy >> velx >> vely >> amigavel >> textura >> lado;
 
 		novo = new Projetil();
 
 		novo->setGerenciadorGrafico(pGerenciadorGrafico);
 		pGerenciadorGrafico->criaCorpo(novo, lado, lado, posx, posy, "textures/Projeteis.png");
+		novo->setTextura(textura);
 		novo->setSubTextura(textura);
 		novo->setVelocidade(velx, vely);
 		novo->setAmigavel(amigavel);
 		novo->setFaseAtual(fase);
 
+		recuperadorProjeteis >> posx >> posy >> velx >> vely >> amigavel >> textura >> lado;
+
 		incluaProjetil(novo);
-		
 	}
 
 	recuperadorProjeteis.close();
@@ -140,13 +143,14 @@ void Fase::recuperarEstaticos(bool Quintal, const string textura)
 	if (!recuperadorEstaticos)
 		cout << "Erro Estaticos." << endl;
 
+	int vida;
+	float posx, posy, cooldown;
+
+	recuperadorEstaticos >> vida >> posx >> posy >> cooldown;
+
 	while (!recuperadorEstaticos.eof())
 	{
 		Estatico* novo = NULL;
-		int vida;
-		float posx, posy, cooldown;
-
-		recuperadorEstaticos >> vida >> posx >> posy >> cooldown;
 
 		novo = new Estatico();
 
@@ -155,6 +159,8 @@ void Fase::recuperarEstaticos(bool Quintal, const string textura)
 		criaInimigo(static_cast <Personagem*> (novo), COMPRIMENTO_ESTATICO, ALTURA_ESTATICO ,
 			 posx, posy , textura);
 		novo->setTexturas(Quintal);
+
+		recuperadorEstaticos >> vida >> posx >> posy >> cooldown;
 	}
 
 	recuperadorEstaticos.close();
@@ -167,17 +173,20 @@ void Fase::recuperarEspinhos(const string textura)
 	if (!recuperadorEspinhos)
 		cout << "Erro Espinhos." << endl;
 
+	float posx, posy;
+
+	recuperadorEspinhos >> posx >> posy;
+
 	while (!recuperadorEspinhos.eof())
 	{
 		Espinho* novo = NULL;
-		float posx, posy;
-
-		recuperadorEspinhos >> posx >> posy;
 
 		novo = new Espinho();
 
 		criaObstaculo(static_cast <Entidade*>(novo),  COMPRIMENTO_ESPINHO, ALTURA_ESPINHO ,
 			 posx, posy , textura);
+
+		recuperadorEspinhos >> posx >> posy;
 	}
 
 	recuperadorEspinhos.close();
@@ -190,17 +199,20 @@ void Fase::recuperarTeias()
 	if (!recuperadorTeias)
 		cout << "Erro Teias." << endl;
 
+	float posx, posy;
+
+	recuperadorTeias >> posx >> posy;
+
 	while (!recuperadorTeias.eof())
 	{
 		Teia* novo = NULL;
-		float posx, posy;
-
-		recuperadorTeias >> posx >> posy;
 
 		novo = new Teia();
 
 		criaObstaculo(static_cast <Entidade*>(novo),  COMPRIMENTO_TEIA, ALTURA_TEIA ,
 			 posx, posy , "textures/Teia.png");
+
+		recuperadorTeias >> posx >> posy;
 	}
 
 	recuperadorTeias.close();
