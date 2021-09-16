@@ -43,13 +43,11 @@ void Menus::MenuJogadores::LoopMenu(char tecla)
 			break;
 			case 4:
 				jogo->setJogador1Fazendeira(true);
-				//Indice = 4;
 				EstadoMultiplayer();
 				jogo->setEstado(2);
 				break;
 			case 5:
 				jogo->setJogador1Fazendeira(false);
-				//Indice = 4;
 				EstadoMultiplayer();
 				jogo->setEstado(2);
 				break;

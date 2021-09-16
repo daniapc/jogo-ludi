@@ -3,7 +3,7 @@
 
 GerenciadorGrafico::GerenciadorGrafico() :
     Janela(sf::VideoMode(static_cast <unsigned int>(COMPRIMENTO_RESOLUCAO), static_cast <unsigned int>(ALTURA_RESOLUCAO)),
-        "Ludi"//, sf::Style::Fullscreen
+        "Ludi", sf::Style::Fullscreen
     ),
     View(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO / 2), sf::Vector2f(COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO))
 {
@@ -87,11 +87,20 @@ void GerenciadorGrafico::CarregarJogo()
         Creditos.setOrigin(sf::Vector2f(Creditos.getLocalBounds().width / 2.f, Creditos.getLocalBounds().height / 2.f));
         Creditos.setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO / 2, ALTURA_RESOLUCAO * 11 / 16+ 20.f));
 
+        sf::Text Beta;
+        Beta.setFillColor(sf::Color::Black);
+        Beta.setFont(Fontes["KidsPlay"]);
+        Beta.setCharacterSize(18);
+        Beta.setString("(beta)");
+        Beta.setOrigin(sf::Vector2f(Beta.getLocalBounds().width / 2.f, Beta.getLocalBounds().height / 2.f));
+        Beta.setPosition(sf::Vector2f(COMPRIMENTO_RESOLUCAO*11/16, ALTURA_RESOLUCAO * 10 / 16));
+
         for (int i = 0; i < 2; i++) {
             Janela.draw(Fundo_Carregamento);
             Janela.draw(Barra_Carregamento);
             Janela.draw(Ludi);
             Janela.draw(Creditos);
+            Janela.draw(Beta);
             Janela.display();
         }
         InicializaTexturas();
@@ -377,8 +386,8 @@ void GerenciadorGrafico::InicializaSubTexturas()
 
     SubTexturas["textures/Bruxo.png"] = sf::IntRect(145, 0, 580, 820); SubTexturas["Bruxo_2"] = sf::IntRect(820, 0, 580, 820); SubTexturas["Bruxo_3"] = sf::IntRect(1495, 0, 530, 820);
     SubTexturas["Bruxo_4"] = sf::IntRect(2130, 0, 530, 820); SubTexturas["Bruxo_5"] = sf::IntRect(2765, 0, 530, 820); SubTexturas["Bruxo_6"] = sf::IntRect(3405, 0, 530, 820);
-    SubTexturas["Bruxo_7"] = sf::IntRect(0, 930, 530, 820); SubTexturas["Bruxo_8"] = sf::IntRect(630, 930, 530, 820); SubTexturas["Bruxo_9"] = sf::IntRect(1260, 930, 750, 820);
-    SubTexturas["Bruxo_10"] = sf::IntRect(2100, 930, 750, 820); SubTexturas["Bruxo_11"] = sf::IntRect(2855, 950, 570, 820); SubTexturas["Bruxo_12"] = sf::IntRect(3460, 950, 570, 820);
+    SubTexturas["Bruxo_7"] = sf::IntRect(0, 930, 530, 820); SubTexturas["Bruxo_8"] = sf::IntRect(630, 930, 530, 820); SubTexturas["Bruxo_9"] = sf::IntRect(1260, 930, 760, 820);
+    SubTexturas["Bruxo_10"] = sf::IntRect(2100, 930, 760, 820); SubTexturas["Bruxo_11"] = sf::IntRect(2855, 950, 570, 820); SubTexturas["Bruxo_12"] = sf::IntRect(3460, 950, 570, 820);
 
     SubTexturas["textures/Plataforma_Quintal.png"] = sf::IntRect(0, 0, 620, 630); SubTexturas["Plataforma_Quintal_2"] = sf::IntRect(660, 0, 620, 630); SubTexturas["Plataforma_Quintal_3"] = sf::IntRect(1320, 10, 620, 630);
     SubTexturas["Plataforma_Quintal_4"] = sf::IntRect(1995, 0, 620, 630); SubTexturas["Plataforma_Quintal_5"] = sf::IntRect(2675, 0, 620, 630);

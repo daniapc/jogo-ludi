@@ -14,18 +14,6 @@ Porta::~Porta()
 
 void Porta::salvar()
 {
-	/*
-	ofstream gravadorPorta("saves/Porta.dat", ios::app);
-
-	if (!gravadorPorta)
-		cout << "Erro Gravar Porta." << endl;
-
-	gravadorPorta << this->getPosicaoX()  << ' '
-		<< this->getPosicaoY()  << ' ' << endl;
-
-	gravadorPorta.close();	
-	*/
-
 }
 
 void Porta::setJogo(Jogo* jg)
@@ -54,7 +42,7 @@ void Porta::colidir(Personagem* personagem)
 		else 
 		{
 			pGerenciadorGrafico->tocarMusica("Creditos");
-			jogo->mensagemCreditos("Venceu o jogo!");
+			jogo->mensagemCreditos("Venceu o jogo! ");
 			jogo->setEstado(7);	
 			jogo->getQuarto().limparTudo();
 		}

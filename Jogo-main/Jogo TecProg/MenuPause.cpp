@@ -57,7 +57,6 @@ void Menus::MenuPause::LoopMenu(char tecla)
 		if (jogo->getEstado() != 6) {
 			criaTexto(Textos[1], "Salvar jogo", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 250);
 		}
-	
 }
 
 void Menus::MenuPause::Inicializa()

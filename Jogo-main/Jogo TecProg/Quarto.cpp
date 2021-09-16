@@ -25,6 +25,12 @@ void Quarto::inicializa()
 		COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO / 2, "textures/Quarto.png");
 	listaEntidades.inclua(static_cast <Entidade*> (&Background));
 
+	Cenario* entrada = new Cenario();
+	entrada->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(entrada, 37.5f, 225.f, 37.5f / 2 - 3.f, ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f / 2), "textures/Inicio_Fim.png");
+	entrada->setSubTextura("Inicio_Fim_4");
+	listaEntidades.inclua(static_cast <Entidade*> (entrada));
+
 	criaPlataformas();
 
 	for (int i = 0; i < rand() % 6 + 3; i++)
@@ -44,8 +50,6 @@ void Quarto::inicializa()
 			rand() % (static_cast<int>(COMPRIMENTO_CENARIO - 400)) + 200,
 			ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + ALTURA_ESPINHO / 2), "textures/Espinhos_Materiais.png");
 	}
-
-
 
 	for (int i = 0; i < rand() % 4 + 3; i++)
 	{
@@ -75,12 +79,6 @@ void Quarto::inicializa()
 				COMPRIMENTO_CENARIO - 200.f, ALTURA_RESOLUCAO - ALTURA_CHEFAO + ALTURA_CHEFAO/10 -ALTURA_PLATAFORMA, 
 		"textures/Bicho_Papao.png");
 	chefao->setSubTextura("Bicho_Papao_7");
-
-	Cenario* entrada = new Cenario();
-	entrada->setGerenciadorGrafico(pGerenciadorGrafico);
-	pGerenciadorGrafico->criaCorpo(entrada, 37.5f, 225.f, 37.5f / 2 - 3.f, ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f / 2), "textures/Inicio_Fim.png");
-	entrada->setSubTextura("Inicio_Fim_4");
-	listaEntidades.inclua(static_cast <Entidade*> (entrada));
 
 	listaEntidades.inclua(static_cast <Entidade*> (pJogador1));
 	listaPersonagens.inclua(static_cast <Personagem*> (pJogador1));
@@ -137,6 +135,12 @@ void Quarto::recuperar()
 	pGerenciadorGrafico->criaCorpo(&Background, COMPRIMENTO_CENARIO, ALTURA_RESOLUCAO,
 		COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO / 2, "textures/Quarto.png");
 	listaEntidades.inclua(static_cast<Entidade*> (&Background));
+
+	Cenario* entrada = new Cenario();
+	entrada->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(entrada, 37.5f, 225.f, 37.5f / 2 - 3.f, ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f / 2), "textures/Inicio_Fim.png");
+	entrada->setSubTextura("Inicio_Fim_4");
+	listaEntidades.inclua(static_cast <Entidade*> (entrada));
 
 	criaPlataformas();
 
@@ -214,8 +218,6 @@ void Quarto::recuperarChefao()
 		float posx, posy, cooldown, estadochefao;
 
 		recuperadorChefao >> posx >> posy >> cooldown >> estadochefao;
-
-		cout << "vida: " << vida << endl;
 
 		novo = new Chefao();
 		novo->setVida(vida);

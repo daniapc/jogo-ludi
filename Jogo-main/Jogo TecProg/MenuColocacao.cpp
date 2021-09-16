@@ -64,6 +64,7 @@ void Menus::MenuColocacao::LoopMenu(char tecla)
 				{
 				case 5:
 				{
+					criaTexto(Textos[5], "(Scoreboard salvo com sucesso)", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 500);
 					ofstream deletarColocacao("saves/Colocacao.dat", ios::out);
 					deletarColocacao.close();
 
@@ -93,6 +94,9 @@ void Menus::MenuColocacao::LoopMenu(char tecla)
 				}
 
 		}
+	}
+	if (jogo->getEstado() != 3) {
+		criaTexto(Textos[5], "Salvar Scoreboard", "Preto", "KidsPlay", 35, COMPRIMENTO_RESOLUCAO * 1 / 2, 500);
 	}
 }
 

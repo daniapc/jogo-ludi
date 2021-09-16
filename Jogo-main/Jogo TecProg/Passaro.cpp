@@ -30,7 +30,6 @@ void Passaro::colidir(Personagem* personagem)
 {
 	if (personagem->getAmigavel() && this->podeAtacar())
 	{
-		cout << "Colidiu com Passaro!" << endl;
 		personagem->setVida(personagem->getVida() - 1);
 		if (personagem->getVida() <= 0)
 			personagem->setDesalocavel(true);

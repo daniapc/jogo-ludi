@@ -164,11 +164,23 @@ void Quintal::recuperar()
 		COMPRIMENTO_RESOLUCAO, ALTURA_RESOLUCAO / 2, "textures/Quintal.png");
 	listaEntidades.inclua(static_cast <Entidade*> (&Background));
 
+	Cenario* placa = new Cenario();
+	placa->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(placa, 104.f, 116.f, 200.f, ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f / 2), "textures/Inicio_Fim.png");
+	placa->setSubTextura("textures/Inicio_Fim.png");
+	listaEntidades.inclua(static_cast <Entidade*> (placa));
+
+	Cenario* telhado = new Cenario();
+	telhado->setGerenciadorGrafico(pGerenciadorGrafico);
+	pGerenciadorGrafico->criaCorpo(telhado, 167.f, 272.f, COMPRIMENTO_CENARIO - 167.f / 2 + 3.f, 360.f, "textures/Inicio_Fim.png");
+	telhado->setSubTextura("Inicio_Fim_2");
+	listaEntidades.inclua(static_cast <Entidade*> (telhado));
+
 	criaPlataformas();
 
 	porta.setGerenciadorGrafico(pGerenciadorGrafico);
-	pGerenciadorGrafico->criaCorpo(&porta, 25.f, 150.f, COMPRIMENTO_CENARIO - 25.f/2,
-		ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 50.f), "textures/Inicio_Fim.png");
+	pGerenciadorGrafico->criaCorpo(&porta, 37.5f, 225.f, COMPRIMENTO_CENARIO - 37.5f / 2 + 3.f,
+		ALTURA_RESOLUCAO - (ALTURA_PLATAFORMA + 225.f / 2), "textures/Inicio_Fim.png");
 	porta.setSubTextura("Inicio_Fim_3");
 	porta.setJogo(pJogo);
 	listaEntidades.inclua(static_cast<Entidade*> (&porta));

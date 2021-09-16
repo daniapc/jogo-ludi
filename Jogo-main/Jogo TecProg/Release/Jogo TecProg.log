@@ -1,8 +1,12 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: O diretório intermediário (Release\) contém arquivos compartilhados de outro projeto (Jogo TecProg.vcxproj). Isso pode levar a um comportamento incorreto de limpeza e recompilação.
-  Creditos.cpp
+  GerenciadorGrafico.cpp
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(152,44): warning C4244: 'argumento': conversão de 'float' para 'unsigned int', possível perda de dados
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(180,27): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(191,27): warning C4018: '>=': incompatibilidade de signed/unsigned
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(200,22): warning C4018: '>=': incompatibilidade de signed/unsigned
   Gerando código
-  1 of 1123 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 1139 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    12 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código
   Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Release\Ludi.exe
