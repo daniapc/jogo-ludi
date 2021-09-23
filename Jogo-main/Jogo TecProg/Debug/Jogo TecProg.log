@@ -18,20 +18,19 @@ C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jog
 C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(152,27): warning C4018: '>=': incompatibilidade de signed/unsigned
 C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(164,22): warning C4018: '>=': incompatibilidade de signed/unsigned
   Inimigo.cpp
+  Jogador.cpp
   Jogo.cpp
 C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Jogo.cpp(333,10): warning C4101: 'jogador1fazendeira': variável local não referenciada
   ListaEntidades.cpp
   ListaPersonagens.cpp
-  main.cpp
-  Jogador.cpp
   Menu.cpp
 C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Menu.cpp(6,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
   MenuColocacao.cpp
-  Gerando Código...
-C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(146): warning C4715: 'GerenciadorGrafico::getDimensoesX': nem todos os caminhos de controle retornam um valor
-C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(157): warning C4715: 'GerenciadorGrafico::getDimensoesY': nem todos os caminhos de controle retornam um valor
-  Compilando...
   MenuFases.cpp
+  Gerando Código...
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(157): warning C4715: 'GerenciadorGrafico::getDimensoesY': nem todos os caminhos de controle retornam um valor
+C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\GerenciadorGrafico.cpp(146): warning C4715: 'GerenciadorGrafico::getDimensoesX': nem todos os caminhos de controle retornam um valor
+  Compilando...
   MenuJogadores.cpp
   MenuPause.cpp
   MenuPrincipal.cpp
@@ -57,6 +56,7 @@ C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jog
 C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Jogo TecProg\Quintal.cpp(66,60): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
   Teia.cpp
   Texto.cpp
+  main.cpp
   Gerando Código...
   LINK : C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Jogo TecProg.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
   Jogo TecProg.vcxproj -> C:\Users\AnaPaula\Documents\Faculdade\2021.1\Técnicas de Programação\Jogo\Jogo_Repositorio_Dani\Jogo-main\Debug\Jogo TecProg.exe
